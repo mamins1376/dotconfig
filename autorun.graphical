@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if pgrep -u "$USER" lxpolkit; then
+	exit 0
+fi
+
+lxpolkit &
+
+#/usr/libexec/polkit-gnome-authentication-agent-1 &
+#/usr/libexec/bluetooth/obexd &
+
+#pcmanfm -d &
+#batterylife &
+#safe-volume &
+
+sleep 1
+
+mpDris2 &
+
+sleep 1
+
+playerctld daemon
+
+alacritty --class NCMPCPP -t NCMPCPP -e ncmpcpp &

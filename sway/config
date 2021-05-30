@@ -1,0 +1,172 @@
+# vim:set ft=conf et:
+
+font pango:Droid Sans: 11px
+
+default_border pixel 2
+gaps inner 10px
+smart_gaps on
+hide_edge_borders smart
+
+floating_modifier Mod4 normal
+
+xwayland disable
+
+exec_always exec $SWAY_DIR/fix-gtk3
+exec exec $SWAY_DIR/autorun
+
+bar swaybar_command waybar
+
+input type:keyboard {
+    xkb_layout us,ir
+    xkb_model pc104
+    xkb_options grp:shift_caps_toggle
+}
+
+input type:touchpad {
+    drag enabled
+    drag_lock enabled
+    middle_emulation enabled
+    natural_scroll enabled
+    tap enabled
+    dwt disabled
+}
+
+output eDP-1 {
+    position 0 0
+    background wallpaper.png fill
+}
+
+set {
+    $bg            #2059ca
+    $bg-inactive   #323232
+    $bg-urgent     #000000
+    $text          #eeeeec
+    $text-inactive #babdb6
+
+    $bar           #323232
+    $statusline    #e0e0e0
+
+    $W0 0:Editor
+    $W1 1:Focus
+    $W2 2:Terminal
+    $W3 3:Background
+    $W4 4:Auxiliary
+    $W5 5:Social
+    $W6 6:Web
+    $W7 7:Media
+}
+
+client.focused          $bg           $bg          $text          $bg $bg
+client.unfocused        $bg-inactive  $bg-inactive $text-inactive $bar $bar
+client.focused_inactive $bg-inactive  $bg-inactive $text-inactive $bar $bar
+client.urgent           $bg-urgent    $bg-urgent   $text          $bar $bar
+
+bindsym {
+    Mod4+h focus left
+    Mod4+j focus down
+    Mod4+k focus up
+    Mod4+l focus right
+
+    Mod4+grave focus next
+    Mod4+Shift+grave focus prev
+
+    Mod4+Shift+h move left
+    Mod4+Shift+j move down
+    Mod4+Shift+k move up
+    Mod4+Shift+l move right
+
+    # Switch to workspace
+    Mod4+1 workspace $W0
+    Mod4+2 workspace $W1
+    Mod4+3 workspace $W2
+    Mod4+4 workspace $W3
+    Mod4+5 workspace $W4
+    Mod4+6 workspace $W5
+    Mod4+q workspace $W6
+    Mod4+w workspace $W7
+
+    Mod4+Shift+1 move workspace $W0, workspace $W0
+    Mod4+Shift+2 move workspace $W1, workspace $W1
+    Mod4+Shift+3 move workspace $W2, workspace $W2
+    Mod4+Shift+4 move workspace $W3, workspace $W3
+    Mod4+Shift+5 move workspace $W4, workspace $W4
+    Mod4+Shift+6 move workspace $W5, workspace $W5
+    Mod4+Shift+q move workspace $W6, workspace $W6
+    Mod4+Shift+w move workspace $W7, workspace $W7
+
+    Mod4+Escape workspace back_and_forth
+
+    Mod4+b splith
+    Mod4+v splitv
+
+    Mod4+Space layout toggle
+
+    Mod4+m fullscreen
+
+    Mod4+r mode resize
+
+    Mod4+Shift+space floating toggle
+
+    Mod1+F4 kill
+
+    Mod4+Shift+c reload
+
+    Mod4+Control+Shift+e exit
+    Mod4+Control+Shift+r restart
+
+    Mod4+Return exec exec alacritty
+    Mod4+Shift+Return exec exec sakura --class NeoVim -x nvim
+    Mod4+Control+Return exec exec firefox
+    Mod4+Control+Shift+Return exec exec nemo
+
+    Mod4+e exec exec wofi -G -S drun
+
+    Mod4+Control+e exec exec loginctl poweroff
+    Mod4+Control+r exec exec loginctl reboot
+
+    XF86AudioMute exec exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+    XF86AudioLowerVolume exec exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+    XF86AudioRaiseVolume exec exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+
+    XF86AudioPlay exec exec playerctl play
+    XF86AudioPause exec exec playerctl pause
+    XF86AudioPrev exec exec playerctl previous
+    XF86AudioNext exec exec playerctl next
+
+    Mod4+XF86AudioMute exec exec playerctl play-pause
+    Mod4+XF86AudioLowerVolume exec exec playerctl previous
+    Mod4+XF86AudioRaiseVolume exec exec playerctl next
+    Mod4+Control+XF86AudioMute exec exec playerctl stop
+    Mod4+Control+XF86AudioLowerVolume exec exec playerctl position 5-
+    Mod4+Control+XF86AudioRaiseVolume exec exec playerctl position 5+
+    Mod4+KP_Add exec exec playerctl volume 0.03+
+    Mod4+KP_Subtract exec exec playerctl volume 0.03-
+
+    XF86MonBrightnessUp exec exec light -A 5
+    XF86MonBrightnessDown exec exec light -U 5
+    Mod4+XF86MonBrightnessUp exec exec light -S 100
+    Mod4+XF86MonBrightnessDown exec exec light -S 0
+}
+
+### Resizing containers
+mode resize bindsym {
+    KP_Add resize grow width 10px
+    KP_Subtract resize shrink width 10px
+    Control+KP_Add resize grow height 10px
+    Control+KP_Subtract resize shrink height 10px
+
+    Return mode default
+    Escape mode default
+}
+
+assign {
+    [app_id="^sakura$"]  $W0
+    [app_id="^firefox$"] $W6
+    [app_id="^NCMPCPP$"] $W7
+}
+
+no_focus [app_id="^firefox$" title="Sharing Indicator$"]
+
+for_window [app_id="^firefox$" title="Sharing Indicator$"] floating true, kill
+
+for_window [app_id="^wdisplays$"] floating enable, sticky enable, resize set width 500 px

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+export XDG_CURRENT_DESKTOP=Unity
+
+export SESSION=${XDG_CURRENT_DESKTOP,,}
+export DESKTOP_SESSION=${SESSION}
+export XDG_DESKTOP_SESSION=${SESSION}
+export MDMSESSION=${SESSION}
+
+export QT_QPA_PLATFORM=wayland
+export CLUTTER_BACKEND=wayland
+export SDL_VIDEODRIVER=wayland
+export MOZ_ENABLE_WAYLAND=1
+export MOZ_WEBRENDER=1

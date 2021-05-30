@@ -1,0 +1,121 @@
+#!/bin/bash
+# -*- coding: utf-8 -*-
+# vim: fenc=utf-8 ts=4 noet sw=4 sts=4 ft=sh
+
+# bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
+
+# set bash configs directory
+CONFDIR=$XDG_CONFIG_HOME/bash
+
+# If not running interactively, don't do anything
+case $- in
+	*i*) ;;
+	*) return;;
+esac
+
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=-1
+HISTFILESIZE=-1
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+shopt -s globstar
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+fi
+
+### Alias definitions.
+# exa
+alias exa='exa -F --group-directories-first'
+alias e='exa -x'
+alias ee='exa -l'
+alias ea='ee -a'
+alias et='e -T'
+
+# ls
+alias ls='ls -CF --group-directories-first --color=auto'
+alias l='ls -x'
+alias ll='ls -l'
+alias la='ls -A'
+
+# grep
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# shell modification
+alias cd..='cd ..'
+alias cd-='cd -'
+
+# python virtual environment
+#alias venv='python -m venv'
+#alias act='. bin/activate'
+#alias deact='deactivate'
+#alias react='deactivate; activate'
+
+# utilities
+alias ax='axel -N -a "$(clipboard)"'
+alias bee='beet -v import --from-scratch'
+
+### Utility functions
+try() {
+	while ! $@; do sleep 0.1; done
+}
+
+cr() {
+	if [ -z "$CREDIT" ]; then
+		CREDIT=0
+	fi
+
+	if [ -n "$1" ]; then
+		CREDIT=$(( $CREDIT + $1 ))
+	fi
+
+	echo $CREDIT
+}
+
+ffanal() {
+	ffplay -volume 20 -fs -f lavfi "amovie=$1, asplit [a][out1]; [a] showcqt=s=1366x768:rate=60:count=4 [out0]"
+}
+
+fffreq() {
+	ffplay -volume 20 -fs -f lavfi "amovie=$1, asplit [a][out1]; [a] showspectrum=s=1366x768:slide=replace:color=plasma:fps=40:scale=log:fscale=log:win_func=blackman:gain=0.75 [out0]"
+}
+
+sleep_until() {
+	SECS=$(($(date -d "$1" +%s) - $(date +%s)))
+	if [ $SECS -lt 0 ]; then
+		echo specified moment is in the past
+		return 1
+	fi
+	echo waiting for $SECS seconds
+	sleep $SECS
+}
+
+# command-not-found
+CNFSRC=/usr/share/doc/pkgfile/command-not-found.bash
+if [ -f ${CNFSRC} ]; then
+	source ${CNFSRC}
+fi
+unset CNFSRC
+
+eval "$(starship init bash)"
+
+# nvm completion
+command -v nvm >/dev/null || [ -f $NVM_DIR/nvm.sh ] && . $NVM_DIR/nvm.sh
+[ -f $NVM_DIR/bash_completion ] && . $NVM_DIR/bash_completion
