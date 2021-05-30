@@ -1,0 +1,6 @@
+#!/bin/bash
+. ./env
+export SWAY_DIR=$PWD
+cd
+unset OLDPWD
+exec sway
