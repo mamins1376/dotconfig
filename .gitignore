@@ -1,3 +1,10 @@
 **/log
 **/*history
 **/*.local
+**/*.png
+/mpd
+/dconf
+/pulse/*-source
+/pulse/*-sink
+/pulse/*.tdb
+/pulse/cookie
