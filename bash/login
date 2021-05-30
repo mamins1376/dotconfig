@@ -16,7 +16,7 @@ for item in sway tmux; do
 		if cd $XDG_CONFIG_HOME/$item; then
 			logdir=$PWD
 		else
-			printf "ERROR: $$TERM is set to '$TERM' but it's directory does" \
+			echo -e "ERROR: $$TERM is set to '$TERM' but it's directory does" \
 				"not exist, falling back to plain shell" >&2
 		fi
 
@@ -32,7 +32,7 @@ if [ "${OLDPWD+x}" ]; then
 		exec dbus-launch --exit-with-session ./login >>$logdir/log 2>&1
 	fi
 
-	printf "ERROR: $$TERM is set to '$TERM' but the following is not an" \
+	echo -e "ERROR: $$TERM is set to '$TERM' but the following is not an" \
 		"executable:\n\t$(realpath ./login)" >&2
 fi
 
