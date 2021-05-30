@@ -1,0 +1,16 @@
+#!/bin/sh
+
+$XDG_CONFIG_HOME/autorun.graphical &
+
+if pgrep -u "$USER" swayidle; then
+	exit 0
+fi
+
+sh -c 'while celluloid --gapplication-service; do true; done' &
+
+exec swayidle -w \
+	timeout 300 swaylock \
+	timeout 600 'swaymsg "output * dpms off"' \
+	resume 'swaymsg "output * dpms on"' \
+	before-sleep 'playerctl -a pause && swaylock' \
+	after-resume 'swaymsg "output * dpms on"'

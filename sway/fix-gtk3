@@ -1,0 +1,14 @@
+#!/bin/bash
+
+function load-gsettings {
+	gsettings set org.gnome.desktop.interface $1 \
+		"$(grep $2 $config | cut -d= -f2)"
+}
+
+config=$XDG_CONFIG_HOME/gtk-3.0/settings.ini
+[ ! -f $config ] && exit 1
+
+load-gsettings gtk-theme gtk-theme-name
+load-gsettings icon-theme gtk-icon-theme-name
+load-gsettings cursor-theme gtk-cursor-theme-name
+load-gsettings font-name gtk-font-name
