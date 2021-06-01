@@ -1,6 +1,9 @@
 **/*history
 **/*.local
 **/*.png
+
+/environment.d/??-private.conf
+
 /ario
 /chromium
 /coc
