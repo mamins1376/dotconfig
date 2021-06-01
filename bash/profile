@@ -15,9 +15,9 @@ export VDPAU_DRIVER=radeonsi
 export WINEDLLOVERRIDES=mshtml=d
 
 export DATA_ROOT=/data/amin
-export XDG_CONFIG_HOME=$DATA_ROOT/config
-export XDG_CACHE_HOME=$DATA_ROOT/cache
-export XDG_LOCAL_HOME=$DATA_ROOT/local
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_LOCAL_HOME=$home/.local
 export XDG_DATA_HOME=$XDG_LOCAL_HOME/share
 
 export NVM_DIR=$XDG_DATA_HOME/nvm
@@ -40,11 +40,11 @@ done
 
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-[ -f $XDG_CONFIG_HOME/env.local ] && . $XDG_CONFIG_HOME/env.local
+for src in $XDG_CONFIG_HOME/bash/profile.local $NVM_DIR/nvm.sh; do
+	[ -f $src ] && . $src
+done
 
 if [ -z "$SSH_AUTH_SOCK" ]; then
     eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh 2> /dev/null)
     export SSH_AUTH_SOCK
 fi
-
-[ -f $NVM_DIR/nvm.sh ] && . $NVM_DIR/nvm.sh
