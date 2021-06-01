@@ -2,13 +2,12 @@
 **/*.local
 **/*.png
 
-/environment.d/??-private.conf
-
 /ario
 /chromium
 /coc
 /dconf
 /mpd
+/ncmpcpp
 /pipewire
 /pulse/*-source
 /pulse/*-sink

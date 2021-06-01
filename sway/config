@@ -11,6 +11,7 @@ floating_modifier Mod4 normal
 
 xwayland enable
 
+exec_always systemctl --user import-environment
 exec_always exec $SWAY_DIR/fix-gtk3
 exec exec $SWAY_DIR/autorun
 
