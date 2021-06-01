@@ -1,13 +1,14 @@
 **/*history
 **/*.local
 **/*.png
+**/*.log
 
 /ario
 /chromium
 /coc
 /dconf
 /mpd
-/ncmpcpp
+/ncmpcpp/lyrics
 /nvim/**/.*
 /pipewire
 /pulse/*-source
