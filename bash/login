@@ -24,12 +24,10 @@ for item in sway tmux; do
 	fi
 done
 
-setsid -f $XDG_CONFIG_HOME/autorun >$logdir/log 2>&1
-
 if [ "${OLDPWD+x}" ]; then
 	if [ -x ./login ]; then
 		unset TERM OLDPWD
-		exec dbus-launch --exit-with-session ./login >>$logdir/log 2>&1
+		exec ./login >>$logdir/log 2>&1
 	fi
 
 	echo -e "ERROR: $$TERM is set to '$TERM' but the following is not an" \

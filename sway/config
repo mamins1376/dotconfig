@@ -9,7 +9,7 @@ hide_edge_borders smart
 
 floating_modifier Mod4 normal
 
-xwayland disable
+xwayland enable
 
 exec_always exec $SWAY_DIR/fix-gtk3
 exec exec $SWAY_DIR/autorun
@@ -121,8 +121,8 @@ bindsym {
 
     Mod4+e exec exec wofi -G -S drun
 
-    Mod4+Control+e exec exec loginctl poweroff
-    Mod4+Control+r exec exec loginctl reboot
+    Mod4+Control+e exec exec systemctl poweroff
+    Mod4+Control+r exec exec systemctl reboot
 
     XF86AudioMute exec exec pactl set-sink-mute @DEFAULT_SINK@ toggle
     XF86AudioLowerVolume exec exec pactl set-sink-volume @DEFAULT_SINK@ -5%
@@ -168,5 +168,7 @@ assign {
 no_focus [app_id="^firefox$" title="Sharing Indicator$"]
 
 for_window [app_id="^firefox$" title="Sharing Indicator$"] floating true, kill
+
+for_window [class="^net-mc-main-Main$"] floating enable
 
 for_window [app_id="^wdisplays$"] floating enable, sticky enable, resize set width 500 px

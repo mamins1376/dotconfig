@@ -13,7 +13,6 @@ export LESS=-SR
 
 export VDPAU_DRIVER=radeonsi
 export WINEDLLOVERRIDES=mshtml=d
-export PULSE_SERVER=tcp:localhost
 
 export DATA_ROOT=/data/amin
 export XDG_CONFIG_HOME=$DATA_ROOT/config
@@ -42,13 +41,6 @@ done
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 [ -f $XDG_CONFIG_HOME/env.local ] && . $XDG_CONFIG_HOME/env.local
-
-if [ -z "$DBUS_SESSION_BUS_PID" ]; then
-	eval $(dbus-launch)
-	export DBUS_SESSION_BUS_ADDRESS
-	export DBUS_SESSION_BUS_PID
-	export DBUS_SESSION_BUS_WINDOWID
-fi
 
 if [ -z "$SSH_AUTH_SOCK" ]; then
     eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh 2> /dev/null)
