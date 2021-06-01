@@ -8,6 +8,7 @@
 /dconf
 /mpd
 /ncmpcpp
+/nvim/**/.*
 /pipewire
 /pulse/*-source
 /pulse/*-sink
