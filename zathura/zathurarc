@@ -1,0 +1,9 @@
+map normal D set recolor
+map fullscreen D set recolor
+map presentation D set recolor
+map index D set recolor
+
+map normal <C-f> toggle_fullscreen
+map fullscreen <C-f> toggle_fullscreen
+map presentation <C-f> toggle_fullscreen
+map index <C-f> toggle_fullscreen

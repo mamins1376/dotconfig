@@ -1,0 +1,11 @@
+# vim: ft=conf
+
+ControlSocketsGroupWritable 1
+DataDirectoryGroupReadable 1
+CacheDirectoryGroupReadable 1 # workaround for tor bug #26913
+
+UseBridges 1
+
+%include bridges
+
+ClientTransportPlugin obfs3,obfs4,scramblesuit,meek_lite exec /usr/sbin/obfs4proxy

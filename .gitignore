@@ -8,3 +8,4 @@
 /pulse/*-sink
 /pulse/*.tdb
 /pulse/cookie
+/tor/bridges
