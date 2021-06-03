@@ -10,25 +10,19 @@ export VISUAL=nvim
 export EDITOR=nvim\ -p
 export PYTHONDONTWRITEBYTECODE=1
 export LESS=-SR
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-export VDPAU_DRIVER=radeonsi
-export WINEDLLOVERRIDES=mshtml=d
-
-export DATA_ROOT=/data/amin
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_CACHE_HOME=$HOME/.cache
-export XDG_LOCAL_HOME=$HOME/.local
-export XDG_DATA_HOME=$XDG_LOCAL_HOME/share
+XDG_CONFIG_HOME=$HOME/.config
+XDG_CACHE_HOME=$HOME/.cache
+XDG_LOCAL_HOME=$HOME/.local
+XDG_DATA_HOME=$XDG_LOCAL_HOME/share
 
 export NVM_DIR=$XDG_DATA_HOME/nvm
 export PYTHONUSERBASE=$XDG_LOCAL_HOME
-export WINEPREFIX=$XDG_DATA_HOME/wine
-export ANDROID_SDK_ROOT=$XDG_DATA_HOME/android
-export ANDROID_HOME=$ANDROID_SDK_ROOT
-export DENO_DIR=$XDG_DATA_HOME/deno
-export DENO_INSTALL_ROOT=$DENO_DIR
 export CARGO_HOME=$XDG_CACHE_HOME/cargo
 export RUSTUP_HOME=$XDG_DATA_HOME/rustup
+
+export MOZ_ENABLE_WAYLAND=1
 
 export GOOGLE_API_KEY=no
 export GOOGLE_DEFAULT_CLIENT_ID=no
@@ -37,8 +31,6 @@ export GOOGLE_DEFAULT_CLIENT_SECRET=no
 for item in $XDG_CONFIG_HOME/bash $XDG_LOCAL_HOME $CARGO_HOME; do
 	PATH=$item/bin:$PATH
 done
-
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 for src in $XDG_CONFIG_HOME/bash/profile.local $NVM_DIR/nvm.sh; do
 	[ -f $src ] && . $src
