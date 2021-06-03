@@ -4,9 +4,12 @@
 **/*.log
 
 /ario
+/bash/bin
 /chromium
 /coc
 /dconf
+/guitarix
+/keepassxc
 /mpd
 /ncmpcpp/lyrics
 /nvim/**/.*
@@ -15,6 +18,7 @@
 /pulse/*-sink
 /pulse/*.tdb
 /pulse/cookie
+/systemd
 /tor/bridges
 
 /pavucontrol.ini
