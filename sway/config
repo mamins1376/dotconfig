@@ -11,7 +11,7 @@ floating_modifier Mod4 normal
 
 xwayland enable
 
-exec_always systemctl --user import-environment
+exec_always systemctl --user import-environment EDITOR PATH PYTHONUSERBASE CARGO_HOME RUSTUP_HOME MPD_HOST
 exec_always exec apply-gtk3-theme
 
 bar swaybar_command waybar
