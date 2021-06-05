@@ -20,12 +20,15 @@ let g:srcery_italic = 1
 " lightline
 execute 'source '.expand('<sfile>:p:h').'/lightline.vim'
 
+" indent-guides
+let g:indent_guides_enable_on_vim_startup = 1
+
 " python-mode
 let g:pymode_lint = 0
 let g:pymode_rope = 0
 
 " session
-let g:session_directory = $XDG_DATA_HOME.'/nvim/session/'
+let g:session_directory = '~/.local/share/nvim/session/'
 let g:session_autosave = 'no'
 let g:session_autoload = 'no'
 
@@ -60,11 +63,6 @@ let g:syntastic_python_checkers = []
 let g:syntastic_asm_compiler = "arm-none-eabi-gcc"
 let g:syntastic_rust_checkers = []
 
-" indentguides
-let g:indentguides_ignorelist = ['text']
-let g:indentguides_tabchar = '╎'
-hi Whitespace ctermfg=240 guifg=#585858
-
 " vim-vue
 let g:vue_disable_pre_processors = 1
 
@@ -88,7 +86,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'itchyny/lightline.vim'
 Plug 'srcery-colors/srcery-vim'
-Plug 'thaerkh/vim-indentguides'
+Plug 'nathanaelkane/vim-indent-guides'
 Plug 'moll/vim-bbye'
 Plug 'MaxMEllon/vim-jsx-pretty'
 
@@ -104,7 +102,7 @@ Plug 'vim-syntastic/syntastic'
 Plug 'tpope/vim-fugitive'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'sakhnik/nvim-gdb', { 'do': './install.sh' }
-Plug 'neomake/neomake'
+"Plug 'neomake/neomake'
 
 " Plug 'racer-rust/vim-racer'
 Plug 'rust-lang/rust.vim'
@@ -120,7 +118,7 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'digitaltoad/vim-pug'
 Plug 'leafgarland/typescript-vim'
-"Plug 'posva/vim-vue'
+Plug 'posva/vim-vue'
 Plug '1995parham/vim-spice'
 
 Plug 'dart-lang/dart-vim-plugin'

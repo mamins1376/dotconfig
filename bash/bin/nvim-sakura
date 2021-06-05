@@ -1,0 +1,12 @@
+#!/bin/bash
+[ -z "$BASH_VERSION" ] && echo shell must be bash && exit 1
+coproc swaymsg -m -t subscribe '["window"]'
+while read json
+do
+	change=$(echo "$json" | jq -r '.change')
+	app_id=$(echo "$json" | jq -r '.container.app_id')
+	check="$state $change $app_id"
+	[ "$check" = " new sakura" ] && state=go
+	[ "$check" = "go focus sakura" ] && kill -HUP $COPROC_PID
+done <&${COPROC[0]}
+exec nvim

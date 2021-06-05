@@ -4,7 +4,6 @@
 **/*.log
 
 /ario
-/bash/bin
 /chromium
 /coc
 /dconf
@@ -18,7 +17,6 @@
 /pulse/*-sink
 /pulse/*.tdb
 /pulse/cookie
-/systemd
 /tor/bridges
 
 /pavucontrol.ini
