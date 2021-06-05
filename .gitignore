@@ -13,11 +13,19 @@
 /ncmpcpp/lyrics
 /nvim/**/.*
 /pipewire
+
 /pulse/*-source
 /pulse/*-sink
 /pulse/*.tdb
 /pulse/cookie
+
 /tor/bridges
+/tor/lock
+/tor/state
+/tor/state
+/tor/cached-*
+
+/systemd/user/default.target.wants/
 
 /pavucontrol.ini
 /mimeapps.list
