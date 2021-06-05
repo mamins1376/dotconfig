@@ -1,5 +1,13 @@
 #!/bin/bash
 [ -z "$BASH_VERSION" ] && echo shell must be bash && exit 1
+if [ "$1" = launch ]
+then
+	# warm up and load swaymsg & jq
+	swaymsg -t get_version >/dev/null
+	jq '' </dev/null
+	shift 1
+	exec sakura --class NeoVim -x $0 $@
+fi
 coproc swaymsg -m -t subscribe '["window"]'
 while read json
 do
@@ -9,4 +17,4 @@ do
 	[ "$check" = " new sakura" ] && state=go
 	[ "$check" = "go focus sakura" ] && kill -HUP $COPROC_PID
 done <&${COPROC[0]}
-exec nvim
+exec nvim $@

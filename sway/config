@@ -115,7 +115,7 @@ bindsym {
     Mod4+Control+Shift+r restart
 
     Mod4+Return exec exec alacritty
-    Mod4+Shift+Return exec exec sakura --class NeoVim -x nvim-sakura
+    Mod4+Shift+Return exec exec nvim-sakura launch
     Mod4+Control+Return exec exec firefox
     Mod4+Control+Shift+Return exec exec nemo
 
