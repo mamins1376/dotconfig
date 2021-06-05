@@ -1,0 +1,18 @@
+[Unit]
+Description=Anonymizing overlay network for TCP
+After=syslog.target network.target nss-lookup.target
+
+[Service]
+Type=notify
+NotifyAccess=all
+WorkingDirectory=%E/tor
+ExecStart=/usr/bin/tor -f torrc --ControlSocket %t/tor --DataDirectory %E/tor
+ExecReload=/bin/kill -HUP ${MAINPID}
+KillSignal=SIGINT
+TimeoutSec=60
+Restart=on-failure
+WatchdogSec=1m
+LimitNOFILE=32768
+
+[Install]
+WantedBy=default.target
