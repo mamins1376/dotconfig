@@ -11,8 +11,16 @@ floating_modifier Mod4 normal
 
 xwayland enable
 
-exec_always systemctl --user import-environment EDITOR PATH PYTHONUSERBASE CARGO_HOME RUSTUP_HOME MPD_HOST
-exec_always exec apply-gtk3-theme
+exec exec dbus-update-activation-environment --systemd --all
+exec exec apply-gtk3-theme
+exec exec wlsunset -l 35.7214 -L 51.4174 -s 22:00
+exec exec swayidle -w \
+	timeout 300 swaylock \
+	timeout 600 'swaymsg "output * dpms off"' \
+	resume 'swaymsg "output * dpms on"' \
+	before-sleep 'playerctl -a pause && swaylock' \
+	after-resume 'swaymsg "output * dpms on"'
+
 
 bar swaybar_command waybar
 
