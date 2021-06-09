@@ -1,0 +1,20 @@
+directory: ../../music
+plugins: convert fetchart embedart thumbnails scrub permissions
+import:
+    move: yes
+    from_scratch: yes
+languages: en
+match:
+    preferred:
+        countries: ['US', 'GB|UK']
+        media: ['CD', 'Digital Media|File']
+        original_year: yes
+paths:
+    default: $albumartist/$original_year.$original_month. $album/$track. $title
+convert:
+    format: vorbis
+    formats:
+        vorbis:
+            command: ffmpeg -i $source -y -c:a libvorbis -qscale:a 5.5 $dest
+            extension: ogg
+        mp3: sh -c "ffmpeg -i '$source' -f wav - | lame -V 2 --noreplaygain - '$dest'"

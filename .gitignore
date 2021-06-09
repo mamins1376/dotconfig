@@ -4,6 +4,10 @@
 **/*.log
 
 /ario
+
+/beets/library.db
+/beets/state.pickle
+
 /chromium
 /coc
 /dconf
