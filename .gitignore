@@ -10,7 +10,11 @@
 
 /chromium
 /coc
+/configstore
 /dconf
+/easytag
+/enchant
+/gedit
 /guitarix
 /keepassxc
 /mpd
@@ -33,3 +37,6 @@
 
 /pavucontrol.ini
 /mimeapps.list
+
+/QtProject.conf
+/bash/bin/firefox
