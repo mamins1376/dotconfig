@@ -1,0 +1,15 @@
+[Unit]
+Description=Ultra fast download utility daemon
+After=network.target
+
+[Service]
+Type=exec
+WorkingDirectory=%E/aria2
+ExecStart=/usr/bin/sh -c 'exec /usr/bin/aria2c --rpc-secret=$$ARIA_SECRET'
+KillSignal=SIGINT
+TimeoutSec=60
+Restart=on-failure
+WatchdogSec=1m
+
+[Install]
+WantedBy=default.target
