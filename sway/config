@@ -22,7 +22,6 @@ exec exec swayidle -w \
 	before-sleep 'playerctl -a pause && swaylock' \
 	after-resume 'swaymsg "output * dpms on"'
 
-
 bar swaybar_command waybar
 
 input type:keyboard {
@@ -128,7 +127,6 @@ bindsym {
     Mod4+Control+Return exec exec firefox
     Mod4+Control+Shift+Return exec exec nemo
 
-
     Mod4+e exec exec wofi -G -S drun
 
     Mod4+Control+e exec exec systemctl poweroff
@@ -180,6 +178,8 @@ assign {
 no_focus [app_id="^firefox$" title="Sharing Indicator$"]
 
 for_window [app_id="^firefox$" title="Sharing Indicator$"] floating true, kill
+
+for_window [app_id="^thunderbird$" title="^$"] floating enable
 
 for_window [class="^net-mc-main-Main$"] floating enable
 
