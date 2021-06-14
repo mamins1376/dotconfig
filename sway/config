@@ -128,6 +128,7 @@ bindsym {
     Mod4+Control+Return exec exec firefox
     Mod4+Control+Shift+Return exec exec nemo
 
+
     Mod4+e exec exec wofi -G -S drun
 
     Mod4+Control+e exec exec systemctl poweroff
@@ -155,6 +156,8 @@ bindsym {
     XF86MonBrightnessDown exec exec light -U 5
     Mod4+XF86MonBrightnessUp exec exec light -S 100
     Mod4+XF86MonBrightnessDown exec exec light -S 0
+
+    Mod4+Control+l exec exec swaylock
 }
 
 ### Resizing containers
