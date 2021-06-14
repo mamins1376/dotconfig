@@ -14,6 +14,7 @@ xwayland enable
 exec exec dbus-update-activation-environment --systemd --all
 exec exec apply-gtk3-theme
 exec exec wlsunset -l 35.7214 -L 51.4174 -s 22:00
+exec exec alacritty --class NCMPCPP -e ncmpcpp
 exec exec swayidle -w \
 	timeout 300 swaylock \
 	timeout 600 'swaymsg "output * dpms off"' \
