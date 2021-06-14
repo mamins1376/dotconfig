@@ -1,5 +1,5 @@
 directory: ../../music
-plugins: convert fetchart embedart thumbnails scrub permissions
+plugins: convert fetchart embedart thumbnails scrub permissions mbsubmit
 import:
     move: yes
     from_scratch: yes
@@ -18,3 +18,5 @@ convert:
             command: ffmpeg -i $source -y -c:a libvorbis -qscale:a 5.5 $dest
             extension: ogg
         mp3: sh -c "ffmpeg -i '$source' -f wav - | lame -V 2 --noreplaygain - '$dest'"
+mbsubmit:
+    threshold: strong
