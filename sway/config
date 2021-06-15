@@ -131,6 +131,8 @@ bindsym {
 
     Mod4+Control+e exec exec systemctl poweroff
     Mod4+Control+r exec exec systemctl reboot
+    Mod4+Control+h exec exec systemctl hibernate
+    Mod4+Control+Shift+h exec exec systemctl hybrid-sleep
 
     XF86AudioMute exec exec pactl set-sink-mute @DEFAULT_SINK@ toggle
     XF86AudioLowerVolume exec exec pactl set-sink-volume @DEFAULT_SINK@ -5%
