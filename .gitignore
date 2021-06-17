@@ -3,12 +3,14 @@
 **/*.png
 **/*.log
 
+/aria2/session
+/aria2/*.dat
+
 /ario
 
 /beets/library.db
 /beets/state.pickle
 
-/aria2/session
 /chromium
 /coc
 /configstore
