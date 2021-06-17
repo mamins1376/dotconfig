@@ -179,9 +179,11 @@ assign {
 
 no_focus [app_id="^firefox$" title="Sharing Indicator$"]
 
-for_window [app_id="^firefox$" title="Sharing Indicator$"] floating true, kill
+for_window [app_id="^firefox$" title="Sharing Indicator$"] floating enable, kill
 
-for_window [app_id="^thunderbird$" title="^$"] floating enable
+for_window [app_id="^firefox$" title="^Extension: \(Aria2"] floating enable
+
+for_window [app_id="^(?:thunderbird|firefox)$" title="^$"] floating enable
 
 for_window [class="^net-mc-main-Main$"] floating enable
 
