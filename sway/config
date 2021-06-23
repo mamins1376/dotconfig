@@ -62,7 +62,7 @@ client.unfocused        $bg-inactive  $bg-inactive $text-inactive $bar $bar
 client.focused_inactive $bg-inactive  $bg-inactive $text-inactive $bar $bar
 client.urgent           $bg-urgent    $bg-urgent   $text          $bar $bar
 
-bindsym {
+bindsym --to-code {
     Mod4+h focus left
     Mod4+j focus down
     Mod4+k focus up
