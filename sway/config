@@ -182,6 +182,10 @@ for_window [app_id="^thunderbird$" title=" Reminders$"] floating enable
 
 for_window [app_id="^thunderbird$" title="^An error has occurred$"] floating enable
 
+#for_window [class="^qemu$"] floating enable
+
+for_window [class="^ffplay$"] floating enable
+
 for_window [class="^net-mc-main-Main$"] floating enable
 
 for_window [app_id="^wdisplays$"] floating enable, sticky enable, resize set width 500 px
