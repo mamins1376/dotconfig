@@ -68,8 +68,8 @@ bindsym --to-code {
     Mod4+k focus up
     Mod4+l focus right
 
-    Mod4+grave focus next
-    Mod4+Shift+grave focus prev
+    Mod1+Tab focus next
+    Mod1+Shift+Tab focus prev
 
     Mod4+Shift+h move left
     Mod4+Shift+j move down
