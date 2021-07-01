@@ -6,6 +6,7 @@
 /aria2/session
 /aria2/*.dat
 
+/ardour6
 /ario
 
 /beets/library.db
@@ -23,6 +24,7 @@
 /gtk-2.0
 /guitarix
 /keepassxc
+/libreoffice
 /mpd
 /ncmpcpp/lyrics
 /nvim/**/.*
@@ -40,6 +42,8 @@
 /tor/cached-*
 
 /systemd/user/default.target.wants/
+/VirtualBox
+/vmpk.sourceforge.net
 
 /pavucontrol.ini
 /mimeapps.list
