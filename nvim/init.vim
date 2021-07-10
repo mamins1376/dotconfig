@@ -27,6 +27,9 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:pymode_lint = 0
 let g:pymode_rope = 0
 
+" coc
+let g:coc_global_extensions = ['coc-tsserver']
+
 " session
 let g:session_directory = '~/.local/share/nvim/session/'
 let g:session_autosave = 'no'
