@@ -32,7 +32,8 @@ for item in $XDG_CONFIG_HOME/bash $XDG_LOCAL_HOME $CARGO_HOME; do
 	PATH=$item/bin:$PATH
 done
 
-for src in $XDG_CONFIG_HOME/bash/profile.local $NVM_DIR/nvm.sh; do
+#for src in $XDG_CONFIG_HOME/bash/profile.local $NVM_DIR/nvm.sh; do
+for src in $XDG_CONFIG_HOME/bash/profile.local; do
 	[ -f $src ] && . $src
 done
 
