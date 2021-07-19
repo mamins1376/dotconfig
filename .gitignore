@@ -3,6 +3,8 @@
 **/*.png
 **/*.log
 
+/autostart
+
 /aria2/session
 /aria2/*.dat
 
@@ -12,6 +14,7 @@
 /beets/library.db
 /beets/state.pickle
 
+/calibre
 /chromium
 /coc
 /configstore
@@ -21,6 +24,7 @@
 /enchant
 /gedit
 /GIMP
+/Google
 /gtk-2.0
 /guitarix
 /keepassxc
@@ -34,6 +38,8 @@
 /pulse/*-sink
 /pulse/*.tdb
 /pulse/cookie
+
+/skypeforlinux
 
 /tor/bridges
 /tor/lock
