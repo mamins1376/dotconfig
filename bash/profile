@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
 # vim: fenc=utf-8 ts=4 noet sw=4 sts=4 ft=sh
 
-# TODO: remove all unnecessary export statements
+export XDG_CURRENT_DESKTOP=sway
+
+export QT_QPA_PLATFORM=wayland
+export QT_QPA_PLATFORMTHEME=qt5ct
+export CLUTTER_BACKEND=wayland
+export SDL_VIDEODRIVER=wayland
 
 export LANGUAGE=en_US:en:C
 export LC_TIME=$LANG
@@ -27,6 +32,13 @@ export MOZ_ENABLE_WAYLAND=1
 export GOOGLE_API_KEY=no
 export GOOGLE_DEFAULT_CLIENT_ID=no
 export GOOGLE_DEFAULT_CLIENT_SECRET=no
+
+export ANDROID_HOME=$XDG_DATA_HOME/android/sdk
+if [ -d $ANDROID_HOME ]; then
+	for dir in emulator tools{,/bin} platform-tools; do
+		PATH=$ANDROID_HOME/$dir:$PATH
+	done
+fi
 
 for item in $XDG_CONFIG_HOME/bash $XDG_LOCAL_HOME $CARGO_HOME; do
 	PATH=$item/bin:$PATH
