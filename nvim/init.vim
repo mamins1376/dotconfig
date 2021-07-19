@@ -22,13 +22,15 @@ execute 'source '.expand('<sfile>:p:h').'/lightline.vim'
 
 " indent-guides
 let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
 
 " python-mode
 let g:pymode_lint = 0
 let g:pymode_rope = 0
 
 " coc
-let g:coc_global_extensions = ['coc-tsserver']
+let g:coc_global_extensions = ['coc-tsserver', 'coc-rust-analyzer']
 
 " session
 let g:session_directory = '~/.local/share/nvim/session/'
