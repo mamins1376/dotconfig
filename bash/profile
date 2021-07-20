@@ -35,7 +35,7 @@ export GOOGLE_DEFAULT_CLIENT_SECRET=no
 
 export ANDROID_HOME=$XDG_DATA_HOME/android/sdk
 if [ -d $ANDROID_HOME ]; then
-	for dir in emulator tools{,/bin} platform-tools; do
+	for dir in tools{,/bin} platform-tools emulator; do
 		PATH=$ANDROID_HOME/$dir:$PATH
 	done
 fi
