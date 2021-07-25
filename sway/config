@@ -15,8 +15,9 @@ xwayland enable
 
 exec exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec exec apply-gtk3-theme
-exec exec wlsunset -l 35.7214 -L 51.4174 -s 22:00
+exec exec wlsunset -l 35.7214 -L 51.4174
 exec exec alacritty --class NCMPCPP -e ncmpcpp
+exec exec sway-fix
 exec exec swayidle -w \
 	timeout 300 swaylock \
 	timeout 600 'swaymsg "output * dpms off"' \
@@ -124,26 +125,26 @@ bindsym --to-code {
 
     Mod4+Control+e exec exec systemctl poweroff
     Mod4+Control+r exec exec systemctl reboot
-    Mod4+Control+h exec exec systemctl hibernate
-    Mod4+Control+Shift+h exec exec systemctl hybrid-sleep
+    --locked Mod4+Control+h exec exec systemctl hibernate
+    --locked Mod4+Control+Shift+h exec exec systemctl hybrid-sleep
 
-    XF86AudioMute exec exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-    XF86AudioLowerVolume exec exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-    XF86AudioRaiseVolume exec exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+    --locked XF86AudioMute exec exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+    --locked XF86AudioLowerVolume exec exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+    --locked XF86AudioRaiseVolume exec exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 
-    XF86AudioPlay exec exec playerctl play
-    XF86AudioPause exec exec playerctl pause
-    XF86AudioPrev exec exec playerctl previous
-    XF86AudioNext exec exec playerctl next
+    --locked XF86AudioPlay exec exec playerctl play
+    --locked XF86AudioPause exec exec playerctl pause
+    --locked XF86AudioPrev exec exec playerctl previous
+    --locked XF86AudioNext exec exec playerctl next
 
-    Mod4+XF86AudioMute exec exec playerctl play-pause
-    Mod4+XF86AudioLowerVolume exec exec playerctl previous
-    Mod4+XF86AudioRaiseVolume exec exec playerctl next
-    Mod4+Control+XF86AudioMute exec exec playerctl stop
-    Mod4+Control+XF86AudioLowerVolume exec exec playerctl position 5-
-    Mod4+Control+XF86AudioRaiseVolume exec exec playerctl position 5+
-    Mod4+KP_Add exec exec playerctl volume 0.03+
-    Mod4+KP_Subtract exec exec playerctl volume 0.03-
+    --locked Mod4+XF86AudioMute exec exec playerctl play-pause
+    --locked Mod4+XF86AudioLowerVolume exec exec playerctl previous
+    --locked Mod4+XF86AudioRaiseVolume exec exec playerctl next
+    --locked Mod4+Control+XF86AudioMute exec exec playerctl stop
+    --locked Mod4+Control+XF86AudioLowerVolume exec exec playerctl position 5-
+    --locked Mod4+Control+XF86AudioRaiseVolume exec exec playerctl position 5+
+    --locked Mod4+KP_Add exec exec playerctl volume 0.03+
+    --locked Mod4+KP_Subtract exec exec playerctl volume 0.03-
 
     XF86MonBrightnessUp exec exec light -A 5
     XF86MonBrightnessDown exec exec light -U 5
@@ -188,6 +189,12 @@ for_window [app_id="^org.gnome.Solanum$"] floating enable
 
 for_window [class="^ffplay$"] floating enable
 
+for_window [class="^jetbrains-studio$" title="^win0$"] floating enable
+
+for_window [window_type="^unknown$" title="^Android Emulator - "] resize set 460 px
+
 for_window [class="^net-mc-main-Main$"] floating enable
+
+for_window [class="^lmms$" title="^lmms$"] floating enable
 
 for_window [app_id="^wdisplays$"] floating enable, sticky enable, resize set width 500 px

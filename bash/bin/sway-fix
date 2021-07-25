@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# script to fix windows that behave oddly under swaywm/wayland
+
+[ -z "$BASH_VERSION" ] && echo shell must be bash && exit 1
+coproc swaymsg -m -t subscribe '["window", "workspace"]'
+while read json
+do
+	# keep track of current workspace (will be set only on focus event with type: workspace)
+	id="$(echo "$json" | jq -r .current.id)"
+	if [ "$id" != null ]
+	then current="$id"
+	fi
+
+	# set the target workspace to the one containing the android emulator main window
+	name="$(echo "$json" | jq -r .container.name)"
+	if [ "$(echo "$name" | cut -c-19)" = "Android Emulator - " ]
+	then target="$current"
+	fi
+
+	# move and resize the utility window (only if we are on the target workspace - otherwise will follow you around)
+	if [ "$current" = "$target" ]
+	then swaymsg '[window_type="^utility$" title="^Emulator$"] move position 1271 208' >/dev/null
+	fi
+
+	# kill the small black window if focused
+	#change=$(echo "$json" | jq -r .change)
+	height="$(echo "$json" | jq -r .container.geometry.height)"
+	if [ "$name" = Emulator ] && [ "$height" -lt 100 ]
+	then swaymsg "[con_id=$(echo "$json" | jq -r .container.id)] kill"
+	fi
+done <&${COPROC[0]}
