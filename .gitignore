@@ -4,6 +4,7 @@
 **/*.log
 
 /autostart
+/Android Open Source Project
 
 /aria2/session
 /aria2/*.dat
@@ -21,6 +22,7 @@
 /dconf
 /discord
 /easytag
+/Electron
 /enchant
 /gedit
 /GIMP
