@@ -69,7 +69,7 @@ alias cd-='cd -'
 
 ### Utility functions
 try() {
-	while ! $@; do sleep 0.1; done
+	while ! sh -c "$(echo "$@")"; do sleep 0.1; done
 }
 
 ffanal() {

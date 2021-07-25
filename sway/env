@@ -8,6 +8,8 @@ export XDG_DESKTOP_SESSION=sway
 export XDG_CURRENT_DESKTOP=sway
 
 export QT_QPA_PLATFORM=wayland
+export QT_QPA_PLATFORMTHEME=qt5ct
+
 export CLUTTER_BACKEND=wayland
 export SDL_VIDEODRIVER=wayland
 
