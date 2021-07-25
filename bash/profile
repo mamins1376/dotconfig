@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # vim: fenc=utf-8 ts=4 noet sw=4 sts=4 ft=sh
 
+[ $SESSION ] && [ ! $LANGUAGE ] || return 0
+
 export LANGUAGE=en_US:en:C
 export LC_TIME=$LANG
 
@@ -35,15 +37,9 @@ for item in $XDG_CONFIG_HOME/bash $XDG_LOCAL_HOME $CARGO_HOME
 do PATH=$item/bin:$PATH
 done
 
-#for src in $XDG_CONFIG_HOME/bash/profile.local $NVM_DIR/nvm.sh; do
-for src in $XDG_CONFIG_HOME/bash/profile.local
-do [ -f $src ] && . $src
-done
-
-if [ ${SWAYSOCK+x} ]
-then envfile=$XDG_CONFIG_HOME/sway/env
+envfile=$XDG_CONFIG_HOME/$SESSION/env
 [ -f $envfile ] && . $envfile
-fi
+unset envfile
 
 if [ -z "$SSH_AUTH_SOCK" ]
 then
