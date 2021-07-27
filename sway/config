@@ -121,7 +121,7 @@ bindsym --to-code {
     Mod4+Control+Return exec exec firefox
     Mod4+Control+Shift+Return exec exec nemo
 
-    Mod4+e exec exec wofi -G -S drun
+    Mod4+e exec exec sirula
 
     Mod4+Control+e exec exec systemctl poweroff
     Mod4+Control+r exec exec systemctl reboot
