@@ -1,4 +1,0 @@
-#!/bin/sh
-[ "$SESSION" = sway ] && exec sway
-echo "ERROR: invalid \$SESSION: '$SESSION'" >&2
-return 1
