@@ -28,12 +28,14 @@
 /GIMP
 /Google
 /gtk-2.0
+/gtk-3.0/bookmarks
 /guitarix
 /keepassxc
 /kicad
 /libreoffice
 /mpd
 /ncmpcpp/lyrics
+/nemo
 /nvim/**/.*
 /pipewire
 
