@@ -2,6 +2,7 @@ markup_highlight = 'underline="low" weight="bold"'
 #markup_extra = 'foreground="blue"'
 #markup_default = 'foreground="yellow"'
 exclusive = true
+recent_first = true
 lines = 1
 icon_size = 20
 anchor_left = false
