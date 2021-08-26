@@ -30,7 +30,7 @@ let g:pymode_lint = 0
 let g:pymode_rope = 0
 
 " coc
-let g:coc_global_extensions = ['coc-tsserver', 'coc-rust-analyzer']
+let g:coc_global_extensions = ['coc-tsserver', 'coc-rust-analyzer', 'coc-json']
 
 " session
 let g:session_directory = '~/.local/share/nvim/session/'
