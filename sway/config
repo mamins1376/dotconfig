@@ -1,6 +1,7 @@
 # vim:set ft=conf et:
 
-include /etc/sway/config.d/*.conf
+include /etc/sway/config.d/20-input.conf
+include /etc/sway/config.d/50-systemd-user.conf
 
 font pango:Droid Sans: 11px
 
@@ -185,6 +186,8 @@ for_window [app_id="^thunderbird$" title="^An error has occurred$"] floating ena
 
 #for_window [class="^qemu$"] floating enable
 
+for_window [title=" is sharing your screen\.$"] move position 100 ppt 100 ppt
+
 for_window [app_id="^org.gnome.Solanum$"] floating enable
 
 for_window [class="^ffplay$"] floating enable
@@ -198,3 +201,5 @@ for_window [class="^net-mc-main-Main$"] floating enable
 for_window [class="^lmms$" title="^lmms$"] floating enable
 
 for_window [app_id="^wdisplays$"] floating enable, sticky enable, resize set width 500 px
+
+include /etc/sway/config.d/30-output.conf
