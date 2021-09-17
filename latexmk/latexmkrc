@@ -1,0 +1,6 @@
+#!/usr/bin/perl
+
+$pdf_previewer = 'xdg-open %S';
+
+# zathura rules.
+$pdf_update_method = 0;
