@@ -30,7 +30,7 @@ let g:pymode_lint = 0
 let g:pymode_rope = 0
 
 " coc
-let g:coc_global_extensions = ['coc-tsserver', 'coc-rust-analyzer', 'coc-json']
+let g:coc_global_extensions = ['coc-tsserver', 'coc-rust-analyzer', 'coc-json', 'coc-vimtex']
 
 " session
 let g:session_directory = '~/.local/share/nvim/session/'
@@ -70,6 +70,9 @@ let g:syntastic_rust_checkers = []
 
 " vim-vue
 let g:vue_disable_pre_processors = 1
+
+" vimtex
+let g:vimtex_view_method = 'zathura'
 
 " XML-Folding
 let g:xml_syntax_folding = 1
@@ -126,6 +129,8 @@ Plug 'leafgarland/typescript-vim'
 Plug 'posva/vim-vue'
 Plug '1995parham/vim-spice'
 
+Plug 'lervag/vimtex'
+
 Plug 'dart-lang/dart-vim-plugin'
 
 Plug 'ledger/vim-ledger'
@@ -150,7 +155,7 @@ set foldmethod=syntax
 set nowrap
 
 set noet ts=4 sts=4 sw=4
-au FileType vue,html,xml,dart,typescript,typescriptreact set et ts=2 sts=2 sw=2
+au FileType tex,vue,html,xml,dart,typescript,typescriptreact set et ts=2 sts=2 sw=2
 
 au FileType netrw setl bufhidden=delete
 
