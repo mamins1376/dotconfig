@@ -174,5 +174,17 @@ nmap <leader>dg :GdbStart\ gdb\ -q\ a.out
 "nmap <leader>s!S :DeleteSession!<CR>
 "nmap <leader>sr :RestartVim<CR>
 
+" fix the conflict between coc and vimtex for K
+nnoremap <silent> K :call <sid>show_documentation()<cr>
+function! s:show_documentation()
+  if index(['vim', 'help'], &filetype) >= 0
+    execute 'help ' . expand('<cword>')
+  elseif &filetype ==# 'tex'
+    VimtexDocPackage
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
 " sudo-write
 cnoremap w!! execute 'silent! write !pkexec tee % >/dev/null' <bar> edit!
