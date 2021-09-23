@@ -15,6 +15,7 @@ xwayland enable
 exec exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec exec apply-gtk3-theme
 exec exec wlsunset -l 35.7214 -L 51.4174
+exec exec nm-applet --indicator
 exec exec alacritty --class NCMPCPP -e ncmpcpp
 exec exec sway-fix
 exec exec swayidle -w \
