@@ -16,6 +16,7 @@ exec exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec exec apply-gtk3-theme
 exec exec wlsunset -l 35.7214 -L 51.4174
 exec exec nm-applet --indicator
+exec exec blueman-applet
 exec exec alacritty --class NCMPCPP -e ncmpcpp
 exec exec sway-fix
 exec exec swayidle -w \
@@ -118,7 +119,7 @@ bindsym --to-code {
 
     Mod4+Return exec exec alacritty
     Mod4+Shift+Return exec exec nvim-sakura launch
-    Mod4+Control+Return exec exec firefox
+    Mod4+Control+Return exec exec firefox-developer-edition
     Mod4+Control+Shift+Return exec exec nemo
 
     Mod4+e exec exec sirula
@@ -190,6 +191,8 @@ for_window [title=" is sharing your screen\.$"] move position 100 ppt 100 ppt
 for_window [app_id="^org.gnome.Solanum$"] floating enable
 
 for_window [app_id="^galculator$"] floating enable
+
+for_window [app_id="^nm-openconnect-auth-dialog$"] floating enable
 
 for_window [class="^ffplay$"] floating enable
 
