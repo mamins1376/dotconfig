@@ -69,7 +69,9 @@ alias cd-='cd -'
 
 ### Utility functions
 try() {
-	while ! sh -c "$(echo "$@")"; do sleep 0.1; done
+	while ! sh -c "$(echo "$@")"
+	do sleep 0.1
+	done
 }
 
 ffanal() {
@@ -82,9 +84,9 @@ fffreq() {
 
 sleep_until() {
 	SECS=$(($(date -d "$1" +%s) - $(date +%s)))
-	if [ $SECS -lt 0 ]; then
-		echo specified moment is in the past
-		return 1
+	if [ $SECS -lt 0 ]
+	then echo specified moment is in the past
+	return 1
 	fi
 	echo waiting for $SECS seconds
 	sleep $SECS
@@ -92,13 +94,15 @@ sleep_until() {
 
 # command-not-found
 CNFSRC=/usr/share/doc/pkgfile/command-not-found.bash
-if [ -f ${CNFSRC} ]; then
-	source ${CNFSRC}
+if [ -f ${CNFSRC} ]
+then . ${CNFSRC}
 fi
 unset CNFSRC
 
 eval "$(starship init bash)"
 
-# nvm completion
-command -v nvm >/dev/null || [ -f $NVM_DIR/nvm.sh ] && . $NVM_DIR/nvm.sh
+# nvm + completion
+if ! command -v nvm >/dev/null
+then [ -f $NVM_DIR/nvm.sh ] && . $NVM_DIR/nvm.sh
 [ ! -f $NVM_DIR/bash_completion ] || . $NVM_DIR/bash_completion
+fi
