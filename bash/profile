@@ -38,6 +38,9 @@ for item in $XDG_CONFIG_HOME/bash $XDG_LOCAL_HOME $CARGO_HOME
 do PATH=$item/bin:$PATH
 done
 
+# nvm (for nvim)
+command -v nvm >/dev/null || [ -f $NVM_DIR/nvm.sh ] && . $NVM_DIR/nvm.sh
+
 envfile=$XDG_CONFIG_HOME/$SESSION/env
 [ -f $envfile ] && . $envfile
 unset envfile
