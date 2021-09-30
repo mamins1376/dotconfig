@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# some programs do not support having their configuration files reside in
+# $XDG_CONFIG_HOME or even ~/.config.
+# I'd rather have everything here but create a symlink for the hard-coded
+# path in ~ or other places. This script does just that.
+
+set -e
+
+cd "$(realpath .)"
+
+if [ ! -d .git ] || [ ! -f install ]
+then printf 'ERROR: PWD must be the root of repository\n' >&2
+false
+fi
+
+rln() {
+	ln -rsf ./$1 "$HOME/.$([ "$2" ] && printf $2 || basename $1)"
+}
+
+# bash
+rln bash/profile
+rln bash/config bashrc
+rln bash/logout bash_logout
+
+rln nyx
+rln jupyter
