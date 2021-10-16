@@ -206,6 +206,8 @@ for_window [class="^net-mc-main-Main$"] floating enable
 
 for_window [class="^lmms$" title="^lmms$"] floating enable
 
+for_window [instance="^ngspice$"] floating enable
+
 for_window [app_id="^wdisplays$"] floating enable, sticky enable, resize set width 500 px
 
 include /etc/sway/config.d/30-output.conf
