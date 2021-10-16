@@ -12,10 +12,13 @@ match:
 paths:
     default: $albumartist/$original_year.$original_month. $album/$track. $title
 convert:
-    format: vorbis
+    format: opus
     formats:
+        opus:
+            command: ffmpeg -i $source -y -c:a libopus -b:a 64k $dest
+            extension: opus
         vorbis:
-            command: ffmpeg -i $source -y -c:a libvorbis -qscale:a 5.5 $dest
+            command: ffmpeg -i $source -y -c:a libvorbis -q:a 5.5 $dest
             extension: ogg
         mp3: sh -c "ffmpeg -i '$source' -f wav - | lame -V 2 --noreplaygain - '$dest'"
 mbsubmit:
