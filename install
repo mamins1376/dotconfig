@@ -15,7 +15,7 @@ false
 fi
 
 rln() {
-	ln -rsf $([[ $1 = /* ]] || printf ./)$1 \
+	ln -nrsf $([[ $1 = /* ]] || printf ./)$1 \
 		"$HOME/.$([ "$2" ] && printf $2 || basename $1)"
 }
 
