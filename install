@@ -25,3 +25,5 @@ rln bash/logout bash_logout
 
 rln nyx
 rln jupyter
+
+rln gtkrc-2.0

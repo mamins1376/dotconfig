@@ -1,16 +1,18 @@
 #!/bin/bash
 
+set -e
+
 [ "${WAYLAND_DISPLAY:-x}" ] || exit 0
 
 load-gsettings() {
-	gsettings set org.gnome.desktop.interface ${1}-theme \
+	gsettings set org.gnome.desktop.interface ${1} \
 		"$(grep gtk-${2}-name $config | cut -d= -f2)"
 }
 
-config=$XDG_CONFIG_HOME/gtk-3.0/settings.ini
-[ -f $config ] || exit 1
+config=${XDG_CONFIG_HOME:-$HOME/.config}/gtk-3.0/settings.ini
+[ -f $config ]
 
-load-gsettings gtk theme
-load-gsettings icon icon-theme
-load-gsettings cursor cursor-theme
-load-gsettings font font
+load-gsettings gtk-theme theme
+load-gsettings icon-theme icon-theme
+load-gsettings cursor-theme cursor-theme
+load-gsettings font-name font
