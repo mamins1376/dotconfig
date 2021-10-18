@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # some programs do not support having their configuration files reside in
 # $XDG_CONFIG_HOME or even ~/.config.
@@ -15,7 +15,8 @@ false
 fi
 
 rln() {
-	ln -rsf ./$1 "$HOME/.$([ "$2" ] && printf $2 || basename $1)"
+	ln -rsf $([[ $1 = /* ]] || printf ./)$1 \
+		"$HOME/.$([ "$2" ] && printf $2 || basename $1)"
 }
 
 # bash
@@ -27,3 +28,5 @@ rln nyx
 rln jupyter
 
 rln gtkrc-2.0
+
+rln ${XDF_RUNTIME_DIR:-/run/user/$(id -u)} run
