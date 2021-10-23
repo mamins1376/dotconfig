@@ -3,7 +3,8 @@
 window {
     font-family: 'DejaVuSansMonoForPowerLine Nerd Font';
     font-size: 13px;
-    background-color: rgba(0, 0, 0, .23);
+    background-color: transparent;
+    background-image: linear-gradient(rgba(51, 21, 19, .5), rgba(25, 11, 9, .9));
     color: #fff;
 }
 

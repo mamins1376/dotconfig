@@ -40,7 +40,7 @@ output * {
 }
 
 set {
-    $bg            #2059ca
+    $bg            #ac5920
     $bg-inactive   #323232
     $bg-urgent     #000000
     $text          #eeeeec
