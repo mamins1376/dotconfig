@@ -1,19 +1,19 @@
 // vim:set ft=jsonc et:
 {
     "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 20, // Waybar height (to be removed for auto height)
+    //"height": 0, // Waybar height (to be removed for auto height)
 
-    "modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
+    "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
     "modules-center": [],
-    "modules-right": ["mpd", "idle_inhibitor", "pulseaudio", "bluetooth", "network", "cpu", "memory", "temperature", "backlight", "sway/language", "battery", "clock", "tray"],
+    "modules-right": ["mpd", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "sway/language", "battery", "clock", "tray", "idle_inhibitor"],
 
     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
-        "format": "<big>{icon}</big>",
+        "format": "{icon}",
         "format-icons": {
             "0:Editor": "",
-            "1:Focus": "🌟",
+            "1:Focus": "☯",
             "2:Terminal": "",
             "3:Background": "",
             "4:Auxiliary": "",
@@ -38,22 +38,22 @@
     "mpd": {
         "unknown-tag": "N/A",
         "interval": 2,
-        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title}",
-        "format-disconnected": "",
-        "format-stopped": "  {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}",
-        "tooltip-format": "MPD (connected)",
-        "tooltip-format-disconnected": "MPD (disconnected)",
+        "format": "{stateIcon}{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{albumArtist}",
+        "format-disconnected": "",
+        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}",
+        "tooltip-format": "{artist} - {title} (from {album})",
+        "tooltip-format-disconnected": "",
         "consume-icons": {
-            "on": " "
+            "on": " "
         },
         "random-icons": {
-            "on": " "
+            "on": " "
         },
         "repeat-icons": {
-            "on": " "
+            "on": " ꝏ"
         },
         "single-icons": {
-            "on": "1 "
+            "on": " ꝏ1"
         },
         "state-icons": {
             "paused": "",
@@ -69,7 +69,7 @@
     },
     "tray": {
         // "icon-size": 21,
-        "spacing": 10
+        "spacing": 4
     },
     "clock": {
         // "timezone": "America/New_York",
@@ -77,24 +77,24 @@
         "format-alt": "{:%Y-%m-%d}"
     },
     "cpu": {
-        "format": "{usage}% ",
+        "format": "{usage}﹪ ",
         "tooltip": true
     },
     "memory": {
-        "format": "{}% "
+        "format": "{}﹪ "
     },
     "temperature": {
         "thermal-zone": 1,
         // "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
-        "critical-threshold": 80,
+        "critical-threshold": 85,
         // "format-critical": "{temperatureC}°C {icon}",
         "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
+        "format-icons": [""]
     },
     "backlight": {
         // "device": "acpi_video1",
-        "format": "{percent}% {icon}",
-        "format-icons": ["", ""],
+        "format": "{percent}﹪ {icon}",
+        "format-icons": ["○", "●"],
         // I've turned 'natural-scroll' on, so these are reversed.
         "on-scroll-up": "light -U 1",
         "on-scroll-down": "light -A 1"
@@ -105,9 +105,9 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
+        "format": "{capacity}﹪ {icon}",
+        "format-charging": "{capacity}﹪ ",
+        "format-plugged": "{capacity}﹪ 🔌",
         "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
@@ -116,31 +116,29 @@
         "on-click-right": "sh -c 'echo 1 > /sys/devices/pci0000:00/0000:00:1f.0/PNP0C09:00/VPC2004:00/conservation_mode'"
     },
     "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
+        "interface": "wlp*", // (Optional) To force the use of this interface
+        "format-wifi": "{essid} ({signalStrength}﹪) ",
+        //"format-ethernet": "{ipaddr}/{cidr} ",
+        //"format-linked": "",
+        "format-disconnected": "⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
-    "bluetooth": {
-        "format-alt": "{status}"
-    },
     "pulseaudio": {
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
+        "format": "{volume}﹪{icon} {format_source}",
+        "format-muted": "⨉ {icon} {format_source}",
+        "format-bluetooth": "{volume}﹪{icon} {format_source} ",
+        "format-bluetooth-muted": "⨉ {icon} {format_source} ",
+        "format-source": "{volume}﹪",
         "format-source-muted": "",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
+            "headphone": " 🎧",
+            "hands-free": "",
+            "headset": "",
+            "phone": " ",
+            "portable": " ",
+            "car": " ",
+            "speaker": " 📣",
+            "default": []
         },
         "on-click": "pavucontrol",
         "on-click-right": "pactl set-sink-volume @DEFAULT_SINK@ 0dB",
@@ -148,17 +146,5 @@
         // I've turned 'natural-scroll' on, so these are reversed.
         "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ -1%",
         "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ +1%"
-    },
-    "custom/media": {
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     }
 }

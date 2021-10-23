@@ -1,196 +1,147 @@
 /* vim:set ft=css et ts=4 sts=4 sw=4: */
 
-* {
-    border: none;
-    border-radius: 0;
+window {
     font-family: 'DejaVuSansMonoForPowerLine Nerd Font';
-    font-size: 12px;
-    min-height: 0;
+    font-size: 13px;
+    background-color: rgba(0, 0, 0, .23);
+    color: #fff;
 }
 
-window#waybar {
-    background-color: rgba(43, 48, 59, 0.5);
-    border-top: 2px solid rgba(100, 114, 125, 0.5);
-    color: #fff;
-    transition: background-color .5s;
+.modules-left > widget:first-child > widget {
+    margin-left: 0;
+}
+
+.modules-right box:last-child label {
+    margin-right: 0;
 }
 
 #workspaces button {
-    padding: 0 4px;
-    background: transparent;
-    color: #ffffff;
-    /* Use box-shadow instead of border so the text isn't offset */
-    box-shadow: inset 0 2px transparent;
+    padding: 0;
+    border: none;
+    border-radius: 0;
     transition: all 100ms ease-out;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
-    box-shadow: inset 0 2px #aaa;
+    /* Use box-shadow instead of border so the text isn't offset */
+    box-shadow: inset 0 -2px #aaa;
 }
 
 #workspaces button.focused {
-    background: #ccc;
-    color: #333;
-    box-shadow: inset 0 2px #ccc;
+    box-shadow: inset 0 -2px #ccc;
 }
 
 #workspaces button.urgent {
     background-color: #c44;
 }
 
+#workspaces label {
+    font-size: 1.5rem;
+}
+
 #mode {
     background-color: #64727D;
 }
 
-#clock,
-#battery,
-#cpu,
-#memory,
-#disk,
-#temperature,
-#backlight,
-#network,
-#pulseaudio,
-#custom-media,
-#tray,
-#mode,
-#idle_inhibitor,
-#mpd {
-    padding: 0 8px;
-    color: #fff;
+#window {
+    padding: 0 6px;
 }
 
-/* If workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
-}
-
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
-}
-
-#clock {
-    background-color: #64727D;
-}
-
-#battery {
-    background-color: #ffffff;
-    color: #000000;
+.modules-right label {
+    padding: 0 5px;
 }
 
 #battery.charging, #battery.plugged {
-    color: #ffffff;
-    background-color: #26A65B;
+    box-shadow: inset 0 -2px #26A65B;
 }
 
 @keyframes blink {
     to {
-        background-color: #fff;
+        background-color: transparent;
         color: #000;
     }
 }
 
 #battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: #fff;
+    background-color: rgba(240, 60, 60, .6);
     animation: blink .4s linear infinite alternate;
 }
 
-label:focus {
-    background-color: #000000;
+#clock {
+    box-shadow: inset 0 -2px #64727D;
 }
 
 #cpu {
-    background-color: #2ecc71;
-    color: #000000;
+    box-shadow: inset 0 -2px #2ecc71;
 }
 
 #memory {
-    background-color: #9b59b6;
+    box-shadow: inset 0 -2px #9b59b6;
 }
 
 #disk {
-    background-color: #964B00;
+    box-shadow: inset 0 -2px #964B00;
 }
 
 #backlight {
-    background-color: #90b1b1;
+    box-shadow: inset 0 -2px #90b1b1;
 }
 
 #network {
-    background-color: #2980b9;
+    box-shadow: inset 0 -2px #2980b9;
 }
 
 #network.disconnected {
-    background-color: #f53c3c;
+    box-shadow: inset 0 -2px #f53c3c;
 }
 
 #pulseaudio {
-    background-color: #f1c40f;
-    color: #000000;
+    box-shadow: inset 0 -2px #f1c40f;
 }
 
 #pulseaudio.muted {
-    background-color: #90b1b1;
-    color: #2a5c45;
-}
-
-#custom-media {
-    background-color: #66cc99;
-    color: #2a5c45;
-    min-width: 100px;
-}
-
-#custom-media.custom-spotify {
-    background-color: #66cc99;
-}
-
-#custom-media.custom-vlc {
-    background-color: #ffa000;
+    box-shadow: inset 0 -2px #90b1b1;
 }
 
 #temperature {
-    background-color: #f0932b;
+    box-shadow: inset 0 -2px #f0932b;
 }
 
 #temperature.critical {
-    background-color: #eb4d4b;
+    box-shadow: inset 0 -2px #eb4d4b;
 }
 
 #tray {
-    background-color: #2980b9;
+    box-shadow: inset 0 -2px #2980b9;
 }
 
 #idle_inhibitor {
-    background-color: #2d3436;
+    font-size: 1.7rem;
+    box-shadow: inset 0 -2px #2d3436;
 }
 
 #idle_inhibitor.activated {
-    background-color: #ecf0f1;
-    color: #2d3436;
+    box-shadow: inset 0 -2px #ecf0f1;
 }
 
 #mpd {
-    background-color: #66cc99;
-    color: #2a5c45;
+    box-shadow: inset 0 -2px #66cc99;
 }
 
 #mpd.disconnected {
-    background-color: #f53c3c;
+    box-shadow: inset 0 -2px #f53c3c;
 }
 
 #mpd.stopped {
-    background-color: #90b1b1;
+    box-shadow: inset 0 -2px #b101b9;
 }
 
 #mpd.paused {
-    background-color: #51a37a;
+    box-shadow: inset 0 -2px #51a37a;
 }
 
 #language {
-    background: #00b093;
+    box-shadow: inset 0 -2px #00b093;
     min-width: 24px;
 }
