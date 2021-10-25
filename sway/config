@@ -36,11 +36,11 @@ input type:keyboard {
 
 output * {
     position 0 0
-    background wallpaper.png fill
+    background wallpaper.jpg fill
 }
 
 set {
-    $bg            #ac5920
+    $bg            #39ac70
     $bg-inactive   #323232
     $bg-urgent     #000000
     $text          #eeeeec
