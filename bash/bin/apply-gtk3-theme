@@ -2,15 +2,20 @@
 
 set -e
 
-[ "${WAYLAND_DISPLAY:-x}" ] || exit 0
+config=${XDG_CONFIG_HOME:-$HOME/.config}
 
+xres=$config/Xresources
+if [ ${DISPLAY+x} ] && type xrdb >/dev/null && [ -f $xres ]
+then xrdb -merge $xres
+fi
+
+[ ${WAYLAND_DISPLAY+x} ] || exit 0
+
+gsettings=$config/gtk-3.0/settings.ini
 load-gsettings() {
 	gsettings set org.gnome.desktop.interface ${1} \
-		"$(grep gtk-${2}-name $config | cut -d= -f2)"
+		"$(grep gtk-${2}-name $gsettings | cut -d= -f2)"
 }
-
-config=${XDG_CONFIG_HOME:-$HOME/.config}/gtk-3.0/settings.ini
-[ -f $config ]
 
 load-gsettings gtk-theme theme
 load-gsettings icon-theme icon-theme
