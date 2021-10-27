@@ -130,6 +130,7 @@ bindsym --to-code {
     --locked Mod4+Control+Shift+h exec exec systemctl hybrid-sleep
 
     --locked XF86AudioMute exec exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+    --locked Control+XF86AudioMute exec exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
     --locked XF86AudioLowerVolume exec exec pactl set-sink-volume @DEFAULT_SINK@ -5%
     --locked XF86AudioRaiseVolume exec exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 
