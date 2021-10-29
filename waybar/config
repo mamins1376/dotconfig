@@ -3,10 +3,26 @@
     "position": "bottom", // Waybar position (top|bottom|left|right)
     //"height": 0, // Waybar height (to be removed for auto height)
 
-    "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
+    "modules-left": [
+        "sway/workspaces",
+        "sway/mode",
+        "sway/window"
+    ],
     "modules-center": [],
-    "modules-right": ["mpd", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "sway/language", "battery", "clock", "tray", "idle_inhibitor"],
-
+    "modules-right": [
+        "mpd",
+        "pulseaudio",
+        "network",
+        "cpu",
+        "memory",
+        "temperature",
+        "backlight",
+        "sway/language",
+        "battery",
+        "clock",
+        "tray",
+        "idle_inhibitor"
+    ],
     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
