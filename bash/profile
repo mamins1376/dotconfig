@@ -10,8 +10,19 @@ export VISUAL=nvim
 export EDITOR=nvim\ -p
 export PYTHONDONTWRITEBYTECODE=1
 export LESS=-SR
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export LIBVIRT_DEFAULT_URI=qemu:///system
+
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36'
+GCC_COLORS="$GCC_COLORS:caret=01;32:locus=01:quote=01"
+
+o='-b -n -l 5 --scrollbar autohide'
+o="$o --tf #cacaca --tb #00000060"
+o="$o --ff #e6e6e6 --fb #00000060"
+o="$o --nf #747474 --nb #00000074"
+o="$o --hf #e6e6e6 --nb #42424240"
+o="$o --scf #747474 --scb #00000000"
+export BEMENU_OPTS="$o"
+unset o
 
 XDG_CONFIG_HOME=$HOME/.config
 XDG_CACHE_HOME=$HOME/.cache
