@@ -7,7 +7,6 @@
 /autostart
 /Android Open Source Project
 
-/aria2/session
 /aria2/*.dat
 
 /ardour6
