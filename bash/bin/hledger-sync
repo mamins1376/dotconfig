@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e
+hledger git -- commit -a -m Add\ transactions
+exec hledger git push

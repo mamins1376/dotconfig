@@ -1,0 +1,3 @@
+#!/bin/bash
+workdir="$(dirname "$LEDGER_FILE")"
+exec git --work-tree "$workdir" --git-dir "${workdir}/.git" "$@"
