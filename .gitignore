@@ -11,21 +11,27 @@
 
 /ardour6
 /ario
+/bat
 
 /beets/library.db
 /beets/state.pickle
 
 /calibre
 /chromium
+/clangd
 /coc
 /Code - OSS
 /configstore
 /dconf
 /discord
+/easyeffects
 /easytag
 /Electron
+/Element
 /enchant
 /falkTX
+/Friture
+/Fritzing
 /galculator
 /gedit
 /GIMP
@@ -33,22 +39,30 @@
 /gtk-2.0
 /gtk-3.0/bookmarks
 /guitarix
+/inkscape
 /jupyter/migrated
 /keepassxc
 /kicad
 /libreoffice
 /lsp-plugins
+/menus
+/minidlna
 /ncmpcpp/lyrics
 /nemo
+/octave
+/Nextcloud
 /nvim/**/.*
 /nyx/cache.sqlite
 /pipewire
+/pmbootstrap.cfg
 
 /pulse/*-source
 /pulse/*-sink
 /pulse/*.tdb
 /pulse/cookie
 
+/remmina
+/rustdesk
 /skypeforlinux
 /termshark
 

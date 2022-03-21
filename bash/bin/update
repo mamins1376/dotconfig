@@ -1,0 +1,6 @@
+#!/bin/sh
+paru -Suy
+rustup update
+pio update
+nvm install --lts
+# :PlugUpdate, :CocUpdate, rust-analyzer
