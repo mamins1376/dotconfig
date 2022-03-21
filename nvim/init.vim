@@ -30,7 +30,15 @@ let g:pymode_lint = 0
 let g:pymode_rope = 0
 
 " coc
-let g:coc_global_extensions = ['coc-tsserver', 'coc-rust-analyzer', 'coc-json', 'coc-vimtex']
+let g:coc_global_extensions = [
+	\'coc-tsserver',
+	\'coc-rust-analyzer',
+	\'coc-json',
+	\'coc-vimtex',
+	\'coc-pyright',
+	\'coc-css',
+	\'coc-html',
+	\]
 
 " session
 let g:session_directory = '~/.local/share/nvim/session/'
@@ -68,6 +76,9 @@ let g:syntastic_python_checkers = []
 let g:syntastic_asm_compiler = "arm-none-eabi-gcc"
 let g:syntastic_rust_checkers = []
 
+" netrw
+let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+'
+
 " vim-vue
 let g:vue_disable_pre_processors = 1
 
@@ -104,6 +115,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-vinegar'
 Plug 'mattn/emmet-vim'
+Plug 'ollykel/v-vim'
 
 Plug 'raimondi/delimitmate'
 Plug 'vim-syntastic/syntastic'
@@ -116,6 +128,7 @@ Plug 'sakhnik/nvim-gdb', { 'do': './install.sh' }
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
 Plug 'kevinoid/vim-jsonc'
+Plug 'rhysd/vim-llvm'
 
 "Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for': ['python', 'vim-plug'] }
@@ -128,6 +141,9 @@ Plug 'digitaltoad/vim-pug'
 Plug 'leafgarland/typescript-vim'
 Plug 'posva/vim-vue'
 Plug '1995parham/vim-spice'
+Plug 'dcharbon/vim-flatbuffers'
+
+Plug 'jvirtanen/vim-octave'
 
 Plug 'lervag/vimtex'
 

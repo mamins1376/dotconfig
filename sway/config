@@ -17,7 +17,8 @@ exec exec apply-gtk3-theme
 exec exec wlsunset -l 35.7214 -L 51.4174
 exec exec nm-applet --indicator
 exec exec blueman-applet
-exec exec alacritty --class NCMPCPP -e ncmpcpp
+exec exec nextcloud --background
+exec exec sakura --class=NCMPCPP -e ncmpcpp
 exec exec sway-fix
 exec exec swayidle -w \
 	timeout 300 swaylock \
@@ -117,7 +118,7 @@ bindsym --to-code {
     Mod4+Control+Shift+e exit
     Mod4+Control+Shift+r restart
 
-    Mod4+Return exec exec alacritty
+    Mod4+Return exec exec sakura
     Mod4+Shift+Return exec exec nvim-sakura launch
     Mod4+Control+Return exec exec firefox-developer-edition
     Mod4+Control+Shift+Return exec exec nemo
@@ -168,7 +169,7 @@ mode resize bindsym {
 }
 
 assign {
-    [app_id="^sakura$"]  $W0
+    #[app_id="^sakura$"]  $W0
     [app_id="^firefox$"] $W6
     [app_id="^NCMPCPP$"] $W7
 }
@@ -198,6 +199,8 @@ for_window [class="^ffplay$"] floating enable
 for_window [class="^jetbrains-studio$" title="^win0$"] floating enable
 
 for_window [class="^MATLAB " title="^Figure "] floating enable
+
+for_window [class="^MATLABWindow$"] floating enable
 
 for_window [title="^Simulink Library Browser$"] floating enable
 

@@ -193,10 +193,12 @@ visualizer_color = 41, 83, 119, 155, 185, 215, 209, 203, 197, 161
 #alternative_header_second_line_format = {{$4$b%a$/b$9}{ - $7%b$9}{ ($4%y$9)}}|{%D}
 #
 #current_item_prefix = $(yellow)$r
+current_item_prefix = $(cyan)$r
 #
 #current_item_suffix = $/r$(end)
 #
 #current_item_inactive_column_prefix = $(white)$r
+current_item_inactive_column_prefix = $(246)$r
 #
 #current_item_inactive_column_suffix = $/r$(end)
 #
@@ -307,7 +309,7 @@ visualizer_color = 41, 83, 119, 155, 185, 215, 209, 203, 197, 161
 #
 #seek_time = 1
 #
-volume_change_step = 3
+volume_change_step = 5
 #
 #autocenter_mode = no
 #
@@ -318,6 +320,7 @@ volume_change_step = 3
 ## part of progressbar.
 ##
 #progressbar_look = =>
+progressbar_look = ▬▶—
 #
 ## Available values: database, playlist.
 ##
@@ -521,12 +524,14 @@ external_editor = nvim
 #state_flags_color = default:b
 #
 #main_window_color = yellow
+main_window_color = 253
 #
 #color1 = white
 #
 #color2 = green
 #
 #progressbar_color = black:b
+progressbar_color = green:b
 #
 #progressbar_elapsed_color = green:b
 #

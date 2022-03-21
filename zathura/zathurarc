@@ -10,7 +10,7 @@ map index <C-f> toggle_fullscreen
 
 # github.com/srcery-colors/srcery-gui/blob/master/zathura/srcery.theme
 ## Zathura config
-set recolor true
+#set recolor true
 set recolor-lightcolor          \#1C1B19
 set recolor-darkcolor           \#D0BFA1
 set highlight-color             \#98BC37
