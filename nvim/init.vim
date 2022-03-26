@@ -129,6 +129,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
 Plug 'kevinoid/vim-jsonc'
 Plug 'rhysd/vim-llvm'
+Plug 'jamespeapen/swayconfig.vim'
 
 "Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for': ['python', 'vim-plug'] }
