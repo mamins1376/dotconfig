@@ -1,4 +1,4 @@
-# vim:set ft=conf et:
+# vim:set et:
 
 include /etc/sway/config.d/20-input.conf
 include /etc/sway/config.d/50-systemd-user.conf
@@ -32,11 +32,11 @@ bar swaybar_command waybar
 input type:keyboard {
     xkb_layout us,ir
     xkb_model pc104
-    xkb_options grp:shift_caps_toggle
+    xkb_options grp:shift_caps_toggle,compose:ralt
 }
 
 output * {
-    position 0 0
+    #position 0 0
     background wallpaper.jpg fill
 }
 
