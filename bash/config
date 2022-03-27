@@ -68,6 +68,18 @@ alias cd-='cd -'
 #alias react='deactivate; activate'
 
 ### Utility functions
+td() {
+	date '+%Y-%m-%d %H:%M:%S'
+}
+
+ti() {
+	echo -e "\ni $(td) electra:${1}  ${@:2}" >>"$TIMECLOCK_FILE"
+}
+
+to() {
+	echo "o $(td)" >>"$TIMECLOCK_FILE"
+}
+
 try() {
 	while ! sh -c "$(echo "$@")"
 	do sleep 0.1
