@@ -1,2 +1,5 @@
 #!/bin/sh
-exec env QT_QPA_PLATFORM=xcb /bin/lmms "$@"
+export QT_QPA_PLATFORM=xcb
+export WINEARCH=win32
+export WINEPREFIX=$WINEPREFIXES/lmms
+exec /bin/lmms "$@"
