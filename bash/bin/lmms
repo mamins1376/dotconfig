@@ -1,5 +1,5 @@
 #!/bin/sh
 export QT_QPA_PLATFORM=xcb
-export WINEARCH=win32
+export WINEARCH=win64
 export WINEPREFIX=$WINEPREFIXES/lmms
 exec /bin/lmms "$@"
