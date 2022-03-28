@@ -61,6 +61,8 @@ alias egrep='egrep --color=auto'
 alias cd..='cd ..'
 alias cd-='cd -'
 
+alias hclock='hledger -f $TIMECLOCK_FILE'
+
 # python virtual environment
 #alias venv='python -m venv'
 #alias act='. bin/activate'
@@ -89,9 +91,9 @@ td() {
 }
 
 ti() {
-	if test $# -lt 2
+	if test $# -eq 0
 	then
-		echo -e "usage: $FUNCNAME GROUP DESCRIPTIONS...\n" >&2
+		echo -e "usage: $FUNCNAME GROUP [DESCRIPTIONS...]\n" >&2
 		return 1
 	fi
 

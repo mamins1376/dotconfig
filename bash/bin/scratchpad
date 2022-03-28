@@ -1,0 +1,4 @@
+#!/bin/sh
+while true
+do alacritty --config-file $HOME/.config/alacritty/scratchpad.yml
+done

@@ -17,8 +17,9 @@ exec exec apply-gtk3-theme
 exec exec wlsunset -l 35.7214 -L 51.4174
 exec exec nm-applet --indicator
 exec exec blueman-applet
+exec exec scratchpad
 exec exec nextcloud --background
-exec exec sakura --class=NCMPCPP -e ncmpcpp
+exec exec alacritty --config-file $HOME/.config/alacritty/ncmpcpp.yml
 exec exec sway-fix
 exec exec swayidle -w \
 	timeout 300 swaylock \
@@ -120,7 +121,7 @@ bindsym --to-code {
 
     Mod4+Return exec exec sakura
     Mod4+Shift+Return exec exec nvim-sakura launch
-    Mod4+Control+Return exec exec firefox-developer-edition
+    Mod4+Control+Return exec exec firefox
     Mod4+Control+Shift+Return exec exec nemo
 
     Mod4+e exec exec sirula
@@ -155,10 +156,12 @@ bindsym --to-code {
     Mod4+XF86MonBrightnessDown exec exec light -S 0
 
     Mod4+Control+l exec exec swaylock
+
+    Mod4+grave scratchpad show
 }
 
 ### Resizing containers
-mode resize bindsym {
+mode resize bindsym --to-code {
     KP_Add resize grow width 10px
     KP_Subtract resize shrink width 10px
     Control+KP_Add resize grow height 10px
@@ -170,17 +173,19 @@ mode resize bindsym {
 
 assign {
     #[app_id="^sakura$"]  $W0
-    [app_id="^firefox$"] $W6
-    [app_id="^NCMPCPP$"] $W7
+    [app_id="^firefoxdeveloperedition$"] $W6
+    [app_id="^ncmpcpp$"] $W7
 }
 
-no_focus [app_id="^firefox$" title="Sharing Indicator$"]
+no_focus [app_id="^firefoxdeveloperedition$" title="Sharing Indicator$"]
 
-for_window [app_id="^firefox$" title="Sharing Indicator$"] floating enable, kill
+for_window [app_id="^firefoxdeveloperedition$" title="Sharing Indicator$"] floating enable, kill
 
-for_window [app_id="^firefox$" title="^Extension: \(Aria2"] floating enable
+for_window [app_id="^firefoxdeveloperedition$" title="^Extension: \(Aria2"] floating enable
 
-for_window [app_id="^(?:thunderbird|firefox)$" title="^$"] floating enable
+for_window [app_id="^scratchpad$"] move scratchpad, sticky enable, resize set 1366 300, move position 0 0
+
+for_window [app_id="^(?:thunderbird|firefoxdeveloperedition)$" title="^$"] floating enable
 
 for_window [app_id="^thunderbird$" title=" Reminders$"] floating enable
 
