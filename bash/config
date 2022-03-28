@@ -68,16 +68,44 @@ alias cd-='cd -'
 #alias react='deactivate; activate'
 
 ### Utility functions
+
+tx() {
+	# the common part of 'ti' and 'to' is this function.
+
+	last_line="$(tail -n 1 "$TIMECLOCK_FILE")"
+	if test $? -ne 0
+	then return 1
+	fi
+
+	if test "${last_line:0:${#1}}" = "$1"
+	then return 2
+	fi
+
+	echo -e "$2" >>"$TIMECLOCK_FILE"
+}
+
 td() {
 	date '+%Y-%m-%d %H:%M:%S'
 }
 
 ti() {
-	echo -e "\ni $(td) electra:${1}  ${@:2}" >>"$TIMECLOCK_FILE"
+	if test $# -lt 2
+	then
+		echo -e "usage: $FUNCNAME GROUP DESCRIPTIONS...\n" >&2
+		return 1
+	fi
+
+	tx 'i ' "\ni $(td) ${1}  ${@:2}"
 }
 
 to() {
-	echo "o $(td)" >>"$TIMECLOCK_FILE"
+	if test $# -ne 0
+	then
+		echo -e "error: '$FUNCNAME' takes no arguments.\n" >&2
+		return 1
+	fi
+
+	tx 'o ' "o $(td)"
 }
 
 try() {
