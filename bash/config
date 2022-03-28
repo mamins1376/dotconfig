@@ -1,6 +1,6 @@
 #!/bin/bash
 # -*- coding: utf-8 -*-
-# vim: fenc=utf-8 ts=4 noet sw=4 sts=4 ft=sh
+# vim: fenc=utf-8 ts=4 noet sw=4 sts=4 ft=sh tw=80
 
 # bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
@@ -73,6 +73,11 @@ alias hclock='hledger -f $TIMECLOCK_FILE'
 
 tx() {
 	# the common part of 'ti' and 'to' is this function.
+	# $1: this string should not be at the beginning of timeclock file's last
+	#     line. used to abort double 'ti'/'to's. 
+	# $2: string to append to the timeclock file
+	# $3: if given, is the group or account name. will be checked for explicit
+	#     declaration in order to avoid using unknown names by mistake.
 
 	last_line="$(tail -n 1 "$TIMECLOCK_FILE")"
 	if test $? -ne 0
@@ -81,6 +86,43 @@ tx() {
 
 	if test "${last_line:0:${#1}}" = "$1"
 	then return 2
+	fi
+
+	if test "$3"
+	then
+		while read tx_line
+		do
+			if test "; account " != "${tx_line:0:10}"
+			then continue
+			fi
+			tx_line=($tx_line)
+			tx_accounts="$tx_accounts ${tx_line[2]}"
+		done <"$TIMECLOCK_FILE"
+		unset tx_line
+
+		tx_not_found=true
+		for tx_account in $tx_accounts
+		do
+			if test "$3" = $tx_account
+			then 
+				tx_not_found=false
+				break
+			fi
+		done
+
+		if $tx_not_found
+		then
+			echo -e "error: invalid account name: $3\n\nvalid names are:" >&2
+			for tx_account in $tx_accounts
+			do echo -e "· $tx_account" >&2
+			done
+
+			unset tx_not_found tx_accounts tx_account
+
+			return 3
+		fi
+
+		unset tx_not_found tx_accounts tx_account
 	fi
 
 	echo -e "$2" >>"$TIMECLOCK_FILE"
@@ -97,7 +139,10 @@ ti() {
 		return 1
 	fi
 
-	tx 'i ' "\ni $(td) ${1}  ${@:2}"
+	if test $# -gt 1
+	then tx 'i ' "\ni $(td) $1  ${*:2}" "$1"
+	else tx 'i ' "\ni $(td) $1" "$1"
+	fi
 }
 
 to() {
