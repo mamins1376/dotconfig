@@ -73,6 +73,8 @@ alias hclock='hledger -f $TIMECLOCK_FILE'
 #alias deact='deactivate'
 #alias react='deactivate; activate'
 
+alias update='source `which update`'
+
 ### Utility functions
 
 tx() {
@@ -92,6 +94,10 @@ tx() {
 
 	while read tx_line
 	do
+		if test "$tx_line"
+		then tx_last="$tx_line"
+		fi
+
 		if test '; account ' != "${tx_line:0:10}"
 		then continue
 		fi
@@ -106,11 +112,11 @@ tx() {
 	done <"$TIMECLOCK_FILE"
 
 	# check if last line matches $1 or not
-	if test "$1" = "${tx_line:0:${#1}}" 
+	if test "$1" = "${tx_last:0:${#1}}" 
 	then
 		echo "error: cannot register in/out twice in a row" >&2
 
-		unset tx_not_found tx_line tx_account tx_accounts
+		unset tx_not_found tx_line tx_account tx_accounts tx_last
 
 		return 2
 	fi
@@ -122,12 +128,12 @@ tx() {
 		do echo -e "· $tx_account" >&2
 		done
 
-		unset tx_not_found tx_line tx_account tx_accounts
+		unset tx_not_found tx_line tx_account tx_accounts tx_last
 
 		return 3
 	fi
 
-	unset tx_not_found tx_line tx_account tx_accounts
+	unset tx_not_found tx_line tx_account tx_accounts tx_last
 
 	echo -e "$2" >>"$TIMECLOCK_FILE"
 }
