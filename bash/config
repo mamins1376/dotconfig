@@ -79,51 +79,51 @@ tx() {
 	# $3: if given, is the group or account name. will be checked for explicit
 	#     declaration in order to avoid using unknown names by mistake.
 
-	last_line="$(tail -n 1 "$TIMECLOCK_FILE")"
-	if test $? -ne 0
-	then return 1
-	fi
-
-	if test "${last_line:0:${#1}}" = "$1"
-	then return 2
-	fi
-
-	if test "$3"
+	if ! test -r "$TIMECLOCK_FILE"
 	then
-		while read tx_line
-		do
-			if test "; account " != "${tx_line:0:10}"
-			then continue
-			fi
-			tx_line=($tx_line)
-			tx_accounts="$tx_accounts ${tx_line[2]}"
-		done <"$TIMECLOCK_FILE"
-		unset tx_line
+		echo "error: timeclock file not found or unreadable:" >&2
+		echo "  \`$TIMECLOCK_FILE'" >&2
+		return 1
+	fi
 
-		tx_not_found=true
-		for tx_account in $tx_accounts
-		do
-			if test "$3" = $tx_account
-			then 
-				tx_not_found=false
-				break
-			fi
-		done
-
-		if $tx_not_found
-		then
-			echo -e "error: invalid account name: $3\n\nvalid names are:" >&2
-			for tx_account in $tx_accounts
-			do echo -e "· $tx_account" >&2
-			done
-
-			unset tx_not_found tx_accounts tx_account
-
-			return 3
+	while read tx_line
+	do
+		if test '; account ' != "${tx_line:0:10}"
+		then continue
 		fi
 
-		unset tx_not_found tx_accounts tx_account
+		tx_line=($tx_line)
+		tx_account=${tx_line[2]}
+		tx_accounts="$tx_accounts $tx_account"
+
+		if test "$3" = $tx_account
+		then tx_not_found=false
+		fi
+	done <"$TIMECLOCK_FILE"
+
+	# check if last line matches $1 or not
+	if test "$1" = "${tx_line:0:${#1}}" 
+	then
+		echo "error: cannot register in/out twice in a row" >&2
+
+		unset tx_not_found tx_line tx_account tx_accounts
+
+		return 2
 	fi
+
+	if test "$3" && $tx_not_found
+	then
+		echo -e "error: invalid account name: $3\n\nvalid names are:" >&2
+		for tx_account in $tx_accounts
+		do echo -e "· $tx_account" >&2
+		done
+
+		unset tx_not_found tx_line tx_account tx_accounts
+
+		return 3
+	fi
+
+	unset tx_not_found tx_line tx_account tx_accounts
 
 	echo -e "$2" >>"$TIMECLOCK_FILE"
 }
