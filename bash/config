@@ -34,8 +34,12 @@ shopt -s globstar
 shopt -s nullglob
 
 # enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+if hash dircolors 2>/dev/null
+then
+	if test -r ~/.dircolors
+	then eval "$(dircolors -b ~/.dircolors)"
+	else eval "$(dircolors -b)"
+	fi
 fi
 
 ### Alias definitions.
@@ -161,12 +165,16 @@ try() {
 	done
 }
 
+ffxyz() {
+	ffplay -volume 20 -fs -f lavfi "amovie=$1, asplit [a][out1]; [a] $2 [out0]"
+}
+
 ffanal() {
-	ffplay -volume 20 -fs -f lavfi "amovie=$1, asplit [a][out1]; [a] showcqt=s=1366x768:rate=60:count=4 [out0]"
+	ffxyz "$1" showcqt=s=1366x768:rate=60:count=4
 }
 
 fffreq() {
-	ffplay -volume 20 -fs -f lavfi "amovie=$1, asplit [a][out1]; [a] showspectrum=s=1366x768:slide=replace:color=plasma:fps=40:scale=log:fscale=log:win_func=blackman:gain=0.75 [out0]"
+	ffxyz "$1" showspectrum=s=1366x768:slide=replace:color=plasma:fps=40:scale=log:fscale=log:win_func=blackman:gain=0.75
 }
 
 sleep_until() {
@@ -180,16 +188,22 @@ sleep_until() {
 }
 
 # command-not-found
-CNFSRC=/usr/share/doc/pkgfile/command-not-found.bash
-if [ -f ${CNFSRC} ]
-then . ${CNFSRC}
+cnfsrc=/usr/share/doc/pkgfile/command-not-found.bash
+if test -r $cnfsrc
+then source $cnfsrc
 fi
-unset CNFSRC
+unset cnfsrc
 
 eval "$(starship init bash)"
 
 # nvm + completion
 if ! command -v nvm >/dev/null
-then [ -f $NVM_DIR/nvm.sh ] && . $NVM_DIR/nvm.sh
-[ ! -f $NVM_DIR/bash_completion ] || . $NVM_DIR/bash_completion
+then
+	if test -r $NVM_DIR/nvm.sh
+	then source $NVM_DIR/nvm.sh
+	fi
+
+	if test -r $NVM_DIR/bash_completion
+	then source $NVM_DIR/bash_completion
+	fi
 fi
