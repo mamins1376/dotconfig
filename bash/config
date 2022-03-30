@@ -165,8 +165,17 @@ td() {
 ti() {
 	if test $# -eq 0
 	then
-		echo -e "usage: $FUNCNAME GROUP [DESCRIPTIONS...]\n" >&2
-		return 1
+		# : is given to have tx_last
+		tx_load :
+
+		if test "${tx_last:0:2}" = 'i '
+		then echo "    ${tx_last:2}"
+		else echo 'nothing started yet.'
+		fi
+
+		tx_unload
+
+		return
 	fi
 
 	if test $# -gt 1
