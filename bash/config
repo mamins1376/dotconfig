@@ -77,13 +77,8 @@ alias update='source `which update`'
 
 ### Utility functions
 
-tx() {
-	# the common part of 'ti' and 'to' is this function.
-	# $1: this string should not be at the beginning of timeclock file's last
-	#     line. used to abort double 'ti'/'to's. 
-	# $2: string to append to the timeclock file
-	# $3: if given, is the group or account name. will be checked for explicit
-	#     declaration in order to avoid using unknown names by mistake.
+tx_load() {
+	local line account
 
 	if ! test -r "$TIMECLOCK_FILE"
 	then
@@ -92,31 +87,54 @@ tx() {
 		return 1
 	fi
 
-	while read tx_line
-	do
-		if test "$tx_line"
-		then tx_last="$tx_line"
-		fi
+	tx_not_found=true
 
-		if test '; account ' != "${tx_line:0:10}"
+	while read line
+	do
+		if test -z "$line"
 		then continue
 		fi
 
-		tx_line=($tx_line)
-		tx_account=${tx_line[2]}
-		tx_accounts="$tx_accounts $tx_account"
+		# ignore the rest of file if $1 is not given, tx_last will be incorrect
+		if test -z "$1" && test "${line:0:1}" = i
+		then break
+		fi
 
-		if test "$3" = $tx_account
+		tx_last="$line"
+
+		if test '; account ' != "${line:0:10}"
+		then continue
+		fi
+
+		line=($line)
+		account=${line[2]}
+		tx_accounts+=($account)
+
+		if test "$1" = $account
 		then tx_not_found=false
 		fi
 	done <"$TIMECLOCK_FILE"
+}
+
+tx_unload() {
+	unset tx_not_found tx_accounts tx_last
+}
+
+tx() {
+	# the common part of 'ti' and 'to' is this function.
+	# $1: this string should not be at the beginning of timeclock file's last
+	#     line. used to abort double 'ti'/'to's. 
+	# $2: string to append to the timeclock file
+	# $3: if given, is the group or account name. will be checked for explicit
+	#     declaration in order to avoid using unknown names by mistake.
+	tx_load "$3"
 
 	# check if last line matches $1 or not
-	if test "$1" = "${tx_last:0:${#1}}" 
+	if test "$1" && test "$1" = "${tx_last:0:${#1}}" 
 	then
 		echo "error: cannot register in/out twice in a row" >&2
 
-		unset tx_not_found tx_line tx_account tx_accounts tx_last
+		unset tx_not_found tx_account tx_accounts tx_last
 
 		return 2
 	fi
@@ -124,18 +142,20 @@ tx() {
 	if test "$3" && $tx_not_found
 	then
 		echo -e "error: invalid account name: $3\n\nvalid names are:" >&2
-		for tx_account in $tx_accounts
+		for tx_account in ${tx_accounts[*]}
 		do echo -e "· $tx_account" >&2
 		done
 
-		unset tx_not_found tx_line tx_account tx_accounts tx_last
+		tx_unload
 
 		return 3
 	fi
 
-	unset tx_not_found tx_line tx_account tx_accounts tx_last
+	tx_unload
 
-	echo -e "$2" >>"$TIMECLOCK_FILE"
+	if test "$2"
+	then echo -e "$2" >>"$TIMECLOCK_FILE"
+	fi
 }
 
 td() {
@@ -154,6 +174,29 @@ ti() {
 	else tx 'i ' "\ni $(td) $1" "$1"
 	fi
 }
+
+_ti_completion() {
+	local account
+
+	COMP_WORDBREAKS=${COMP_WORDBREAKS//:}
+
+	if test "$3" != ti
+	then return
+	fi
+
+	tx_load
+
+	for account in ${tx_accounts[*]}
+	do
+		if test "$2" = "${account:0:${#2}}"
+		then COMPREPLY+=($account)
+		fi
+	done
+
+	tx_unload
+}
+
+complete -F _ti_completion ti
 
 to() {
 	if test $# -ne 0
@@ -213,3 +256,4 @@ then
 	then source $NVM_DIR/bash_completion
 	fi
 fi
+
