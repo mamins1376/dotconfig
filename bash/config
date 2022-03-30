@@ -127,7 +127,11 @@ tx() {
 	# $2: string to append to the timeclock file
 	# $3: if given, is the group or account name. will be checked for explicit
 	#     declaration in order to avoid using unknown names by mistake.
-	tx_load "$3"
+
+	if test "$1" = 'o '
+	then tx_load :       # : is given to have tx_last
+	else tx_load "$3"
+	fi
 
 	# check if last line matches $1 or not
 	if test "$1" && test "$1" = "${tx_last:0:${#1}}" 
