@@ -43,23 +43,30 @@ then
 fi
 
 ### Alias definitions.
-# exa
-alias exa='exa -F --group-directories-first'
-alias e='exa -x'
-alias ee='exa -l'
-alias ea='ee -a'
-alias et='e -T'
-
-# ls
-alias ls='ls -CF --group-directories-first --color=auto'
-alias l='ls -x'
-alias ll='ls -l'
-alias la='ls -A'
+if hash exa 2>/dev/null
+then
+	alias ls='exa --icons --git -F --group-directories-first'
+	alias l='ls -x'
+	alias ll='ls -l'
+	alias la='ls -a'
+else
+	alias ls='ls -CF --group-directories-first --color=auto'
+	alias l='ls -x'
+	alias ll='ls -l'
+	alias la='ls -A'
+fi
 
 # grep
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+if hash rg 2>/dev/null
+then
+	alias grep='rg'
+	alias fgrep='rg -F'
+	alias egrep='rg'
+else
+	alias grep='grep --color=auto'
+	alias fgrep='fgrep --color=auto'
+	alias egrep='egrep --color=auto'
+fi
 
 # shell modification
 alias cd..='cd ..'
@@ -95,12 +102,12 @@ tx_load() {
 		then continue
 		fi
 
+		tx_last="$line"
+
 		# ignore the rest of file if $1 is not given, tx_last will be incorrect
-		if test -z "$1" && test "${line:0:1}" = i
+		if test -z "$1" && test 'i ' = "${line:0:2}"
 		then break
 		fi
-
-		tx_last="$line"
 
 		if test '; account ' != "${line:0:10}"
 		then continue
@@ -270,3 +277,4 @@ then
 	fi
 fi
 
+set -o vi
