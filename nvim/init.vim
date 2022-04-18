@@ -1,3 +1,5 @@
+let not_android = 'android' !=? trim(system('uname -o'))
+
 " environment
 "let g:python_host_prog = '/sbin/python2'
 let g:python3_host_prog = '/sbin/python3'
@@ -31,14 +33,14 @@ let g:pymode_rope = 0
 
 " coc
 let g:coc_global_extensions = [
-	\'coc-tsserver',
-	\'coc-rust-analyzer',
-	\'coc-json',
-	\'coc-vimtex',
-	\'coc-pyright',
-	\'coc-css',
-	\'coc-html',
-	\]
+      \'coc-tsserver',
+      \'coc-rust-analyzer',
+      \'coc-json',
+      \'coc-vimtex',
+      \'coc-pyright',
+      \'coc-css',
+      \'coc-html',
+      \]
 
 " session
 let g:session_directory = '~/.local/share/nvim/session/'
@@ -89,14 +91,16 @@ let g:vimtex_view_method = 'zathura'
 let g:xml_syntax_folding = 1
 
 " termdebug
-packadd termdebug
-let g:termdebugger = "arm-none-eabi-gdb"
-let g:termdebug_popup = 0
-let g:termdebug_wide = 163
-tnoremap <Esc> <C-\><C-n>
-nnoremap <silent> <leader>b :Break<CR>
-nnoremap <silent> <leader>bc :Clear<CR>
-nnoremap <silent> <leader>c :Continue<CR>
+if not_android
+  packadd termdebug
+  let g:termdebugger = "arm-none-eabi-gdb"
+  let g:termdebug_popup = 0
+  let g:termdebug_wide = 163
+  tnoremap <Esc> <C-\><C-n>
+  nnoremap <silent> <leader>b :Break<CR>
+  nnoremap <silent> <leader>bc :Clear<CR>
+  nnoremap <silent> <leader>c :Continue<CR>
+endif
 
 " plugins
 call plug#begin('~/.local/share/nvim/plugged')
@@ -111,59 +115,71 @@ Plug 'MaxMEllon/vim-jsx-pretty'
 
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'majutsushi/tagbar'
+
 Plug 'tpope/vim-vinegar'
-Plug 'mattn/emmet-vim'
-Plug 'ollykel/v-vim'
+Plug 'tpope/vim-fugitive'
 
 Plug 'raimondi/delimitmate'
-Plug 'vim-syntastic/syntastic'
-Plug 'tpope/vim-fugitive'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'sakhnik/nvim-gdb', { 'do': './install.sh' }
-"Plug 'neomake/neomake'
 
-" Plug 'racer-rust/vim-racer'
-Plug 'rust-lang/rust.vim'
+"Plug 'mattn/emmet-vim'
+
 Plug 'cespare/vim-toml'
+
 Plug 'kevinoid/vim-jsonc'
-Plug 'rhysd/vim-llvm'
-Plug 'jamespeapen/swayconfig.vim'
 
-"Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for': ['python', 'vim-plug'] }
-
-" Plug 'ap/vim-css-color' " Slows down X(HT)ML editing AF
 Plug 'pangloss/vim-javascript'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'digitaltoad/vim-pug'
 Plug 'leafgarland/typescript-vim'
-Plug 'posva/vim-vue'
-Plug '1995parham/vim-spice'
-Plug 'dcharbon/vim-flatbuffers'
-
-Plug 'jvirtanen/vim-octave'
-
-Plug 'lervag/vimtex'
-
-Plug 'dart-lang/dart-vim-plugin'
 
 Plug 'ledger/vim-ledger'
-Plug 'gisraptor/vim-lilypond-integrator'
-" Plug 'kassio/neoterm'
-" Plug 'vim-scripts/XML-Folding'
+
+if not_android
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'majutsushi/tagbar'
+
+  Plug 'vim-syntastic/syntastic'
+  Plug 'editorconfig/editorconfig-vim'
+  Plug 'sakhnik/nvim-gdb', { 'do': './install.sh' }
+  "Plug 'neomake/neomake'
+
+  " Plug 'racer-rust/vim-racer'
+  Plug 'rust-lang/rust.vim'
+  Plug 'rhysd/vim-llvm'
+  Plug 'jamespeapen/swayconfig.vim'
+
+  "Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+  Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for': ['python', 'vim-plug'] }
+
+  " Plug 'ap/vim-css-color' " Slows down X(HT)ML editing AF
+  Plug 'hail2u/vim-css3-syntax'
+  Plug 'cakebaker/scss-syntax.vim'
+  Plug 'digitaltoad/vim-pug'
+  Plug 'posva/vim-vue'
+  Plug '1995parham/vim-spice'
+  Plug 'dcharbon/vim-flatbuffers'
+
+  Plug 'jvirtanen/vim-octave'
+
+  Plug 'lervag/vimtex'
+
+  Plug 'dart-lang/dart-vim-plugin'
+
+  Plug 'gisraptor/vim-lilypond-integrator'
+  " Plug 'kassio/neoterm'
+  " Plug 'vim-scripts/XML-Folding'
+endif
 
 call plug#end()
 
 colorscheme srcery
 set background=dark
 set termguicolors
-set termbidi
 set splitright
 highlight Normal ctermbg=None guibg=None
 highlight NonText ctermbg=None guibg=None
+
+if not_android
+  set termbidi
+endif
 
 set exrc
 set number
@@ -177,10 +193,14 @@ au FileType tex,vue,html,xml,dart,typescript,typescriptreact set et ts=2 sts=2 s
 au FileType netrw setl bufhidden=delete
 
 " CoC
-execute 'source '.expand('<sfile>:p:h').'/coc.vim'
+if not_android
+  execute 'source '.expand('<sfile>:p:h').'/coc.vim'
+endif
 
 " gdb
-nmap <leader>dg :GdbStart\ gdb\ -q\ a.out
+if not_android
+  nmap <leader>dg :GdbStart\ gdb\ -q\ a.out
+endif
 
 " workspace
 "nmap <leader>ss :SaveSession<CR>
@@ -192,16 +212,18 @@ nmap <leader>dg :GdbStart\ gdb\ -q\ a.out
 "nmap <leader>sr :RestartVim<CR>
 
 " fix the conflict between coc and vimtex for K
-nnoremap <silent> K :call <sid>show_documentation()<cr>
-function! s:show_documentation()
-  if index(['vim', 'help'], &filetype) >= 0
-    execute 'help ' . expand('<cword>')
-  elseif &filetype ==# 'tex'
-    VimtexDocPackage
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+if not_android
+  nnoremap <silent> K :call <sid>show_documentation()<cr>
+  function! s:show_documentation()
+    if index(['vim', 'help'], &filetype) >= 0
+      execute 'help ' . expand('<cword>')
+    elseif &filetype ==# 'tex'
+      VimtexDocPackage
+    else
+      call CocAction('doHover')
+    endif
+  endfunction
+endif
 
 " sudo-write
 cnoremap w!! execute 'silent! write !pkexec tee % >/dev/null' <bar> edit!
