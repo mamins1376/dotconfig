@@ -254,6 +254,7 @@ sleep_until() {
 	fi
 	echo waiting for $SECS seconds
 	sleep $SECS
+	unset SECS
 }
 
 # command-not-found

@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 # vim: fenc=utf-8 ts=4 noet sw=4 sts=4 ft=sh
 
-[ $SESSION ] && [ ! $LANGUAGE ] || return 0
+if [ "$SESSION" ] && [ ! "$LANGUAGE" ]
+then return 0
+fi
 
 export LANGUAGE=en_US:en:C
 export LC_TIME=$LANG
@@ -58,7 +60,7 @@ envfile=$XDG_CONFIG_HOME/$SESSION/env
 [ -f $envfile ] && . $envfile
 unset envfile
 
-if [ -z "$SSH_AUTH_SOCK" ]
+if [ -z "$SSH_AUTH_SOCK" ] && hash gnome-keyring-daemon 2>/dev/null
 then
     eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh 2> /dev/null)
     export SSH_AUTH_SOCK
