@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 # vim: fenc=utf-8 ts=4 noet sw=4 sts=4 ft=sh
 
-if [ "$SESSION" ] && [ ! "$LANGUAGE" ]
+if [ ! "$SESSION" ]
+then return 0
+fi
+
+if [ "$LANGUAGE" ]
 then return 0
 fi
 

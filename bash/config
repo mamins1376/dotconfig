@@ -12,6 +12,13 @@ case $- in
 	*) return;;
 esac
 
+if [ "$TERMUX_VERSION" ] && [ ! "$SESSION" ]
+then SESSION=termux
+fi
+
+# just in case it was not sourced already
+source .profile
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
