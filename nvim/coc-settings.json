@@ -1,17 +1,15 @@
 {
 	"languageserver": {
-		"ccls": {
-			"command": "ccls",
-			"filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
-			"rootPatterns": [".ccls-root", "compile_commands.json"],
-			"initializationOptions": {
-				"cache": {
-					"directory": ".ccls-cache"
-				},
-				"client": {
-					"snippetSupport": true
-				}
-			}
+		"clangd": {
+			"command": "clangd",
+			"args": ["-header-insertion=never"],
+			"rootPatterns": [".clangd", "compile_flags.txt", "compile_commands.json", ".git"],
+			"filetypes": ["c", "cc", "cxx", "cpp", "c++", "objc", "objcpp"]
+		},
+		"vls": {
+			"command": "vls",
+			"args": [],
+			"filetypes": ["vlang"]
 		}
 	},
 	"rust-analyzer.diagnostics.disabled": ["inactive-code"],
