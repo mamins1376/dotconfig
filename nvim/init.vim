@@ -112,6 +112,7 @@ Plug 'srcery-colors/srcery-vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'moll/vim-bbye'
 Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'tpope/vim-abolish'
 
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
@@ -129,6 +130,7 @@ Plug 'kevinoid/vim-jsonc'
 
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
+Plug 'ollykel/v-vim'
 
 Plug 'ledger/vim-ledger'
 
@@ -171,6 +173,7 @@ endif
 call plug#end()
 
 colorscheme srcery
+set mouse=a
 set background=dark
 set termguicolors
 set splitright
