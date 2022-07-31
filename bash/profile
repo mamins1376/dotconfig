@@ -75,3 +75,12 @@ then
     eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh 2> /dev/null)
     export SSH_AUTH_SOCK
 fi
+
+# automatically spawn sway (with fail-safe for lock-out prevention)
+(shopt -s nullglob;
+if [ ! /run/user/$(id -u)/sway-ipc.$(id -u).*.sock ] && [ ! -f /tmp/autosway ]
+then
+	touch /tmp/autosway
+	exec sway
+fi
+)
