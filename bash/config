@@ -72,7 +72,10 @@ fi
 alias cd..='cd ..'
 alias cd-='cd -'
 
-alias hclock='hledger -f $TIMECLOCK_FILE'
+alias hclock='env LEDGER_FILE=$TIMECLOCK_FILE hledger'
+
+alias hl=hledger
+alias hc=hclock
 
 # python virtual environment
 #alias venv='python -m venv'
