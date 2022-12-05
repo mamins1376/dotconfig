@@ -38,7 +38,7 @@ input type:keyboard {
 
 output * {
     #position 0 0
-    background wallpaper.jpg fill
+    background wallpaper.png fill
 }
 
 set {
