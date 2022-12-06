@@ -69,13 +69,13 @@ else
 fi
 
 # shell modification
+alias cd='cd -P'
 alias cd..='cd ..'
 alias cd-='cd -'
 
-alias hclock='env LEDGER_FILE=$TIMECLOCK_FILE hledger'
+alias hled="hx $LEDGER_FILE"
+alias hced="hx $TIMECLOCK_FILE"
 
-alias hl=hledger
-alias hc=hclock
 
 # python virtual environment
 #alias venv='python -m venv'
@@ -88,7 +88,7 @@ alias update='source `which update`'
 ### Utility functions
 
 tx_load() {
-	local line account
+	local line
 
 	if ! test -r "$TIMECLOCK_FILE"
 	then
@@ -99,28 +99,27 @@ tx_load() {
 
 	tx_not_found=true
 
-	while read line
+	while read -r -a line
 	do
-		if test -z "$line"
+		if test ${#line[@]} -lt 3
 		then continue
 		fi
 
-		tx_last="$line"
+		tx_last=${line[*]}
 
 		# ignore the rest of file if $1 is not given, tx_last will be incorrect
-		if test -z "$1" && test 'i ' = "${line:0:2}"
+		if test -z "$1" && test "${line[0]}" = i
 		then break
 		fi
 
-		if test '; account ' != "${line:0:10}"
+		if test "${line[0]}" != \; || test "${line[1]}" != account
 		then continue
 		fi
 
-		line=($line)
-		account=${line[2]}
-		tx_accounts+=($account)
+		# third field is account name
+		tx_accounts+=("${line[2]}")
 
-		if test "$1" = $account
+		if test "${line[2]}" = "$1"
 		then tx_not_found=false
 		fi
 	done <"$TIMECLOCK_FILE"
@@ -156,7 +155,7 @@ tx() {
 	if test "$3" && $tx_not_found
 	then
 		echo -e "error: invalid account name: $3\n\nvalid names are:" >&2
-		for tx_account in ${tx_accounts[*]}
+		for tx_account in "${tx_accounts[@]}"
 		do echo -e "· $tx_account" >&2
 		done
 
@@ -209,10 +208,10 @@ _ti_completion() {
 
 	tx_load
 
-	for account in ${tx_accounts[*]}
+	for account in "${tx_accounts[@]}"
 	do
 		if test "$2" = "${account:0:${#2}}"
-		then COMPREPLY+=($account)
+		then COMPREPLY+=("$account")
 		fi
 	done
 
@@ -224,7 +223,7 @@ complete -F _ti_completion ti
 to() {
 	if test $# -ne 0
 	then
-		echo -e "error: '$FUNCNAME' takes no arguments.\n" >&2
+		echo -e "error: '${FUNCNAME[0]}' takes no arguments.\n" >&2
 		return 1
 	fi
 
@@ -232,7 +231,7 @@ to() {
 }
 
 try() {
-	while ! sh -c "$(echo "$@")"
+	while ! env "$@"
 	do sleep 0.1
 	done
 }
@@ -260,25 +259,23 @@ sleep_until() {
 	unset SECS
 }
 
+_optional_source() {
+	if test -r "$1"
+	then source "$1"
+	fi
+}
+
 # command-not-found
-cnfsrc=/usr/share/doc/pkgfile/command-not-found.bash
-if test -r $cnfsrc
-then source $cnfsrc
-fi
-unset cnfsrc
+_optional_source /usr/share/doc/pkgfile/command-not-found.bash
 
 eval "$(starship init bash)"
 
 # nvm + completion
 if ! command -v nvm >/dev/null
 then
-	if test -r $NVM_DIR/nvm.sh
-	then source $NVM_DIR/nvm.sh
-	fi
+	_optional_source "$NVM_DIR"/nvm.sh
 
-	if test -r $NVM_DIR/bash_completion
-	then source $NVM_DIR/bash_completion
-	fi
+	_optional_source "$NVM_DIR"/bash_completion
 fi
 
 set -o vi

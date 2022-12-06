@@ -1,5 +1,7 @@
 let not_android = 'android' !=? trim(system('uname -o'))
 
+let g:sh_fold_enabled=7
+
 " environment
 "let g:python_host_prog = '/sbin/python2'
 let g:python3_host_prog = '/sbin/python3'
@@ -102,6 +104,9 @@ if not_android
   nnoremap <silent> <leader>c :Continue<CR>
 endif
 
+" vimspector
+let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
+
 " plugins
 call plug#begin('~/.local/share/nvim/plugged')
 
@@ -136,11 +141,13 @@ Plug 'ledger/vim-ledger'
 
 if not_android
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  "Plug 'puremourning/vimspector'
+
   Plug 'majutsushi/tagbar'
 
   Plug 'vim-syntastic/syntastic'
   Plug 'editorconfig/editorconfig-vim'
-  Plug 'sakhnik/nvim-gdb', { 'do': './install.sh' }
+  "Plug 'sakhnik/nvim-gdb', { 'do': './install.sh' }
   "Plug 'neomake/neomake'
 
   " Plug 'racer-rust/vim-racer'
@@ -192,7 +199,6 @@ set nowrap
 
 set noet ts=4 sts=4 sw=4
 au FileType tex,vue,html,xml,dart,typescript,typescriptreact set et ts=2 sts=2 sw=2
-
 au FileType netrw setl bufhidden=delete
 
 " CoC
@@ -201,9 +207,9 @@ if not_android
 endif
 
 " gdb
-if not_android
-  nmap <leader>dg :GdbStart\ gdb\ -q\ a.out
-endif
+"if not_android
+"  nmap <leader>dg :GdbStart\ gdb\ -q\ a.out
+"endif
 
 " workspace
 "nmap <leader>ss :SaveSession<CR>
@@ -224,6 +230,7 @@ if not_android
       VimtexDocPackage
     else
       call CocAction('doHover')
+
     endif
   endfunction
 endif

@@ -1,5 +1,11 @@
 {
 	"languageserver": {
+		"bash": {
+			"command": "bash-language-server",
+			"args": ["start"],
+			"filetypes": ["sh"],
+			"ignoredRootPaths": ["~"]
+		},
 		"clangd": {
 			"command": "clangd",
 			"args": ["-header-insertion=never"],
@@ -10,11 +16,13 @@
 			"command": "vls",
 			"args": [],
 			"filetypes": ["vlang"]
+		},
+		"cmake": {
+			"command": "cmake-language-server",
+			"filetypes": ["cmake"]
 		}
 	},
-	"rust-analyzer.diagnostics.disabled": ["inactive-code"],
-	"rust-analyzer.cargo.allFeatures": true,
-	"rust-analyzer.updates.channel": "stable",
-	"rust-analyzer.assist.importPrefix": "plain",
-	"rust-analyzer.updates.checkOnStartup": false
+	"rust-analyzer.diagnostics.disabled": ["inactive-code", "unresolved-proc-macro"],
+	"rust-analyzer.server.path": "rust-analyzer",
+	"python.venvPath": ".venv"
 }

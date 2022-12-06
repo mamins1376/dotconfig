@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-[ "$(basename $BASH)" = bash ] || (echo shell must be bash >&2 && false)
+[ "$(basename "$BASH")" = bash ] || (echo shell must be bash >&2 && false)
 
 # warm up and load swaymsg & jq
 if [ "$1" = launch ]
@@ -11,10 +11,10 @@ exec sakura --class NeoVim -x "$0" "$@"
 fi
 
 coproc swaymsg -m -t subscribe '["window"]'
-while read json
-do change=$(printf "$json" | jq -r '.change')
-app_id=$(printf "$json" | jq -r '.container.app_id')
-[ "$change $app_id" = "new sakura" ] && kill -INT $COPROC_PID
-done <&${COPROC[0]}
+while read -r json
+do change=$(printf %s "$json" | jq -r '.change')
+app_id=$(printf %s "$json" | jq -r '.container.app_id')
+[ "$change $app_id" = "new sakura" ] && kill -INT "$COPROC_PID"
+done <&"${COPROC[0]}"
 
-exec nvim $@
+exec nvim "$@"

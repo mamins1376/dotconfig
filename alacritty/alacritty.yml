@@ -306,6 +306,10 @@ colors:
 #  animation: EaseOutExpo
 #  duration: 0
 #  color: '#ffffff'
+bell:
+  command:
+    program: pw-play
+    args: ["--volume", "5", "/usr/share/sounds/freedesktop/stereo/complete.oga"]
 
 #selection:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"

@@ -1,7 +1,7 @@
 #!/bin/sh
-yes | paru -Suy
+yes | paru
 yes | paru -Scc
 rustup update
-pio pkg update
+pio upgrade
 nvm install --lts
 # :PlugUpdate, :CocUpdate, rust-analyzer

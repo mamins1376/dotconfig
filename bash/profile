@@ -1,15 +1,16 @@
+#!/bin/bash
 # -*- coding: utf-8 -*-
-# vim: fenc=utf-8 ts=4 noet sw=4 sts=4 ft=sh
+# vim: fenc=utf-8 ts=4 noet sw=4 sts=4
 
-if [ ! "$SESSION" ] || [ "$LANGUAGE" ]
+if [ ${SESSION+x} ] && [ ${LANGUAGE+x} ]
 then return 0
 fi
 
 export LANGUAGE=en_US:en:C
-export LC_TIME=$LANG
+export LC_TIME="$LANG"
 
-export VISUAL=nvim
-export EDITOR=nvim\ -p
+export VISUAL=hx
+export EDITOR=hx
 export PYTHONDONTWRITEBYTECODE=1
 export LESS=-SR
 export LIBVIRT_DEFAULT_URI=qemu:///system
@@ -45,9 +46,13 @@ export WINEPREFIXES=$XDG_DATA_HOME/wineprefixes
 
 export VLANG_TOOLS=$XDG_DATA_HOME/v/cmd/tools
 
+export PNPM_HOME=$XDG_DATA_HOME/pnpm
+
 export GOOGLE_API_KEY=no
 export GOOGLE_DEFAULT_CLIENT_ID=no
 export GOOGLE_DEFAULT_CLIENT_SECRET=no
+
+export PLATFORMIO_CORE_DIR=/D/platformio
 
 export ANDROID_HOME=$XDG_DATA_HOME/android/sdk
 if [ -d $ANDROID_HOME ]
@@ -64,7 +69,7 @@ for item in $XDG_CONFIG_HOME/bash $XDG_LOCAL_HOME $CARGO_HOME
 do PATH=$item/bin:$PATH
 done
 
-PATH=$PNPM_HOME:$PATH
+PATH="$PNPM_HOME:$PATH"
 
 # nvm (for nvim)
 command -v nvm >/dev/null || [ -f $NVM_DIR/nvm.sh ] && . $NVM_DIR/nvm.sh
@@ -75,15 +80,17 @@ unset envfile
 
 if [ -z "$SSH_AUTH_SOCK" ] && hash gnome-keyring-daemon 2>/dev/null
 then
-    eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh 2> /dev/null)
+    eval "$(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh 2> /dev/null)"
     export SSH_AUTH_SOCK
 fi
 
 # automatically spawn sway (with fail-safe for lock-out prevention)
-(shopt -s nullglob;
-if [ ! /run/user/$(id -u)/sway-ipc.$(id -u).*.sock ] && [ ! -f /tmp/autosway ]
+_run=/run/user/$(id -u)
+_swaylog=$_run/swaylog
+if [ "$SESSION" = sway ]
 then
-	touch /tmp/autosway
-	exec dbus-run-session sway
+ (shopt -s nullglob
+ if [ -z $_run/sway-ipc.$(id -u).*.sock ] && [ ! -f $_swaylog ]
+ then exec dbus-run-session sway &>$_swaylog
+ fi)
 fi
-)
