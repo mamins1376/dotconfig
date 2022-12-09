@@ -8,7 +8,7 @@
 
 # If not running interactively, don't do anything
 case $- in
-	*i*) ;;
+	*i*);;
 	*) return;;
 esac
 
@@ -36,7 +36,7 @@ shopt -s nullglob
 # enable color support of ls and also add handy aliases
 if hash dircolors 2>/dev/null
 then
-	if test -r ~/.dircolors
+	if [ -r ~/.dircolors ]
 	then eval "$(dircolors -b ~/.dircolors)"
 	else eval "$(dircolors -b)"
 	fi
@@ -46,15 +46,13 @@ fi
 if hash exa 2>/dev/null
 then
 	alias ls='exa --icons --git -F --group-directories-first'
-	alias l='ls -x'
-	alias ll='ls -l'
 	alias la='ls -a'
 else
 	alias ls='ls -CF --group-directories-first --color=auto'
-	alias l='ls -x'
-	alias ll='ls -l'
 	alias la='ls -A'
 fi
+alias l='ls -x'
+alias ll='ls -l'
 
 # grep
 if hash rg 2>/dev/null
@@ -90,7 +88,7 @@ alias update='source `which update`'
 tx_load() {
 	local line
 
-	if ! test -r "$TIMECLOCK_FILE"
+	if ! [ -r "$TIMECLOCK_FILE" ]
 	then
 		echo "error: timeclock file not found or unreadable:" >&2
 		echo "  \`$TIMECLOCK_FILE'" >&2
@@ -202,7 +200,7 @@ _ti_completion() {
 
 	COMP_WORDBREAKS=${COMP_WORDBREAKS//:}
 
-	if test "$3" != ti
+	if [ "$3" != ti ]
 	then return
 	fi
 
@@ -210,7 +208,7 @@ _ti_completion() {
 
 	for account in "${tx_accounts[@]}"
 	do
-		if test "$2" = "${account:0:${#2}}"
+		if [ "$2" = "${account:0:${#2}}" ]
 		then COMPREPLY+=("$account")
 		fi
 	done
@@ -221,7 +219,7 @@ _ti_completion() {
 complete -F _ti_completion ti
 
 to() {
-	if test $# -ne 0
+	if [ $# -ne 0 ]
 	then
 		echo -e "error: '${FUNCNAME[0]}' takes no arguments.\n" >&2
 		return 1
@@ -249,24 +247,40 @@ fffreq() {
 }
 
 sleep_until() {
-	SECS=$(($(date -d "$1" +%s) - $(date +%s)))
-	if [ $SECS -lt 0 ]
+	local secs
+
+	secs=$(($(date -d "$1" +%s) - $(date +%s)))
+	if [ $secs -lt 0 ]
 	then echo specified moment is in the past
 	return 1
 	fi
-	echo waiting for $SECS seconds
-	sleep $SECS
-	unset SECS
+	echo waiting for $secs seconds
+	sleep $secs
 }
 
 _optional_source() {
-	if test -r "$1"
-	then source "$1"
+	if [ -r "$1" ]
+ 	then . "$1"
 	fi
 }
 
 # command-not-found
-_optional_source /usr/share/doc/pkgfile/command-not-found.bash
+if read -r -a REPLY </etc/issue 2>/dev/null && [ "${REPLY[0]}" = Void ]
+then
+	command_not_found_handle () {
+	    local list
+
+	    if hash xlocate >/dev/null 2>&1
+			then
+				list="$(xlocate "bin/$1\$" 2>/dev/null | awk '{print $1}' | uniq)"
+		    [ "${list}" ] || return 127
+                
+		    printf 'possible packages with %s:\n%s\n' "$1" "$list"
+	    fi
+	}
+else
+	_optional_source /usr/share/doc/pkgfile/command-not-found.bash
+fi
 
 eval "$(starship init bash)"
 
@@ -274,7 +288,6 @@ eval "$(starship init bash)"
 if ! command -v nvm >/dev/null
 then
 	_optional_source "$NVM_DIR"/nvm.sh
-
 	_optional_source "$NVM_DIR"/bash_completion
 fi
 
