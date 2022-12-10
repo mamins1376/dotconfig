@@ -71,12 +71,13 @@ done
 
 PATH="$PNPM_HOME:$PATH"
 
-# nvm (for nvim)
-command -v nvm >/dev/null || [ -f $NVM_DIR/nvm.sh ] && . $NVM_DIR/nvm.sh
+_optional_source() {
+  if [ -r "$1" ]
+  then . "$1"
+  fi
+}
 
-envfile=$XDG_CONFIG_HOME/$SESSION/env
-[ -f $envfile ] && . $envfile
-unset envfile
+_optional_source "$XDG_CONFIG_HOME/$SESSION/env"
 
 if [ -z "$SSH_AUTH_SOCK" ] && hash gnome-keyring-daemon 2>/dev/null
 then
