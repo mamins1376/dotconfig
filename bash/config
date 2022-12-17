@@ -272,7 +272,7 @@ _optional_source() {
 }
 
 # command-not-found
-if read -r -a REPLY </etc/issue 2>/dev/null && [ "${REPLY[0]}" = Void ]
+if [ -r /etc/issue ] && read -r -a REPLY </etc/issue && [ "${REPLY[0]}" = Void ]
 then
 	command_not_found_handle () {
 	    local list
