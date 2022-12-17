@@ -1,19 +1,16 @@
+#!/bin/bash
 # -*- coding: utf-8 -*-
-# vim: fenc=utf-8 ts=4 noet sw=4 sts=4 ft=sh
+# vim: fenc=utf-8 ts=4 noet sw=4 sts=4
 
-if [ ! "$SESSION" ]
-then return 0
-fi
-
-if [ "$LANGUAGE" ]
+if [ ! ${SESSION+x} ] || [ ${LANGUAGE+x} ]
 then return 0
 fi
 
 export LANGUAGE=en_US:en:C
-export LC_TIME=$LANG
+export LC_TIME="$LANG"
 
-export VISUAL=nvim
-export EDITOR=nvim\ -p
+export VISUAL=hx
+export EDITOR=hx
 export PYTHONDONTWRITEBYTECODE=1
 export LESS=-SR
 export LIBVIRT_DEFAULT_URI=qemu:///system
@@ -36,15 +33,26 @@ XDG_LOCAL_HOME=$HOME/.local
 XDG_DATA_HOME=$XDG_LOCAL_HOME/share
 
 export MPD_HOST=$XDG_RUNTIME_DIR/mpd/socket
+
 export NVM_DIR=$XDG_DATA_HOME/nvm
+export PNPM_HOME=$XDG_DATA_HOME/pnpm
+
 export PYTHONUSERBASE=$XDG_LOCAL_HOME
+
 export CARGO_HOME=$XDG_CACHE_HOME/cargo
 export RUSTUP_HOME=$XDG_DATA_HOME/rustup
+
 export WINEPREFIXES=$XDG_DATA_HOME/wineprefixes
+
+export VLANG_TOOLS=$XDG_DATA_HOME/v/cmd/tools
+
+export PNPM_HOME=$XDG_DATA_HOME/pnpm
 
 export GOOGLE_API_KEY=no
 export GOOGLE_DEFAULT_CLIENT_ID=no
 export GOOGLE_DEFAULT_CLIENT_SECRET=no
+
+export PLATFORMIO_CORE_DIR=/D/platformio
 
 export ANDROID_HOME=$XDG_DATA_HOME/android/sdk
 if [ -d $ANDROID_HOME ]
@@ -53,19 +61,37 @@ do PATH=$ANDROID_HOME/$dir:$PATH
 done
 fi
 
+if [ -d $VLANG_TOOLS ]
+then PATH=$VLANG_TOOLS:$PATH
+fi
+
 for item in $XDG_CONFIG_HOME/bash $XDG_LOCAL_HOME $CARGO_HOME
 do PATH=$item/bin:$PATH
 done
 
-# nvm (for nvim)
-command -v nvm >/dev/null || [ -f $NVM_DIR/nvm.sh ] && . $NVM_DIR/nvm.sh
+PATH="$PNPM_HOME:$PATH"
 
-envfile=$XDG_CONFIG_HOME/$SESSION/env
-[ -f $envfile ] && . $envfile
-unset envfile
+_optional_source() {
+  if [ -r "$1" ]
+  then . "$1"
+  fi
+}
+
+_optional_source "$XDG_CONFIG_HOME/$SESSION/env"
 
 if [ -z "$SSH_AUTH_SOCK" ] && hash gnome-keyring-daemon 2>/dev/null
 then
-    eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh 2> /dev/null)
+    eval "$(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh 2> /dev/null)"
     export SSH_AUTH_SOCK
+fi
+
+# automatically spawn sway (with fail-safe for lock-out prevention)
+_run=/run/user/$(id -u)
+_swaylog=$_run/swaylog
+if [ "$SESSION" = sway ]
+then
+ (shopt -s nullglob
+ if [ -z $_run/sway-ipc.$(id -u).*.sock ] && [ ! -f $_swaylog ]
+ then exec dbus-run-session sway &>$_swaylog
+ fi)
 fi

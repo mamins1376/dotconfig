@@ -1,0 +1,16 @@
+theme = "noctis"
+
+[editor]
+line-number = "relative"
+color-modes = true
+
+[editor.whitespace.characters]
+space = "·"
+nbsp = "⍽"
+tab = "→"
+newline = "⏎"
+tabpad = "·"
+
+[editor.indent-guides]
+render = true
+character = "︴"

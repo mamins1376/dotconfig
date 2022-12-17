@@ -61,6 +61,7 @@
 /pulse/*.tdb
 /pulse/cookie
 
+/qucs
 /remmina
 /rustdesk
 /skypeforlinux
@@ -72,9 +73,13 @@
 /tor/state
 /tor/cached-*
 
+/Trolltech.conf
+
 /systemd/user/default.target.wants/
 /VirtualBox
 /vmpk.sourceforge.net
+/vlc
+/wireshark
 
 /pavucontrol.ini
 /mimeapps.list

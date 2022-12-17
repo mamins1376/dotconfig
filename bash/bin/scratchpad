@@ -1,4 +1,5 @@
 #!/bin/sh
 while true
 do alacritty --config-file $HOME/.config/alacritty/scratchpad.yml
+sleep 2
 done

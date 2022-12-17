@@ -8,7 +8,7 @@ window:
   startup_mode: Windowed
 
   class:
-    instance: ncmpcpp
+    general: ncmpcpp
 
 # Font configuration
 font:

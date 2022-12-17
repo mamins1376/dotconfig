@@ -12,6 +12,7 @@ floating_modifier Mod4 normal
 
 xwayland enable
 
+exec exec wmname LG3D
 exec exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec exec apply-gtk3-theme
 exec exec wlsunset -l 35.7214 -L 51.4174
@@ -38,7 +39,7 @@ input type:keyboard {
 
 output * {
     #position 0 0
-    background wallpaper.jpg fill
+    background wallpaper.png fill
 }
 
 set {
@@ -102,7 +103,7 @@ bindsym --to-code {
     Mod4+Escape workspace back_and_forth
 
     Mod4+b splith
-    Mod4+v splitv
+    #Mod4+v splitv
 
     Mod4+Space layout toggle
 
@@ -119,12 +120,17 @@ bindsym --to-code {
     Mod4+Control+Shift+e exit
     Mod4+Control+Shift+r restart
 
+    Mod4+Print exec grim - | wl-copy
+    Mod4+Control+Print exec slurp | grim -g - - | wl-copy
+
     Mod4+Return exec exec sakura
-    Mod4+Shift+Return exec exec nvim-sakura launch
+    Mod4+Shift+Return exec exec hx-sakura launch
     Mod4+Control+Return exec exec firefox
     Mod4+Control+Shift+Return exec exec nemo
 
     Mod4+e exec exec sirula
+
+    Mod4+v exec exec wg-toggle
 
     Mod4+Control+e exec exec systemctl poweroff
     Mod4+Control+r exec exec systemctl reboot
