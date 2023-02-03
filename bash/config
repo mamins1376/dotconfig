@@ -281,8 +281,8 @@ then
 			then
 				list="$(xlocate "bin/$1\$" 2>/dev/null | awk '{print $1}' | uniq)"
 		    [ "${list}" ] || return 127
-                
-		    printf 'possible packages with %s:\n%s\n' "$1" "$list"
+
+		    printf 'possible packages with %s:\n\t%s\n' "$1" "$list"
 	    fi
 	}
 else
