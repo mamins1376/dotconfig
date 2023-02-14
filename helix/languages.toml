@@ -32,3 +32,7 @@ indent = { tab-width = 4, unit = "    " }
 
 [language.config.checkOnSave]
 command = "clippy"
+
+[[language]]
+name = "php"
+language-server = { command = "php-language-server.php" }
