@@ -62,7 +62,7 @@ if [ -d $VLANG_TOOLS ]
 then PATH=$VLANG_TOOLS:$PATH
 fi
 
-for item in $XDG_CONFIG_HOME/bash $XDG_LOCAL_HOME $CARGO_HOME
+for item in $XDG_CONFIG_HOME/bash $XDG_CONFIG_HOME/composer/vendor $XDG_LOCAL_HOME $CARGO_HOME
 do PATH=$item/bin:$PATH
 done
 
