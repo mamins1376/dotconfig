@@ -475,11 +475,11 @@ ignore_leading_the = yes
 #
 #search_engine_default_search_mode = 1
 #
-external_editor = nvim
+external_editor = hx
 #
 ## Note: set to yes if external editor is a console application.
 ##
-#use_console_editor = yes
+use_console_editor = yes
 #
 ##### colors definitions #####
 ##
