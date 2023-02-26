@@ -82,13 +82,16 @@ then
     export SSH_AUTH_SOCK
 fi
 
+if [ ! ${DBUS_SESSION_BUS_ADDRESS+x} ]
+then _launchers+=(dbus-run-session)
+fi
+
 # automatically spawn sway (with fail-safe for lock-out prevention)
 _run=/run/user/$(id -u)
 _swaylog=$_run/swaylog
 if [ "$SESSION" = sway ]
-then
- (shopt -s nullglob
- if [ -z $_run/sway-ipc.$(id -u).*.sock ] && [ ! -f $_swaylog ]
- then exec dbus-run-session sway &>$_swaylog
- fi)
+then (shopt -s nullglob
+  if [ -z $_run/sway-ipc.$(id -u).*.sock ] && [ ! -f $_swaylog ]
+  then exec "${_launchers[@]}" sway &>$_swaylog
+  fi)
 fi
