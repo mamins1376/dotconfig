@@ -78,9 +78,12 @@ alias cd='cd -P'
 alias cd..='cd ..'
 alias cd-='cd -'
 
+alias aria2c='aria2c --summary-interval=0 -c --no-conf -{x,s,j}16'
+
 alias hled="hx $LEDGER_FILE"
 alias hced="hx $TIMECLOCK_FILE"
 
+alias ip='ip --color=auto'
 
 # python virtual environment
 #alias venv='python -m venv'
@@ -263,6 +266,18 @@ sleep_until() {
 	fi
 	echo waiting for $secs seconds
 	sleep $secs
+}
+
+go2win() {
+	local args
+	efibootmgr | while read -r -a args
+	do
+		if [[ "${args[0]}" == Boot[0-9]*\* ]] && [ "${args[1]}" = Windows ]
+		then
+			echo "${args[0]}"
+			echo "${args[1]}"
+		fi
+	done
 }
 
 _optional_source() {
