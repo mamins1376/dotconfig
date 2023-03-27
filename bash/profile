@@ -53,7 +53,7 @@ export PLATFORMIO_CORE_DIR=/D/platformio
 
 export ANDROID_HOME=$XDG_DATA_HOME/android/sdk
 if [ -d $ANDROID_HOME ]
-then for dir in tools{,/bin} platform-tools emulator
+then for dir in cmdline-tools/latest/bin platform-tools emulator
 do PATH=$ANDROID_HOME/$dir:$PATH
 done
 fi
