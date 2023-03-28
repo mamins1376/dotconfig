@@ -286,13 +286,10 @@ _optional_source() {
 	fi
 }
 
-_optional_init() {
-	for util in "$@"
-	do
-	  if hash "${util}" >/dev/null 2>&1
-		then eval "$("${util}" init bash)"
-		fi
-	done
+_try_eval() {
+  if hash "$1" >/dev/null 2>&1
+	then eval "$("$@")"
+	fi
 }
 
 # command-not-found
@@ -313,7 +310,8 @@ else
 	_optional_source /usr/share/doc/pkgfile/command-not-found.bash
 fi
 
-_optional_init starship zoxide
+_try_eval starship init bash
+_try_eval zoxide init bash
 
 # nvm + completion
 if ! command -v nvm >/dev/null

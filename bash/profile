@@ -68,6 +68,10 @@ done
 
 PATH="$PNPM_HOME:$PATH"
 
+if hash fnm >/dev/null 2>&1
+then eval "$(fnm env)"
+fi
+
 _optional_source() {
   if [ -r "$1" ]
   then . "$1"
