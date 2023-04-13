@@ -49,8 +49,6 @@ export GOOGLE_API_KEY=no
 export GOOGLE_DEFAULT_CLIENT_ID=no
 export GOOGLE_DEFAULT_CLIENT_SECRET=no
 
-export PLATFORMIO_CORE_DIR=/D/platformio
-
 export ANDROID_HOME=$XDG_DATA_HOME/android/sdk
 if [ -d $ANDROID_HOME ]
 then for dir in cmdline-tools/latest/bin platform-tools emulator
@@ -60,6 +58,10 @@ fi
 
 if [ -d $VLANG_TOOLS ]
 then PATH=$VLANG_TOOLS:$PATH
+fi
+
+if [ -d $PLATFORMIO_CORE_DIR ]
+then PATH=$PLATFORMIO_CORE_DIR/packages/toolchain-gccarmnoneeabi/bin:$PATH
 fi
 
 for item in $XDG_CONFIG_HOME/bash $XDG_CONFIG_HOME/composer/vendor $XDG_LOCAL_HOME $CARGO_HOME
