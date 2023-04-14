@@ -123,7 +123,7 @@ bindsym --to-code {
     Mod4+Print exec grim - | wl-copy
     Mod4+Control+Print exec slurp | grim -g - - | wl-copy
 
-    Mod4+Return exec exec sakura
+    Mod4+Return exec exec terminal-emulator
     Mod4+Shift+Return exec exec hx-sakura launch
     Mod4+Control+Return exec exec firefox
     Mod4+Control+Shift+Return exec exec nemo
