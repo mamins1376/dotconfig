@@ -1,8 +1,5 @@
 # vim:set et:
 
-include /etc/sway/config.d/20-input.conf
-include /etc/sway/config.d/50-systemd-user.conf
-
 font pango:Droid Sans: 11px
 
 default_border pixel 2
@@ -35,11 +32,6 @@ input type:keyboard {
     xkb_layout us,ir
     xkb_model pc104
     xkb_options grp:shift_caps_toggle,compose:ralt
-}
-
-output * {
-    #position 0 0
-    background wallpaper.jpg fill
 }
 
 set {
@@ -124,7 +116,7 @@ bindsym --to-code {
     Mod4+Control+Print exec slurp | grim -g - - | wl-copy
 
     Mod4+Return exec exec terminal-emulator
-    Mod4+Shift+Return exec exec hx-sakura launch
+    Mod4+Shift+Return exec exec terminal-emulator -e $$EDITOR
     Mod4+Control+Return exec exec firefox
     Mod4+Control+Shift+Return exec exec nemo
 
@@ -227,4 +219,4 @@ for_window [instance="^ngspice$"] floating enable
 
 for_window [app_id="^wdisplays$"] floating enable, sticky enable, resize set width 500 px
 
-include /etc/sway/config.d/30-output.conf
+include config.local
