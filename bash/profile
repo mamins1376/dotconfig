@@ -64,7 +64,7 @@ fi
 #then PATH=$PLATFORMIO_CORE_DIR/packages/toolchain-gccarmnoneeabi/bin:$PATH
 #fi
 
-for item in $XDG_CONFIG_HOME/bash $XDG_CONFIG_HOME/composer/vendor $XDG_LOCAL_HOME $CARGO_HOME
+for item in $XDG_CONFIG_HOME/bash $XDG_CONFIG_HOME/composer/vendor $CARGO_HOME $XDG_LOCAL_HOME
 do PATH=$item/bin:$PATH
 done
 
