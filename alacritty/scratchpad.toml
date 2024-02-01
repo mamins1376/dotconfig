@@ -1,0 +1,86 @@
+[colors.bright]
+black = "0x918175"
+blue = "0x68a8e4"
+cyan = "0x53fde9"
+green = "0x98bc37"
+magenta = "0xff5c8f"
+red = "0xf75341"
+white = "0xfce8c3"
+yellow = "0xfed06e"
+
+[colors.normal]
+black = "0x1c1b19"
+blue = "0x2c78bf"
+cyan = "0x0aaeb3"
+green = "0x519f50"
+magenta = "0xe02c6d"
+red = "0xef2f27"
+white = "0xd0bfa1"
+yellow = "0xfbb829"
+
+[colors.primary]
+background = "0x373533"
+foreground = "0xfce8c3"
+
+[font]
+size = 9.5
+
+[font.bold]
+style = "Bold"
+
+[font.normal]
+family = "Vazir Code Hack"
+style = "Regular"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "PasteSelection"
+key = "Insert"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ResetFontSize"
+key = "Key0"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Equals"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "NumpadAdd"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "DecreaseFontSize"
+key = "NumpadSubtract"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "DecreaseFontSize"
+key = "Minus"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "ToggleFullscreen"
+key = "F"
+mods = "Control|Shift"
+
+[window]
+decorations = "none"
+opacity = 0.85
+startup_mode = "Windowed"
+
+[window.class]
+general = "scratchpad"
