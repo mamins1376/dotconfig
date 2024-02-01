@@ -4,6 +4,12 @@
 **/*.jpg
 **/*.log
 
+sv/*/supervise
+
+/systemd/user/default.target.wants/
+/systemd/user/graphical-session.target.wants/
+/systemd/user/waybar.service.d/
+
 /Android Open Source Project
 /ardour6
 /aria2/*.dat
@@ -16,6 +22,7 @@
 /binwalk/
 /blender/
 /bottom/
+/browsh
 /calibre
 /chromium
 /clangd
@@ -24,8 +31,8 @@
 /Code - OSS
 /composer
 /configstore
-/dconf
 /d-feet
+/dconf
 /discord
 /easyeffects
 /easytag
@@ -39,6 +46,7 @@
 /Fritzing
 /galculator
 /gedit
+/gh
 /GIMP
 /Google
 /gtk-2.0
@@ -64,6 +72,7 @@
 /MTK/
 /ncmpcpp/lyrics
 /nemo
+/netsurf
 /Nextcloud
 /nvim/**/.*
 /nwjs/
@@ -74,10 +83,10 @@
 /pipewire
 /pmbootstrap.cfg
 /Postman/
-/pulse/cookie
 /pulse/*-sink
 /pulse/*-source
 /pulse/*.tdb
+/pulse/cookie
 /QtProject.conf
 /qucs
 /remmina
@@ -87,10 +96,6 @@
 /simple-update-notifier/
 /skypeforlinux
 /sqlitebrowser/
-sv/*/supervise
-/systemd/user/default.target.wants/
-/systemd/user/graphical-session.target.wants/
-/systemd/user/waybar.service.d/
 /termshark
 /tor/bridges
 /tor/cached-*
