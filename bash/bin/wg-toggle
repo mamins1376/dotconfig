@@ -1,0 +1,11 @@
+#!/bin/sh
+
+_uuid="$1"
+[ "$_uuid" ] || _uuid=b8b74343-d8ba-40eb-8546-909164cb834e
+
+_verb=up
+for _str in $(nmcli connection show --active)
+do [ "$_str" = "$_uuid" ] && _verb=down && break
+done
+
+nmcli connection $_verb "$_uuid"

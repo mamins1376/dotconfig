@@ -1,0 +1,6 @@
+#!/bin/sh
+
+cd ~/.config/tor
+systemctl --user stop tor
+rm -rf cached-* *state keys
+systemctl --user start tor
