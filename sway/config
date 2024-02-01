@@ -17,7 +17,7 @@ exec exec nm-applet --indicator
 exec exec blueman-applet
 exec exec scratchpad
 exec exec nextcloud --background
-exec exec alacritty --config-file $HOME/.config/alacritty/ncmpcpp.yml
+exec exec alacritty --config-file $HOME/.config/alacritty/ncmpcpp.toml
 exec exec sway-fix
 exec exec swayidle -w \
 	timeout 300 'swaylock -i .config/sway/lockscreen.jpg' \

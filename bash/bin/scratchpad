@@ -1,5 +1,10 @@
 #!/bin/sh
+set -e
+cd
+
+_conf="${XDG_CONFIG_HOME:-.config}"/alacritty/scratchpad.toml
+
 while true
-do alacritty --config-file $HOME/.config/alacritty/scratchpad.yml
+do alacritty --config-file "$_conf"
 sleep 2
 done
