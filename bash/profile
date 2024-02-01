@@ -61,6 +61,8 @@ do PATH=$ANDROID_HOME/$dir:$PATH
 done
 fi
 
+export BUN_INSTALL=$XDG_DATA_HOME/bun
+
 if [ -d $VLANG_TOOLS ]
 then PATH=$VLANG_TOOLS:$PATH
 fi
@@ -69,7 +71,7 @@ fi
 #then PATH=$PLATFORMIO_CORE_DIR/packages/toolchain-gccarmnoneeabi/bin:$PATH
 #fi
 
-for item in $XDG_CONFIG_HOME/bash $XDG_CONFIG_HOME/composer/vendor $XDG_LOCAL_HOME $CARGO_HOME $BUN_INSTALL
+for item in $XDG_CONFIG_HOME/bash $BUN_INSTALL $XDG_CONFIG_HOME/composer/vendor $CARGO_HOME $XDG_LOCAL_HOME
 do PATH=$item/bin:$PATH
 done
 

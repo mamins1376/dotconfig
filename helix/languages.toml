@@ -1,5 +1,6 @@
 [language-server.rust-analyzer.config]
 checkOnSave.command = "clippy"
+# checkOnSave.allTargets = false
 imports.prefix = "self"
 
 [[language]]
@@ -15,7 +16,7 @@ command = "piodebuggdb"
 name = "openocd"
 request = "launch"
 completion = ["--", "-x", ".pioinit"]
-args = { runInTerminal = true }
+args.runInTerminal = true
 
 [[language]]
 name = "cpp"

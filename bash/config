@@ -63,16 +63,16 @@ alias l='ls -x'
 alias ll='ls -l'
 
 # grep
-if hash rg 2>/dev/null
-then
-	alias grep='rg'
-	alias fgrep='rg -F'
-	alias egrep='rg'
-else
-	alias grep='grep --color=auto'
-	alias fgrep='fgrep --color=auto'
-	alias egrep='egrep --color=auto'
-fi
+# if hash rg 2>/dev/null
+# then
+# 	alias grep='rg'
+# 	alias fgrep='rg -F'
+# 	alias egrep='rg'
+# else
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+# fi
 
 # shell modification
 alias cd='cd -P'
