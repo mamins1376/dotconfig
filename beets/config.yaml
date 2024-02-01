@@ -15,7 +15,7 @@ convert:
     format: opus
     formats:
         opus:
-            command: ffmpeg -i $source -y -c:a libopus -b:a 64k $dest
+            command: ffmpeg -i $source -y -c:a libopus -b:a 128k $dest
             extension: opus
         vorbis:
             command: ffmpeg -i $source -y -c:a libvorbis -q:a 5.5 $dest

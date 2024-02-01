@@ -1,8 +1,10 @@
-theme = "noctis"
+theme = "kanagawa"
 
 [editor]
 line-number = "relative"
 color-modes = true
+soft-wrap.enable = true
+rulers = [80, 100]
 
 [editor.whitespace.characters]
 space = "·"
@@ -13,4 +15,7 @@ tabpad = "·"
 
 [editor.indent-guides]
 render = true
-character = "︴"
+character = "│"
+
+[keys.normal.space]
+i = ":toggle lsp.display-inlay-hints"

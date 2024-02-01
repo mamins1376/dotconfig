@@ -116,8 +116,8 @@ bindsym --to-code {
     Mod4+Control+Print exec slurp | grim -g - - | wl-copy
 
     Mod4+Return exec exec terminal-emulator
-    Mod4+Shift+Return exec exec terminal-emulator -e $$EDITOR
-    Mod4+Control+Return exec exec firefox
+    Mod4+Shift+Return exec exec hx-sakura launch
+    Mod4+Control+Return exec exec chromium
     Mod4+Control+Shift+Return exec exec nemo
 
     Mod4+e exec exec sirula
@@ -135,14 +135,14 @@ bindsym --to-code {
     --locked XF86AudioRaiseVolume exec exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 
     --locked XF86AudioPlay exec exec playerctl play
-    --locked XF86AudioPause exec exec playerctl pause
+    --locked XF86AudioPause exec exec playerctl -a pause
     --locked XF86AudioPrev exec exec playerctl previous
     --locked XF86AudioNext exec exec playerctl next
 
     --locked Mod4+XF86AudioMute exec exec playerctl play-pause
     --locked Mod4+XF86AudioLowerVolume exec exec playerctl previous
     --locked Mod4+XF86AudioRaiseVolume exec exec playerctl next
-    --locked Mod4+Control+XF86AudioMute exec exec playerctl stop
+    --locked Mod4+Control+XF86AudioMute exec exec playerctl -a stop
     --locked Mod4+Control+XF86AudioLowerVolume exec exec playerctl position 5-
     --locked Mod4+Control+XF86AudioRaiseVolume exec exec playerctl position 5+
     --locked Mod4+KP_Add exec exec playerctl volume 0.03+
@@ -208,6 +208,8 @@ for_window [class="^MATLABWindow$"] floating enable
 for_window [title="^Simulink Library Browser$"] floating enable
 
 for_window [title="^Diagnostic Viewer$"] floating enable
+
+for_window [title="^tk$"] floating enable
 
 for_window [window_type="^unknown$" title="^Android Emulator - "] resize set 460 px
 

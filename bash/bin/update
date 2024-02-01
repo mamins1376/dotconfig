@@ -3,5 +3,3 @@ yes | paru
 yes | paru -Scc
 rustup update
 pio upgrade
-nvm install --lts
-# :PlugUpdate, :CocUpdate, rust-analyzer

@@ -45,6 +45,11 @@ export VLANG_TOOLS=$XDG_DATA_HOME/v/cmd/tools
 
 export PNPM_HOME=$XDG_DATA_HOME/pnpm
 
+export FNM_DIR=$XDG_DATA_HOME/fnm
+export FNM_COREPACK_ENABLED=true
+
+export BUN_INSTALL=$XDG_DATA_HOME/bun
+
 export GOOGLE_API_KEY=no
 export GOOGLE_DEFAULT_CLIENT_ID=no
 export GOOGLE_DEFAULT_CLIENT_SECRET=no
@@ -64,14 +69,16 @@ fi
 #then PATH=$PLATFORMIO_CORE_DIR/packages/toolchain-gccarmnoneeabi/bin:$PATH
 #fi
 
-for item in $XDG_CONFIG_HOME/bash $XDG_CONFIG_HOME/composer/vendor $CARGO_HOME $XDG_LOCAL_HOME
+for item in $XDG_CONFIG_HOME/bash $XDG_CONFIG_HOME/composer/vendor $XDG_LOCAL_HOME $CARGO_HOME $BUN_INSTALL
 do PATH=$item/bin:$PATH
 done
 
-PATH="$PNPM_HOME:$PATH"
+PATH="$PNPM_HOME:$FNM_DIR:$PATH"
+
+PATH="$PATH:${PLATFORMIO_CORE_DIR:-${HOME}/.platformio}/penv/bin"
 
 if hash fnm >/dev/null 2>&1
-then eval "$(fnm env)"
+then eval "$(fnm env --use-on-cd)"
 fi
 
 _optional_source() {

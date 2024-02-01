@@ -39,6 +39,7 @@ shopt -s checkwinsize
 shopt -s globstar
 
 shopt -s nullglob
+shopt -s direxpand
 
 # enable color support of ls and also add handy aliases
 if hash dircolors 2>/dev/null
@@ -85,6 +86,7 @@ alias hced="hx $TIMECLOCK_FILE"
 
 alias ip='ip --color=auto'
 
+alias npm='pnpm'
 # python virtual environment
 #alias venv='python -m venv'
 #alias act='. bin/activate'
@@ -321,3 +323,7 @@ then
 fi
 
 set -o vi
+
+if hash fnm >/dev/null 2>&1
+then eval "$(fnm env --use-on-cd --)"
+fi
