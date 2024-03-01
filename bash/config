@@ -297,17 +297,31 @@ _try_eval() {
 # command-not-found
 if [ -r /etc/issue ] && read -r -a REPLY </etc/issue && [ "${REPLY[0]}" = Void ]
 then
-	command_not_found_handle () {
+  if hash xlocate >/dev/null 2>&1
+	then
+		command_not_found_handle () {
+			type -t xlocate >/dev/null || return 127
+
 	    local list
+			list=("$(xlocate "bin/$1\$" 2>/dev/null | awk '{print $1}' | uniq)")
+	    [ ${#list[@]} -gt 0 ] || return 127
 
-	    if hash xlocate >/dev/null 2>&1
-			then
-				list="$(xlocate "bin/$1\$" 2>/dev/null | awk '{print $1}' | uniq)"
-		    [ "${list}" ] || return 127
+			local item
+			echo 'possible candidates:'
+			for item in "${list[@]}"
+			do printf "\t%s\n" "${item}"
+			done
 
-		    printf 'possible packages with %s:\n\t%s\n' "$1" "$list"
-	    fi
-	}
+	    [ ${#list[@]} -eq 1 ] || return
+			read -r -s -n 1 -p 'install? [Y/n]: '
+			if [ "${REPLY,}" ] && [ "${REPLY,}" != y ]
+			then echo no && return 1
+			fi
+
+			echo yes
+			doas xbps-install "${list[@]}"
+		}
+	fi
 else
 	_optional_source /usr/share/doc/pkgfile/command-not-found.bash
 fi

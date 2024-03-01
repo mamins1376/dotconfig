@@ -1,5 +1,4 @@
 #!/bin/sh
-export QT_QPA_PLATFORM=xcb
 export WINEARCH=win64
 export WINEPREFIX="${WINEPREFIXES}/lmms"
 export PIPEWIRE_LATENCY=128/48000
