@@ -10,6 +10,7 @@ floating_modifier Mod4 normal
 xwayland enable
 
 exec exec wmname LG3D
+exec exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec exec apply-gtk3-theme
 exec exec wlsunset -l 35.7214 -L 51.4174
