@@ -303,8 +303,8 @@ then
 			type -t xlocate >/dev/null || return 127
 
 	    local list
-			list=("$(xlocate "bin/$1\$" 2>/dev/null | awk '{print $1}' | uniq)")
-	    [ ${#list[@]} -gt 0 ] || return 127
+			mapfile -t list < <(xlocate "bin/$1\$" 2>/dev/null | awk '{print $1}' | uniq)
+	    [ "${list[0]}" ] || return 127
 
 			local item
 			echo 'possible candidates:'
