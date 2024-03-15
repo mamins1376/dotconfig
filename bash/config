@@ -326,6 +326,8 @@ else
 	_optional_source /usr/share/doc/pkgfile/command-not-found.bash
 fi
 
+complete -F _command doas
+
 _try_eval starship init bash
 _try_eval zoxide init bash
 
