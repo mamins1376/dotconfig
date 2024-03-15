@@ -40,7 +40,7 @@
             "focused": "",
             "default": ""
         },
-        "persistent_workspaces": {
+        "persistent-workspaces": {
             "0:Editor": [],
             "1:Focus": [],
             "2:Terminal": [],
