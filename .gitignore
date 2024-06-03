@@ -4,7 +4,7 @@
 **/*.jpg
 **/*.log
 
-sv/*/supervise
+/sv/*/supervise
 
 /systemd/user/default.target.wants/
 /systemd/user/graphical-session.target.wants/

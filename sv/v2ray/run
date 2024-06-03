@@ -1,0 +1,3 @@
+#!/bin/bash
+[ -r conf ] && . ./conf
+exec v2ray run -d "${CONFDIR:-${HOME}}"
