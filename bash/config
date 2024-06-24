@@ -74,6 +74,10 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 # fi
 
+if hash doas 2>/dev/null
+then alias sudo=doas
+fi
+
 # shell modification
 alias cd='cd -P'
 alias cd..='cd ..'
