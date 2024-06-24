@@ -95,6 +95,8 @@ alias npm='pnpm'
 
 alias update='source `which update`'
 
+alias usv="SVDIR=${XDG_DATA_HOME:-${HOME}/.local/share}/../service sv"
+
 ### Utility functions
 
 tx_load() {
