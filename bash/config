@@ -83,10 +83,12 @@ alias cd='cd -P'
 alias cd..='cd ..'
 alias cd-='cd -'
 
+alias coin='echo $(( $RANDOM % 2 ))'
+
 alias aria2c='aria2c --summary-interval=0 -c --no-conf -{x,s,j}16'
 
-alias hled="hx $LEDGER_FILE"
-alias hced="hx $TIMECLOCK_FILE"
+alias hled='hx $LEDGER_FILE'
+alias hced='hx $TIMECLOCK_FILE'
 
 alias ip='ip --color=auto'
 
@@ -99,6 +101,7 @@ alias npm='pnpm'
 
 alias update='source `which update`'
 
+# shellcheck disable=SC2139
 alias usv="SVDIR=${XDG_DATA_HOME:-${HOME}/.local/share}/../service sv"
 
 ### Utility functions
@@ -290,7 +293,9 @@ go2win() {
 
 _optional_source() {
 	if [ -r "$1" ]
- 	then . "$1"
+ 	then
+		# shellcheck disable=SC1090
+	 	. "$1"
 	fi
 }
 
