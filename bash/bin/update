@@ -1,5 +1,37 @@
 #!/bin/sh
-yes | paru
-yes | paru -Scc
-rustup update
-pio upgrade
+
+set -e
+
+if [ "$(id -u)" -eq 0 ]
+then _doas=
+elif hash doas 2>/dev/null
+then _doas=doas
+else _doas=sudo
+fi
+
+ID="$(. /etc/os-release && echo $ID)"
+
+case "$ID" in
+  arch)
+    yes | paru
+    yes | paru -Scc
+    ;;
+  debian)
+    $_doas apt-get update
+    $_doas apt-get upgrade --assume-yes
+    ;;
+  void)
+    $_doas xbps-install -Suy
+    ;;
+  *)
+    echo "WARN: unknown distribution: $ID" 1>&2
+    ;;
+esac
+
+if hash rustup 2>/dev/null
+then rustup update
+fi
+
+if hash pio 2>/dev/null
+then pio upgrade
+fi
