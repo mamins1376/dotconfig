@@ -51,6 +51,11 @@ formatter = { command = 'prettier', args = ["--parser", "css"] }
 name = "json"
 formatter = { command = 'prettier', args = ["--parser", "json"] }
 
+# github.com/helix-editor/helix/issues/6164#issuecomment-1464720238
+[[language]]
+name = "verilog"
+file-types = ["vh", "sv", "svh"]
+
 [[language]]
 name = "javascript"
 formatter = { command = 'prettier', args = ["--parser", "typescript"] }
