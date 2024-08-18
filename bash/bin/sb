@@ -1,0 +1,42 @@
+#!/bin/bash
+
+set -e
+
+_sb_panic() {
+	echo 'ERROR:' "$@" >&2
+	return 1
+}
+
+if test ${_SB_ACTIVATE+x}
+then
+	unset _SB_ACTIVATE
+
+	mkdir -p data work
+	mount -t overlay -o "lowerdir=${HOME},upperdir=data,workdir=work" overlayfs "$HOME"
+
+	echo "sandbox activated: $SB_ENV"
+
+	cd
+	exec unshare -U $SHELL
+fi
+
+test ${SB_DIR+x} || SB_DIR="${HOME}/sandbox"
+
+test -d "$SB_DIR" || _sb_panic "$SB_DIR does not exist."
+
+if test ${1+x}
+then
+	test -n ${SB_ENV+x} || _sb_panic 'cannot nest sandboxes.'
+	export SB_ENV="$1"
+
+	export _SB_ACTIVATE=
+
+	exec unshare -rm -w "$SB_DIR/$1" $0
+else
+	if test ${SB_ENV+x}
+	then
+		echo "active sandbox: $SB_ENV"
+	else
+		echo "not in a sandbox."
+	fi
+fi
