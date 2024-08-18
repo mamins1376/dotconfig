@@ -1,1 +1,5 @@
 add_newline = false
+
+[env_var.SB_ENV]
+format = "[{in [$env_value](italic)}](dimmed)"
+variable = "SB_ENV"
