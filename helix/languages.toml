@@ -19,6 +19,10 @@ completion = ["--", "-x", ".pioinit"]
 args.runInTerminal = true
 
 [[language]]
+name = "bash"
+indent = { tab-width = 4, unit = "\t" }
+
+[[language]]
 name = "cpp"
 indent = { tab-width = 4, unit = "\t" }
 
