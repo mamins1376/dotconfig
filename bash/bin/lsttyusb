@@ -1,0 +1,10 @@
+#!/bin/sh
+
+cd /sys/class/tty
+
+for tty in ttyUSB*
+do
+  not_found=false
+  printf '/dev/%s: ' ${tty}
+  cat ${tty}/../../../../product
+done

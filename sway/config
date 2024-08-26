@@ -149,6 +149,9 @@ bindsym --to-code {
     --locked Mod4+KP_Add exec exec playerctl volume 0.03+
     --locked Mod4+KP_Subtract exec exec playerctl volume 0.03-
 
+    XF86TouchpadOff exec exec swaymsg seat '*' hide_cursor 1
+    XF86TouchpadOn exec exec swaymsg seat '*' hide_cursor 0
+
     XF86MonBrightnessUp exec exec light -A 5
     XF86MonBrightnessDown exec exec light -U 5
     Mod4+XF86MonBrightnessUp exec exec light -S 100
@@ -221,5 +224,9 @@ for_window [class="^lmms$" title="^lmms$"] floating enable
 for_window [instance="^ngspice$"] floating enable
 
 for_window [app_id="^wdisplays$"] floating enable, sticky enable, resize set width 500 px
+
+for_window [app_id="^ir\.co\.ngk\."] floating enable
+
+for_window [class="^Matplotlib$"] floating enable
 
 include config.local

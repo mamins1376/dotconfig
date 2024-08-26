@@ -3,6 +3,13 @@ checkOnSave.command = "clippy"
 # checkOnSave.allTargets = false
 imports.prefix = "self"
 
+[language-server.clangd]
+args = ["--header-insertion=never"]
+
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
+
 [[language]]
 name = "c"
 indent = { tab-width = 4, unit = "\t" }
@@ -79,3 +86,8 @@ auto-format = true
 name = "tsx"
 formatter = { command = 'prettier', args = ["--parser", "typescript"] }
 auto-format = true
+
+[[language]]
+name = "python"
+auto-format = true
+language-servers = ["pyright", "ruff"]
