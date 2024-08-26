@@ -4,9 +4,9 @@
 !/.gitignore
 !/Xresources
 !/alacritty/**/*
-!/aria2/**/*
+!/aria2/*.conf
 !/bash/**/*
-!/beets/**/*
+!/beets/config.yaml
 !/dunst/**/*
 !/gtk-3.0/settings.ini
 !/gtkrc-2.0
@@ -17,8 +17,7 @@
 !/latexmk/**/*
 !/mpDris2/**/*
 !/mpd/**/*
-!/ncmpcpp/**/*
-!/nyx/**/*
+!/ncmpcpp/config
 !/paru/**/*
 !/pulse/**/*
 !/qt5ct/**/*
@@ -29,7 +28,6 @@
 !/sway/**/*
 !/swaylock/config
 !/systemd/user
-!/tor/torrc
 !/user-dirs.dirs
 !/waybar/**/*
 !/zathura/**/*

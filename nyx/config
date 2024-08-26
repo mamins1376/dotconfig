@@ -1,4 +1,0 @@
-# vim:set ft=config:
-
-confirm_quit false
-redraw_rate 1
