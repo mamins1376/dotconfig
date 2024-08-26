@@ -51,9 +51,9 @@ then
 fi
 
 ### Alias definitions.
-if hash exa 2>/dev/null
+if hash eza 2>/dev/null
 then
-	alias ls='exa --icons --git -F --group-directories-first'
+	alias ls='eza --icons --git -F --group-directories-first'
 	alias la='ls -a'
 else
 	alias ls='ls -CF --group-directories-first --color=auto'
