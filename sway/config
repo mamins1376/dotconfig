@@ -195,7 +195,9 @@ for_window [app_id="^thunderbird$" title="^An error has occurred$"] floating ena
 
 for_window [title=" is sharing your screen\.$"] move position 100 ppt 100 ppt
 
-for_window [app_id="^org.gnome.Solanum$"] floating enable
+for_window [app_id="^org\.keepassxc\.KeePassXC$"] floating enable
+
+for_window [app_id="^org\.gnome'.Solanum$"] floating enable
 
 for_window [app_id="^galculator$"] floating enable
 
