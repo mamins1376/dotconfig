@@ -9,7 +9,7 @@ do
   [ "${_line[1]}" = Folders ] || continue
   [ "${_line[3]}" = localPath ] || continue
 
-  _dir="${_line[4]}"/v2ray
+  _dir="${_line[4]}"/v2ray/enabled
   [ -d "${_dir}" ] || continue
 
   CONFDIR="$(realpath "${_dir}")"
