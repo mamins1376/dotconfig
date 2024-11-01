@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+_config=${XDG_CONFIG_HOME:-$HOME/.config}
+_cache=${XDG_CACHE_HOME:-$HOME/.cache}
+
+cd "$_config/aria2"
+
+exec aria2c --rpc-secret="$ARIA_SECRET" --input-file="$_cache/aria2.session" --save-session="$_cache/aria2.session"
