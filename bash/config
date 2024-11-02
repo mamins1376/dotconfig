@@ -99,8 +99,6 @@ alias npm='pnpm'
 #alias deact='deactivate'
 #alias react='deactivate; activate'
 
-alias update='source `which update`'
-
 # shellcheck disable=SC2139
 alias usv="SVDIR=${XDG_DATA_HOME:-${HOME}/.local/share}/../service sv"
 
