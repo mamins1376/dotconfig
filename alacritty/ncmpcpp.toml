@@ -77,9 +77,9 @@ action = "ToggleFullscreen"
 key = "F"
 mods = "Control|Shift"
 
-[shell]
-args = ["ncmpcpp"]
-program = "/bin/env"
+[terminal.shell]
+args = ["-c", "_pc=proxychains;hash $_pc||_pc=;exec $_pc ncmpcpp"]
+program = "/bin/sh"
 
 [window]
 decorations = "none"
