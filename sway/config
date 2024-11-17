@@ -15,9 +15,7 @@ exec exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec exec apply-gtk3-theme
 exec exec wlsunset -l 35.7214 -L 51.4174
 exec exec nm-applet --indicator
-exec exec blueman-applet
 exec exec scratchpad
-exec exec nextcloud --background
 exec exec alacritty --config-file $HOME/.config/alacritty/ncmpcpp.toml
 exec exec sway-fix
 exec exec swayidle -w \
@@ -26,6 +24,10 @@ exec exec swayidle -w \
 	resume 'swaymsg "output * dpms on"' \
 	before-sleep 'playerctl -a pause && swaylock' \
 	after-resume 'swaymsg "output * dpms on"'
+
+# exec exec blueman-applet
+# exec exec nextcloud --background
+exec exec dex -a
 
 bar swaybar_command waybar
 
@@ -118,7 +120,7 @@ bindsym --to-code {
 
     Mod4+Return exec exec terminal-emulator
     Mod4+Shift+Return exec exec hx-sakura launch
-    Mod4+Control+Return exec exec chromium
+    Mod4+Control+Return exec exec gtk-launch $(xdg-settings get default-web-browser)
     Mod4+Control+Shift+Return exec exec nemo
 
     Mod4+e exec exec sirula
