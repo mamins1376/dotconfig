@@ -1,6 +1,6 @@
-[bell.command]
-args = ["--volume", "5", "/usr/share/sounds/freedesktop/stereo/complete.oga"]
-program = "pw-play"
+# [bell.command]
+# args = ["--volume", "5", "/usr/share/sounds/freedesktop/stereo/complete.oga"]
+# program = "pw-play"
 
 [colors.bright]
 black = "0x918175"
