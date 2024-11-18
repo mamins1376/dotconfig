@@ -78,7 +78,7 @@ key = "F"
 mods = "Control|Shift"
 
 [terminal.shell]
-args = ["-c", "_pc=proxychains;hash $_pc||_pc=;exec $_pc ncmpcpp"]
+args = ["-c", "_pc=proxychains;(hash $_pc&&_pc=\"$_pc -q\")||_pc=;exec $_pc ncmpcpp"]
 program = "/bin/sh"
 
 [window]
