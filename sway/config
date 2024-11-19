@@ -120,7 +120,7 @@ bindsym --to-code {
 
     Mod4+Return exec exec terminal-emulator
     Mod4+Shift+Return exec exec hx-sakura launch
-    Mod4+Control+Return exec exec gtk-launch $(xdg-settings get default-web-browser)
+    Mod4+Control+Return exec exec gtk-launch "$(xdg-settings get default-web-browser)"
     Mod4+Control+Shift+Return exec exec nemo
 
     Mod4+e exec exec sirula
