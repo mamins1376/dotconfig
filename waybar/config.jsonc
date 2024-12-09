@@ -8,7 +8,7 @@
   ],
   "modules-center": [],
   "modules-right": [
-    "mpd",
+    "mpris",
     "pulseaudio",
     "network",
     "cpu",
@@ -48,36 +48,11 @@
       "6:Web": []
     }
   },
-  "mpd": {
-    "unknown-tag": "N/A",
-    "interval": 2,
-    "format": "{stateIcon}{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{albumArtist}",
-    "format-disconnected": "",
-    "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}",
-    "tooltip-format": "{artist} - {title} (from {album})",
-    "tooltip-format-disconnected": "",
-    "consume-icons": {
-      "on": " "
-    },
-    "random-icons": {
-      "on": " "
-    },
-    "repeat-icons": {
-      "on": " ꝏ"
-    },
-    "single-icons": {
-      "on": " ꝏ1"
-    },
-    "state-icons": {
-      "paused": "",
-      "playing": ""
-    }
-  },
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
-      "activated": "",
-      "deactivated": ""
+      "activated": "\udb80\udd76",
+      "deactivated": "\udb83\udfaa"
     }
   },
   "tray": {
@@ -148,27 +123,47 @@
     "format-alt": "{ifname}: {ipaddr}/{cidr}"
   },
   "pulseaudio": {
-    "format": "{volume}﹪{icon} {format_source}",
-    "format-muted": "⨉ {icon} {format_source}",
-    "format-bluetooth": "{volume}﹪{icon} {format_source} ",
-    "format-bluetooth-muted": "⨉ {icon} {format_source} ",
+    "format": "{icon}{volume}﹪{format_source}",
+    "format-muted": "{icon}\ueb24 {format_source}",
+    "format-bluetooth": "{icon}{volume}﹪{format_source} ",
+    "format-bluetooth-muted": "{icon}\ueb24 {format_source} ",
     "format-source": "{volume}﹪",
     "format-source-muted": "",
     "format-icons": {
-      "headphone": " 🎧",
+      "headphone": "\uf025 ",
       "hands-free": "",
       "headset": "",
-      "phone": " ",
-      "portable": " ",
-      "car": " ",
-      "speaker": " 📣",
+      "phone": " ",
+      "portable": " ",
+      "car": " ",
+      "speaker": "\udb81\udcc3 ",
       "default": []
     },
     "on-click": "pavucontrol",
-    "on-click-right": "pactl set-sink-volume @DEFAULT_SINK@ 0dB",
+    "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
     "on-click-middle": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
     // I've turned 'natural-scroll' on, so these are reversed.
-    "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ -1%",
-    "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ +1%"
+    "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ -1dB",
+    "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ +1dB"
+  },
+  "mpris": {
+    "format": "{player_icon} {dynamic}",
+    "format-paused": "{status_icon} <i>{dynamic}</i>",
+    "player-icons": {
+      "TelegramDesktop": "\uf2c6",
+      "chromium": "\uf268",
+      "default": "\uf04b",
+      "mpd": "\uf001"
+    },
+    "status-icons": {
+      "paused": "\uf04c"
+    },
+    "dynamic-order": [
+      "title",
+      "artist",
+      "album"
+    ],
+    "dynamic-len": 32
+    // "ignored-players": ["chromium"]
   }
 }
