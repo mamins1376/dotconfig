@@ -42,10 +42,6 @@ window {
   background-color: #c44;
 }
 
-#workspaces label {
-  font-size: 1.5rem;
-}
-
 #mode {
   background-color: #64727d;
 }
@@ -124,7 +120,6 @@ window {
 }
 
 #idle_inhibitor {
-  font-size: 1.7rem;
   box-shadow: inset 0 -2px #2d3436;
 }
 

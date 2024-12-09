@@ -82,7 +82,7 @@ args = ["-c", "_pc=proxychains;(hash $_pc&&_pc=\"$_pc -q\")||_pc=;exec $_pc ncmp
 program = "/bin/sh"
 
 [window]
-opacity = 0
+opacity = 0.5
 
 [window.class]
 general = "ncmpcpp"
