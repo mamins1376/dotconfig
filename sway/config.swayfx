@@ -1,0 +1,16 @@
+blur enable
+blur_passes 3
+blur_radius 4
+blur_noise 0.01
+blur_brightness 1
+blur_saturation 0.5
+
+corner_radius 6
+
+shadows enable
+shadows_on_csd enable
+shadow_blur_radius 5
+
+default_dim_inactive 0.3
+
+layer_effects "waybar" blur enable; shadows enable

@@ -1,153 +1,154 @@
 /* vim:set ft=css et ts=4 sts=4 sw=4: */
 
 window {
-    font-family: 'DejaVuSansMono Nerd Font';
-    font-size: 13px;
-    background-color: rgba(0, 0, 0, 0.8);
-    /*background-image: linear-gradient(#202020, #121212);*/
-    /*background-image: linear-gradient(transparent, #6c99b6);*/
-    /*color: #121212;*/
-    color: #fca;
+  font-family: "DejaVuSansMono Nerd Font";
+  font-size: 13px;
+  background-color: rgba(0, 0, 0, 0.7);
+  /*background-image: linear-gradient(#202020, #121212);*/
+  /*background-image: linear-gradient(transparent, #6c99b6);*/
+  /*color: #121212;*/
+  color: #fca;
 }
 
 .modules-left > widget:first-child > widget {
-    margin-left: 0;
+  margin-left: 0;
 }
 
 .modules-right box:last-child label {
-    margin-right: 0;
+  margin-right: 0;
 }
 
 #workspaces button {
-    /*color: #121212;*/
-    color: #fca;
-    padding: 0;
-    border: none;
-    border-radius: 0;
-    transition: all 100ms ease-out;
+  /*color: #121212;*/
+  color: #fca;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  transition: all 100ms ease-out;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
-    /* Use box-shadow instead of border so the text isn't offset */
-    /*box-shadow: inset 0 -2px #555;*/
-    box-shadow: inset 0 -2px #a74;
+  /* Use box-shadow instead of border so the text isn't offset */
+  /*box-shadow: inset 0 -2px #555;*/
+  box-shadow: inset 0 -2px #a74;
 }
 
 #workspaces button.focused {
-    box-shadow: inset 0 -2px #ca7;
+  box-shadow: inset 0 -2px #ca7;
 }
 
 #workspaces button.urgent {
-    background-color: #c44;
+  background-color: #c44;
 }
 
 #workspaces label {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 #mode {
-    background-color: #64727D;
+  background-color: #64727d;
 }
 
 #window {
-    padding: 0 6px;
+  padding: 0 6px;
 }
 
 .modules-right label {
-    padding: 0 5px;
+  padding: 0 5px;
 }
 
-#battery.charging, #battery.plugged {
-    box-shadow: inset 0 -2px #26A65B;
+#battery.charging,
+#battery.plugged {
+  box-shadow: inset 0 -2px #26a65b;
 }
 
 @keyframes blink {
-    to {
-        background-color: transparent;
-        color: #000;
-    }
+  to {
+    background-color: transparent;
+    color: #000;
+  }
 }
 
 #battery.critical:not(.charging) {
-    background-color: rgba(240, 60, 60, .6);
-    animation: blink .4s linear infinite alternate;
+  background-color: rgba(240, 60, 60, 0.6);
+  animation: blink 0.4s linear infinite alternate;
 }
 
 #clock {
-    box-shadow: inset 0 -2px #64727D;
+  box-shadow: inset 0 -2px #64727d;
 }
 
 #cpu {
-    box-shadow: inset 0 -2px #2ecc71;
+  box-shadow: inset 0 -2px #2ecc71;
 }
 
 #memory {
-    box-shadow: inset 0 -2px #9b59b6;
+  box-shadow: inset 0 -2px #9b59b6;
 }
 
 #disk {
-    box-shadow: inset 0 -2px #964B00;
+  box-shadow: inset 0 -2px #964b00;
 }
 
 #backlight {
-    box-shadow: inset 0 -2px #90b1b1;
+  box-shadow: inset 0 -2px #90b1b1;
 }
 
 #network {
-    box-shadow: inset 0 -2px #2980b9;
+  box-shadow: inset 0 -2px #2980b9;
 }
 
 #network.disconnected {
-    box-shadow: inset 0 -2px #f53c3c;
+  box-shadow: inset 0 -2px #f53c3c;
 }
 
 #pulseaudio {
-    box-shadow: inset 0 -2px #f1c40f;
+  box-shadow: inset 0 -2px #f1c40f;
 }
 
 #pulseaudio.muted {
-    box-shadow: inset 0 -2px #90b1b1;
+  box-shadow: inset 0 -2px #90b1b1;
 }
 
 #temperature {
-    box-shadow: inset 0 -2px #f0932b;
+  box-shadow: inset 0 -2px #f0932b;
 }
 
 #temperature.critical {
-    box-shadow: inset 0 -2px #eb4d4b;
+  box-shadow: inset 0 -2px #eb4d4b;
 }
 
 #tray {
-    box-shadow: inset 0 -2px #2980b9;
+  box-shadow: inset 0 -2px #2980b9;
 }
 
 #idle_inhibitor {
-    font-size: 1.7rem;
-    box-shadow: inset 0 -2px #2d3436;
+  font-size: 1.7rem;
+  box-shadow: inset 0 -2px #2d3436;
 }
 
 #idle_inhibitor.activated {
-    box-shadow: inset 0 -2px #ecf0f1;
+  box-shadow: inset 0 -2px #ecf0f1;
 }
 
 #mpd {
-    box-shadow: inset 0 -2px #66cc99;
+  box-shadow: inset 0 -2px #66cc99;
 }
 
 #mpd.disconnected {
-    box-shadow: inset 0 -2px #f53c3c;
+  box-shadow: inset 0 -2px #f53c3c;
 }
 
 #mpd.stopped {
-    box-shadow: inset 0 -2px #b101b9;
+  box-shadow: inset 0 -2px #b101b9;
 }
 
 #mpd.paused {
-    box-shadow: inset 0 -2px #51a37a;
+  box-shadow: inset 0 -2px #51a37a;
 }
 
 #language {
-    box-shadow: inset 0 -2px #00b093;
-    min-width: 24px;
+  box-shadow: inset 0 -2px #00b093;
+  min-width: 24px;
 }

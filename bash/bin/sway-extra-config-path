@@ -1,0 +1,5 @@
+#!/bin/sh
+if ($(cat "/proc/$1/comm") -v | grep -q '^swayfx version ')
+then echo config.swayfx
+else echo /dev/null
+fi

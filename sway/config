@@ -3,6 +3,7 @@
 font pango:Droid Sans: 11px
 
 default_border pixel 2
+default_floating_border pixel 2
 hide_edge_borders smart
 
 floating_modifier Mod4 normal
@@ -57,7 +58,7 @@ set {
     $W7 7:Media
 }
 
-client.focused          $bg           $bg          $text          $bg $bg
+client.focused          $bg           $bg          $text          $bg  $bg
 client.unfocused        $bg-inactive  $bg-inactive $text-inactive $bar $bar
 client.focused_inactive $bg-inactive  $bg-inactive $text-inactive $bar $bar
 client.urgent           $bg-urgent    $bg-urgent   $text          $bar $bar
@@ -236,5 +237,7 @@ for_window [class="^Matplotlib$"] floating enable
 for_window [class="^mc12_64.exe$"] floating enable
 
 for_window [class="^mc12_64.exe$" title="^Micro-Cap "] floating disable
+
+include "$(sway-extra-config-path $PPID)"
 
 include config.local
