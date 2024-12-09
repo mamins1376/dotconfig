@@ -1,7 +1,7 @@
 blur enable
 blur_passes 3
 blur_radius 4
-blur_noise 0.01
+blur_noise 0.03
 blur_brightness 1
 blur_saturation 0.5
 
