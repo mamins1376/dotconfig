@@ -18,6 +18,10 @@ window {
   margin-right: 0;
 }
 
+#workspaces label {
+  font-size: 1.2rem;
+}
+
 #workspaces button {
   /*color: #121212;*/
   color: #fca;

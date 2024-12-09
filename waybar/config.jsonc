@@ -26,26 +26,27 @@
     "all-outputs": true,
     "format": "{icon}",
     "format-icons": {
-      "0:Editor": "",
-      "1:Focus": "☯",
-      "2:Terminal": "",
-      "3:Background": "",
-      "4:Auxiliary": "",
-      "5:Social": "",
-      "6:Web": "",
-      "7:Media": "🎶",
+      "0:Editor": "\udb80\udd69",
+      "1:Terminal": "\uf489",
+      "2:Num3": "\udb83\udca4",
+      "3:Num4": "\udb83\udca6",
+      "4:Num5": "\udb83\udca8",
+      "5:Social": "\ue217",
+      "6:Web": "\uf268",
+      "7:Media": "\uf001",
       "urgent": "",
-      "focused": "",
+      // "focused": "",
       "default": ""
     },
     "persistent-workspaces": {
       "0:Editor": [],
-      "1:Focus": [],
-      "2:Terminal": [],
-      "3:Background": [],
-      "4:Auxiliary": [],
+      "1:Terminal": [],
+      "2:Num3": [],
+      "3:Num4": [],
+      "4:Num5": [],
       "5:Social": [],
-      "6:Web": []
+      "6:Web": [],
+      "7:Media": []
     }
   },
   "idle_inhibitor": {
@@ -150,7 +151,7 @@
     "format": "{player_icon} {dynamic}",
     "format-paused": "{status_icon} <i>{dynamic}</i>",
     "player-icons": {
-      "TelegramDesktop": "\uf2c6",
+      "TelegramDesktop": "\ue217",
       "chromium": "\uf268",
       "default": "\uf04b",
       "mpd": "\uf001"

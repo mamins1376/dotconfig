@@ -49,10 +49,10 @@ set {
     $statusline    #e0e0e0
 
     $W0 0:Editor
-    $W1 1:Focus
-    $W2 2:Terminal
-    $W3 3:Background
-    $W4 4:Auxiliary
+    $W1 1:Terminal
+    $W2 2:Num3
+    $W3 3:Num4
+    $W4 4:Num5
     $W5 5:Social
     $W6 6:Web
     $W7 7:Media
