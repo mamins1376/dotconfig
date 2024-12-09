@@ -1,9 +1,9 @@
 /* vim:set ft=css et ts=4 sts=4 sw=4: */
 
 window {
-  font-family: "Symbols Nerd Font", "DejaVu Sans Condensed";
+  font-family: "Symbols Nerd Font", "Sahel WOL", "DejaVu Sans Condensed";
   font-size: 13px;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: transparent;
   /*background-image: linear-gradient(#202020, #121212);*/
   /*background-image: linear-gradient(transparent, #6c99b6);*/
   /*color: #121212;*/
