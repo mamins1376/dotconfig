@@ -11,8 +11,14 @@ ID="$(. /etc/os-release && echo $ID)"
 
 case "$ID" in
   arch)
-    yes | paru
-    yes | paru -Scc
+    if hash paru 2>/dev/null
+    then
+      yes | paru
+      yes | paru -Scc
+    else
+      $_doas sh -c 'yes | pacman -Suy'
+      $_doas sh -c 'yes | pacman -Scc'
+    fi
     ;;
   debian)
     $_doas apt-get update
@@ -20,16 +26,13 @@ case "$ID" in
     ;;
   void)
     $_doas xbps-install -Suy
+    xlocate -S
     ;;
   *)
     echo "WARN: unknown distribution: $ID" 1>&2
     ;;
 esac
 
-if hash rustup 2>/dev/null
-then rustup update
-fi
+rustup update
 
-if hash pio 2>/dev/null
-then pio upgrade
-fi
+pio upgrade
