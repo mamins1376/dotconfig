@@ -1,4 +1,6 @@
 {
+  "include": ["config.local.jsonc"],
+  "reload_style_on_change": true,
   "position": "bottom", // Waybar position (top|bottom|left|right)
   //"height": 0, // Waybar height (to be removed for auto height)
   "modules-left": [
