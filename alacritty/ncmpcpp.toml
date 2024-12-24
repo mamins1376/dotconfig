@@ -29,8 +29,8 @@ size = 13
 style = "Bold"
 
 [font.normal]
-family = "Iosevka Nerd Font Mono"
-style = "Regular"
+family = "Vazir Code Hack"
+style = "Book"
 
 [[keyboard.bindings]]
 action = "Paste"
