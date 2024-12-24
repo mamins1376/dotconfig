@@ -234,7 +234,9 @@ for_window [app_id="^ir\.co\.ngk\."] floating enable
 
 for_window [class="^Matplotlib$"] floating enable
 
-for_window [class="^mc12_64.exe$"] floating enable
+for_window [app_id=".*\.exe$"] floating enable
+
+for_window [title="^LTspice$" app_id="^ltspice\.exe$"] floating disable
 
 for_window [class="^mc12_64.exe$" title="^Micro-Cap "] floating disable
 
