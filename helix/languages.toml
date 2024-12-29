@@ -10,6 +10,9 @@ args = ["--header-insertion=never"]
 command = "ruff"
 args = ["server"]
 
+[language-server.basedpyright.config]
+# basedpyright.analysis.useLibraryCodeForTypes = true
+
 [[language]]
 name = "c"
 indent = { tab-width = 4, unit = "\t" }
@@ -90,4 +93,4 @@ auto-format = true
 [[language]]
 name = "python"
 auto-format = true
-language-servers = ["pyright", "ruff"]
+language-servers = ["basedpyright", "ruff"]

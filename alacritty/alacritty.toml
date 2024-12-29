@@ -85,7 +85,7 @@ mods = "Control|Shift"
 hide_when_typing = true
 
 [window]
-opacity = 0.5
+opacity = 0.75
 startup_mode = "Windowed"
 resize_increments = true
 padding = { x = 4, y = 4 }
