@@ -97,7 +97,9 @@ _optional_source "$XDG_CONFIG_HOME/$SESSION/env"
 
 if [ "$SESSION" = ssh ]
 then _optional_source ~/.bashrc
-elif hash gnome-keyring-daemon 2>/dev/null
+fi
+
+if [ -z ${SSH_AUTH_SOCK+x} ] && hash gnome-keyring-daemon 2>/dev/null
 then
     eval "$(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh 2> /dev/null)"
     export SSH_AUTH_SOCK
