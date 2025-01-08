@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 # vim: fenc=utf-8 ts=4 noet sw=4 sts=4
 
-if [ ! ${SESSION+x} ] || [ ${LANGUAGE+x} ]
+if [ ${SSH_TTY+x} -a -z ${SESSION+x} ]
+then export SESSION=ssh
+elif [ ! ${SESSION+x} ] || [ ${LANGUAGE+x} ]
 then return 0
 fi
 
@@ -93,7 +95,9 @@ _optional_source() {
 
 _optional_source "$XDG_CONFIG_HOME/$SESSION/env"
 
-if [ -z "$SSH_AUTH_SOCK" ] && hash gnome-keyring-daemon 2>/dev/null
+if [ "$SESSION" = ssh ]
+then _optional_source ~/.bashrc
+elif hash gnome-keyring-daemon 2>/dev/null
 then
     eval "$(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh 2> /dev/null)"
     export SSH_AUTH_SOCK
