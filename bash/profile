@@ -99,10 +99,15 @@ if [ "$SESSION" = ssh ]
 then _optional_source ~/.bashrc
 fi
 
-if [ -z ${SSH_AUTH_SOCK+x} ] && hash gnome-keyring-daemon 2>/dev/null
+if [ ! ${SSH_AUTH_SOCK+x} ]
 then
-    eval "$(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh 2> /dev/null)"
-    export SSH_AUTH_SOCK
+  if [ -n "${XDG_RUNTIME_DIR+x}" -a -w "$XDG_RUNTIME_DIR/gcr/ssh" ]
+  then export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gcr/ssh"
+  elif hash gnome-keyring-daemon 2>/dev/null
+  then
+      eval "$(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh 2> /dev/null)"
+      export SSH_AUTH_SOCK
+  fi
 fi
 
 if [ ! ${DBUS_SESSION_BUS_ADDRESS+x} ]

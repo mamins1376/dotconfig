@@ -234,6 +234,8 @@ for_window [app_id="^ir\.co\.ngk\."] floating enable
 
 for_window [class="^Matplotlib$"] floating enable
 
+for_window [class="^Qemu-system-x86_64$"] floating enable
+
 for_window [app_id=".*\.exe$"] floating enable
 
 for_window [title="^LTspice$" app_id="^ltspice\.exe$"] floating disable
