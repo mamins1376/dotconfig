@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 # vim: fenc=utf-8 ts=4 noet sw=4 sts=4
 
-if [ ${SSH_TTY+x} -a -z ${SESSION+x} ]
+if [ -n "${SSH_TTY+x}" -a -z "${SESSION+x}" ]
 then export SESSION=ssh
-elif [ ! ${SESSION+x} ] || [ ${LANGUAGE+x} ]
+elif [ -z "${SESSION+x}" -o -n "${LANGUAGE+x}" ]
 then return 0
 fi
 
@@ -99,7 +99,7 @@ if [ "$SESSION" = ssh ]
 then _optional_source ~/.bashrc
 fi
 
-if [ ! ${SSH_AUTH_SOCK+x} ]
+if [ -z "${SSH_AUTH_SOCK+x}" ]
 then
   if [ -n "${XDG_RUNTIME_DIR+x}" -a -w "$XDG_RUNTIME_DIR/gcr/ssh" ]
   then export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gcr/ssh"
@@ -110,7 +110,7 @@ then
   fi
 fi
 
-if [ ! ${DBUS_SESSION_BUS_ADDRESS+x} ]
+if [ -z "${DBUS_SESSION_BUS_ADDRESS+x}" ]
 then _launchers+=(dbus-run-session)
 fi
 
