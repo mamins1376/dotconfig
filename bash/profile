@@ -33,12 +33,12 @@ XDG_CACHE_HOME=$HOME/.cache
 XDG_LOCAL_HOME=$HOME/.local
 XDG_DATA_HOME=$XDG_LOCAL_HOME/share
 
-export MPD_HOST=$XDG_RUNTIME_DIR/mpd/socket
+export MPD_HOST="$XDG_RUNTIME_DIR"/mpd/socket
 
 export PYTHONDONTWRITEBYTECODE=1
-export PYTHONUSERBASE=$XDG_LOCAL_HOME
+export PYTHONUSERBASE="$XDG_LOCAL_HOME"
 
-export JUPYTER_CONFIG_DIR=$XDG_CONFIG_HOME/jupyter
+export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME"/jupyter
 
 export CARGO_HOME=$XDG_CACHE_HOME/cargo
 export RUSTUP_HOME=$XDG_DATA_HOME/rustup
@@ -58,20 +58,20 @@ export GOOGLE_API_KEY=no
 export GOOGLE_DEFAULT_CLIENT_ID=no
 export GOOGLE_DEFAULT_CLIENT_SECRET=no
 
-if [ $TERMUX_VERSION ]
-then PLATFORMIO_CORE_DIR=$PREFIX/share/platformio
+if [ "$TERMUX_VERSION" ]
+then PLATFORMIO_CORE_DIR="$PREFIX"/share/platformio
 fi
 
-export ANDROID_HOME=$XDG_DATA_HOME/android/sdk
-if [ -d $ANDROID_HOME ]
+export ANDROID_HOME="$XDG_DATA_HOME"/android/sdk
+if [ -d "$ANDROID_HOME" ]
 then for dir in cmdline-tools/latest/bin platform-tools emulator
-do PATH=$ANDROID_HOME/$dir:$PATH
+do PATH="$ANDROID_HOME"/$dir:$PATH
 done
 fi
 
 export BUN_INSTALL=$XDG_DATA_HOME/bun
 
-if [ -d $VLANG_TOOLS ]
+if [ -d "$VLANG_TOOLS" ]
 then PATH=$VLANG_TOOLS:$PATH
 fi
 
@@ -114,12 +114,4 @@ if [ -z "${DBUS_SESSION_BUS_ADDRESS+x}" ]
 then _launchers+=(dbus-run-session)
 fi
 
-# automatically spawn sway (with fail-safe for lock-out prevention)
-_run=/run/user/$(id -u)
-_swaylog=$_run/swaylog
-if [ "$SESSION" = sway ]
-then (shopt -s nullglob
-  if [ -z $_run/sway-ipc.$(id -u).*.sock ] && [ ! -f $_swaylog ]
-  then exec "${_launchers[@]}" sway $SWAY_ARGS &>$_swaylog
-  fi)
-fi
+[ "$SESSION" != sway ] || ("${_launchers[@]}" sway $SWAY_ARGS &>"$XDG_RUNTIME_DIR/swaylog") || true
