@@ -7,12 +7,13 @@ if [ ${_profile_loaded+x} ]; then
 fi
 export _profile_loaded=
 
-if [ ${SSH_TTY+x} ] && ! [ ${SESSION+x} ]; then
-    export SESSION=ssh
+if ! [ ${SESSION+x} ]; then
+    if [ ${TERMUX_VERSION+x} ]; then
+        export SESSION=termux
+    elif [ ${SSH_TTY+x} ]; then
+        export SESSION=ssh
+    fi
 fi
-
-# export LANGUAGE=en_US:en:C
-# export LC_TIME="$LANG"
 
 export VISUAL=hx
 export EDITOR=hx
@@ -100,6 +101,8 @@ _optional_source "$XDG_CONFIG_HOME/$SESSION/env"
 
 case "$SESSION" in
 ssh)
+    _optional_source /etc/profile
+    _optional_source /etc/bash/bashrc
     _optional_source ~/.bashrc
     ;;
 esac
