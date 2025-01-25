@@ -2,10 +2,13 @@
 # -*- coding: utf-8 -*-
 # vim: fenc=utf-8 ts=4 noet sw=4 sts=4
 
-if [ -n "${SSH_TTY+x}" ] && [ -z "${SESSION+x}" ]; then
-    export SESSION=ssh
-elif [ -z "${SESSION+x}" ] && [ -n "${VISUAL+x}" ]; then
+if [ ${_profile_loaded+x} ]; then
     return 0
+fi
+export _profile_loaded=
+
+if [ ${SSH_TTY+x} ] && ! [ ${SESSION+x} ]; then
+    export SESSION=ssh
 fi
 
 # export LANGUAGE=en_US:en:C
@@ -95,12 +98,14 @@ _optional_source() {
 
 _optional_source "$XDG_CONFIG_HOME/$SESSION/env"
 
-if [ "$SESSION" = ssh ]; then
+case "$SESSION" in
+ssh)
     _optional_source ~/.bashrc
-fi
+    ;;
+esac
 
-if [ -z "${SSH_AUTH_SOCK+x}" ]; then
-    if [ -n "${XDG_RUNTIME_DIR+x}" ] && [ -w "$XDG_RUNTIME_DIR/gcr/ssh" ]; then
+if ! [ ${SSH_AUTH_SOCK+x} ]; then
+    if [ ${XDG_RUNTIME_DIR+x} ] && [ -w "$XDG_RUNTIME_DIR/gcr/ssh" ]; then
         export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gcr/ssh"
     elif hash gnome-keyring-daemon 2>/dev/null; then
         eval "$(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh 2>/dev/null)"
@@ -108,7 +113,7 @@ if [ -z "${SSH_AUTH_SOCK+x}" ]; then
     fi
 fi
 
-if [ -z "${DBUS_SESSION_BUS_ADDRESS+x}" ]; then
+if ! [ ${DBUS_SESSION_BUS_ADDRESS+x} ]; then
     _launchers+=(dbus-run-session)
 fi
 
