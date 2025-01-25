@@ -4,17 +4,16 @@
 
 if [ -n "${SSH_TTY+x}" -a -z "${SESSION+x}" ]
 then export SESSION=ssh
-elif [ -z "${SESSION+x}" -o -n "${LANGUAGE+x}" ]
+elif [ -z "${SESSION+x}" -o -n "${VISUAL+x}" ]
 then return 0
 fi
 
-export LANGUAGE=en_US:en:C
-export LC_TIME="$LANG"
+# export LANGUAGE=en_US:en:C
+# export LC_TIME="$LANG"
 
 export VISUAL=hx
 export EDITOR=hx
 export LESS=-SR
-export LIBVIRT_DEFAULT_URI=qemu:///system
 
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36'
 GCC_COLORS="$GCC_COLORS:caret=01;32:locus=01:quote=01"
@@ -28,10 +27,10 @@ o="$o --scf #747474 --scb #00000000"
 export BEMENU_OPTS="$o"
 unset o
 
-XDG_CONFIG_HOME=$HOME/.config
-XDG_CACHE_HOME=$HOME/.cache
-XDG_LOCAL_HOME=$HOME/.local
-XDG_DATA_HOME=$XDG_LOCAL_HOME/share
+XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
+XDG_LOCAL_HOME=${XDG_LOCAL_HOME:-$HOME/.local}
+XDG_DATA_HOME=${XDG_DATA_HOME:-$XDG_LOCAL_HOME/share}
 
 export MPD_HOST="$XDG_RUNTIME_DIR"/mpd/socket
 
