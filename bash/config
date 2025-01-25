@@ -8,12 +8,12 @@
 
 # If not running interactively, don't do anything
 case $- in
-	*i*);;
-	*) return;;
+*i*) ;;
+*) return ;;
 esac
 
-if [ "$TERMUX_VERSION" ] && [ ! "$SESSION" ]
-then SESSION=termux
+if [ "$TERMUX_VERSION" ] && [ ! "$SESSION" ]; then
+	SESSION=termux
 fi
 
 # just in case it was not sourced already
@@ -42,17 +42,16 @@ shopt -s nullglob
 shopt -s direxpand
 
 # enable color support of ls and also add handy aliases
-if hash dircolors 2>/dev/null
-then
-	if [ -r ~/.dircolors ]
-	then eval "$(dircolors -b ~/.dircolors)"
-	else eval "$(dircolors -b)"
+if hash dircolors 2>/dev/null; then
+	if [ -r ~/.dircolors ]; then
+		eval "$(dircolors -b ~/.dircolors)"
+	else
+		eval "$(dircolors -b)"
 	fi
 fi
 
 ### Alias definitions.
-if hash eza 2>/dev/null
-then
+if hash eza 2>/dev/null; then
 	alias ls='eza --icons --git -F --group-directories-first'
 	alias la='ls -a'
 else
@@ -74,8 +73,8 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 # fi
 
-if hash doas 2>/dev/null
-then alias sudo=doas
+if hash doas 2>/dev/null; then
+	alias sudo=doas
 fi
 
 # shell modification
@@ -110,8 +109,7 @@ alias usv="SVDIR=${XDG_DATA_HOME:-${HOME}/.local/share}/../service sv"
 tx_load() {
 	local line
 
-	if ! [ -r "$TIMECLOCK_FILE" ]
-	then
+	if ! [ -r "$TIMECLOCK_FILE" ]; then
 		echo "error: timeclock file not found or unreadable:" >&2
 		echo "  \`$TIMECLOCK_FILE'" >&2
 		return 1
@@ -119,28 +117,27 @@ tx_load() {
 
 	tx_not_found=true
 
-	while read -r -a line
-	do
-		if test ${#line[@]} -lt 3
-		then continue
+	while read -r -a line; do
+		if test ${#line[@]} -lt 3; then
+			continue
 		fi
 
 		tx_last=${line[*]}
 
 		# ignore the rest of file if $1 is not given, tx_last will be incorrect
-		if test -z "$1" && test "${line[0]}" = i
-		then break
+		if test -z "$1" && test "${line[0]}" = i; then
+			break
 		fi
 
-		if test "${line[0]}" != \; || test "${line[1]}" != account
-		then continue
+		if test "${line[0]}" != \; || test "${line[1]}" != account; then
+			continue
 		fi
 
 		# third field is account name
 		tx_accounts+=("${line[2]}")
 
-		if test "${line[2]}" = "$1"
-		then tx_not_found=false
+		if test "${line[2]}" = "$1"; then
+			tx_not_found=false
 		fi
 	done <"$TIMECLOCK_FILE"
 }
@@ -152,19 +149,19 @@ tx_unload() {
 tx() {
 	# the common part of 'ti' and 'to' is this function.
 	# $1: this string should not be at the beginning of timeclock file's last
-	#     line. used to abort double 'ti'/'to's. 
+	#     line. used to abort double 'ti'/'to's.
 	# $2: string to append to the timeclock file
 	# $3: if given, is the group or account name. will be checked for explicit
 	#     declaration in order to avoid using unknown names by mistake.
 
-	if test "$1" = 'o '
-	then tx_load :       # : is given to have tx_last
-	else tx_load "$3"
+	if test "$1" = 'o '; then
+		tx_load : # : is given to have tx_last
+	else
+		tx_load "$3"
 	fi
 
 	# check if last line matches $1 or not
-	if test "$1" && test "$1" = "${tx_last:0:${#1}}" 
-	then
+	if test "$1" && test "$1" = "${tx_last:0:${#1}}"; then
 		echo "error: cannot register in/out twice in a row" >&2
 
 		unset tx_not_found tx_account tx_accounts tx_last
@@ -172,11 +169,10 @@ tx() {
 		return 2
 	fi
 
-	if test "$3" && $tx_not_found
-	then
+	if test "$3" && $tx_not_found; then
 		echo -e "error: invalid account name: $3\n\nvalid names are:" >&2
-		for tx_account in "${tx_accounts[@]}"
-		do echo -e "· $tx_account" >&2
+		for tx_account in "${tx_accounts[@]}"; do
+			echo -e "· $tx_account" >&2
 		done
 
 		tx_unload
@@ -186,8 +182,8 @@ tx() {
 
 	tx_unload
 
-	if test "$2"
-	then echo -e "$2" >>"$TIMECLOCK_FILE"
+	if test "$2"; then
+		echo -e "$2" >>"$TIMECLOCK_FILE"
 	fi
 }
 
@@ -196,14 +192,14 @@ td() {
 }
 
 ti() {
-	if test $# -eq 0
-	then
+	if test $# -eq 0; then
 		# : is given to have tx_last
 		tx_load :
 
-		if test "${tx_last:0:2}" = 'i '
-		then echo "    ${tx_last:2}"
-		else echo 'nothing started yet.'
+		if test "${tx_last:0:2}" = 'i '; then
+			echo "    ${tx_last:2}"
+		else
+			echo 'nothing started yet.'
 		fi
 
 		tx_unload
@@ -211,27 +207,27 @@ ti() {
 		return
 	fi
 
-	if test $# -gt 1
-	then tx 'i ' "\ni $(td) $1  ${*:2}" "$1"
-	else tx 'i ' "\ni $(td) $1" "$1"
+	if test $# -gt 1; then
+		tx 'i ' "\ni $(td) $1  ${*:2}" "$1"
+	else
+		tx 'i ' "\ni $(td) $1" "$1"
 	fi
 }
 
 _ti_completion() {
 	local account
 
-	COMP_WORDBREAKS=${COMP_WORDBREAKS//:}
+	COMP_WORDBREAKS=${COMP_WORDBREAKS//:/}
 
-	if [ "$3" != ti ]
-	then return
+	if [ "$3" != ti ]; then
+		return
 	fi
 
 	tx_load
 
-	for account in "${tx_accounts[@]}"
-	do
-		if [ "$2" = "${account:0:${#2}}" ]
-		then COMPREPLY+=("$account")
+	for account in "${tx_accounts[@]}"; do
+		if [ "$2" = "${account:0:${#2}}" ]; then
+			COMPREPLY+=("$account")
 		fi
 	done
 
@@ -241,8 +237,7 @@ _ti_completion() {
 complete -F _ti_completion ti
 
 to() {
-	if [ $# -ne 0 ]
-	then
+	if [ $# -ne 0 ]; then
 		echo -e "error: '${FUNCNAME[0]}' takes no arguments.\n" >&2
 		return 1
 	fi
@@ -251,8 +246,8 @@ to() {
 }
 
 try() {
-	while ! env "$@"
-	do sleep 0.1
+	while ! env "$@"; do
+		sleep 0.1
 	done
 }
 
@@ -272,9 +267,9 @@ sleep_until() {
 	local secs
 
 	secs=$(($(date -d "$1" +%s) - $(date +%s)))
-	if [ $secs -lt 0 ]
-	then echo specified moment is in the past
-	return 1
+	if [ $secs -lt 0 ]; then
+		echo specified moment is in the past
+		return 1
 	fi
 	echo waiting for $secs seconds
 	sleep $secs
@@ -282,10 +277,8 @@ sleep_until() {
 
 go2win() {
 	local args
-	efibootmgr | while read -r -a args
-	do
-		if [[ "${args[0]}" == Boot[0-9]*\* ]] && [ "${args[1]}" = Windows ]
-		then
+	efibootmgr | while read -r -a args; do
+		if [[ "${args[0]}" == Boot[0-9]*\* ]] && [ "${args[1]}" = Windows ]; then
 			echo "${args[0]}"
 			echo "${args[1]}"
 		fi
@@ -293,41 +286,38 @@ go2win() {
 }
 
 _optional_source() {
-	if [ -r "$1" ]
- 	then
+	if [ -r "$1" ]; then
 		# shellcheck disable=SC1090
-	 	. "$1"
+		. "$1"
 	fi
 }
 
 _try_eval() {
-  if hash "$1" >/dev/null 2>&1
-	then eval "$("$@")"
+	if hash "$1" >/dev/null 2>&1; then
+		eval "$("$@")"
 	fi
 }
 
 # command-not-found
-if [ -r /etc/issue ] && read -r -a REPLY </etc/issue && [ "${REPLY[0]}" = Void ]
-then
-  if hash xlocate >/dev/null 2>&1
-	then
-		command_not_found_handle () {
+if [ -r /etc/issue ] && read -r -a REPLY </etc/issue && [ "${REPLY[0]}" = Void ]; then
+	if hash xlocate >/dev/null 2>&1; then
+		command_not_found_handle() {
 			type -t xlocate >/dev/null || return 127
 
-	    local list
+			local list
 			mapfile -t list < <(xlocate "bin/$1\$" 2>/dev/null | awk '{print $1}' | uniq)
-	    [ "${list[0]}" ] || return 127
+			[ "${list[0]}" ] || return 127
 
 			local item
 			echo 'possible candidates:'
-			for item in "${list[@]}"
-			do printf "\t%s\n" "${item}"
+			for item in "${list[@]}"; do
+				printf "\t%s\n" "${item}"
 			done
 
-	    [ ${#list[@]} -eq 1 ] || return
+			[ ${#list[@]} -eq 1 ] || return
 			read -r -s -n 1 -p 'install? [Y/n]: '
-			if [ "${REPLY,}" ] && [ "${REPLY,}" != y ]
-			then echo no && return 1
+			if [ "${REPLY,}" ] && [ "${REPLY,}" != y ]; then
+				echo no && return 1
 			fi
 
 			echo yes
@@ -344,14 +334,13 @@ _try_eval starship init bash
 _try_eval zoxide init bash
 
 # nvm + completion
-if ! command -v nvm >/dev/null
-then
+if ! command -v nvm >/dev/null; then
 	_optional_source "$NVM_DIR"/nvm.sh
 	_optional_source "$NVM_DIR"/bash_completion
 fi
 
 set -o vi
 
-if hash fnm >/dev/null 2>&1
-then eval "$(fnm env --use-on-cd --)"
+if hash fnm >/dev/null 2>&1; then
+	eval "$(fnm env --use-on-cd --)"
 fi

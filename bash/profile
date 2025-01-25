@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 # vim: fenc=utf-8 ts=4 noet sw=4 sts=4
 
-if [ -n "${SSH_TTY+x}" -a -z "${SESSION+x}" ]
-then export SESSION=ssh
-elif [ -z "${SESSION+x}" -o -n "${VISUAL+x}" ]
-then return 0
+if [ -n "${SSH_TTY+x}" ] && [ -z "${SESSION+x}" ]; then
+    export SESSION=ssh
+elif [ -z "${SESSION+x}" ] && [ -n "${VISUAL+x}" ]; then
+    return 0
 fi
 
 # export LANGUAGE=en_US:en:C
@@ -57,60 +57,59 @@ export GOOGLE_API_KEY=no
 export GOOGLE_DEFAULT_CLIENT_ID=no
 export GOOGLE_DEFAULT_CLIENT_SECRET=no
 
-if [ "$TERMUX_VERSION" ]
-then PLATFORMIO_CORE_DIR="$PREFIX"/share/platformio
+if [ "$TERMUX_VERSION" ]; then
+    PLATFORMIO_CORE_DIR="$PREFIX"/share/platformio
 fi
 
 export ANDROID_HOME="$XDG_DATA_HOME"/android/sdk
-if [ -d "$ANDROID_HOME" ]
-then for dir in cmdline-tools/latest/bin platform-tools emulator
-do PATH="$ANDROID_HOME"/$dir:$PATH
-done
+if [ -d "$ANDROID_HOME" ]; then
+    for dir in cmdline-tools/latest/bin platform-tools emulator; do
+        PATH="$ANDROID_HOME"/$dir:$PATH
+    done
 fi
 
 export BUN_INSTALL=$XDG_DATA_HOME/bun
 
-if [ -d "$VLANG_TOOLS" ]
-then PATH=$VLANG_TOOLS:$PATH
+if [ -d "$VLANG_TOOLS" ]; then
+    PATH=$VLANG_TOOLS:$PATH
 fi
 
-for item in $XDG_CONFIG_HOME/bash $BUN_INSTALL $XDG_CONFIG_HOME/composer/vendor $CARGO_HOME $XDG_LOCAL_HOME
-do PATH=$item/bin:$PATH
+for item in $XDG_CONFIG_HOME/bash $BUN_INSTALL $XDG_CONFIG_HOME/composer/vendor $CARGO_HOME $XDG_LOCAL_HOME; do
+    PATH=$item/bin:$PATH
 done
 
 PATH="$PNPM_HOME:$FNM_DIR:$PATH"
 
 PATH="$PATH:${PLATFORMIO_CORE_DIR:-${HOME}/.platformio}/penv/bin"
 
-if hash fnm >/dev/null 2>&1
-then eval "$(fnm env --use-on-cd)"
+if hash fnm >/dev/null 2>&1; then
+    eval "$(fnm env --use-on-cd)"
 fi
 
 _optional_source() {
-  if [ -r "$1" ]
-  then . "$1"
-  fi
+    if [ -r "$1" ]; then
+        # shellcheck disable=SC1090
+        . "$1"
+    fi
 }
 
 _optional_source "$XDG_CONFIG_HOME/$SESSION/env"
 
-if [ "$SESSION" = ssh ]
-then _optional_source ~/.bashrc
+if [ "$SESSION" = ssh ]; then
+    _optional_source ~/.bashrc
 fi
 
-if [ -z "${SSH_AUTH_SOCK+x}" ]
-then
-  if [ -n "${XDG_RUNTIME_DIR+x}" -a -w "$XDG_RUNTIME_DIR/gcr/ssh" ]
-  then export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gcr/ssh"
-  elif hash gnome-keyring-daemon 2>/dev/null
-  then
-      eval "$(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh 2> /dev/null)"
-      export SSH_AUTH_SOCK
-  fi
+if [ -z "${SSH_AUTH_SOCK+x}" ]; then
+    if [ -n "${XDG_RUNTIME_DIR+x}" ] && [ -w "$XDG_RUNTIME_DIR/gcr/ssh" ]; then
+        export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gcr/ssh"
+    elif hash gnome-keyring-daemon 2>/dev/null; then
+        eval "$(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh 2>/dev/null)"
+        export SSH_AUTH_SOCK
+    fi
 fi
 
-if [ -z "${DBUS_SESSION_BUS_ADDRESS+x}" ]
-then _launchers+=(dbus-run-session)
+if [ -z "${DBUS_SESSION_BUS_ADDRESS+x}" ]; then
+    _launchers+=(dbus-run-session)
 fi
 
-[ "$SESSION" != sway ] || ("${_launchers[@]}" sway $SWAY_ARGS &>"$XDG_RUNTIME_DIR/swaylog") || true
+[ "$SESSION" != sway ] || ("${_launchers[@]}" sway "${SWAY_ARGS[@]}" &>"$XDG_RUNTIME_DIR/swaylog") || true
