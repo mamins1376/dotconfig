@@ -17,5 +17,9 @@ tabpad = "·"
 render = true
 character = "│"
 
+[editor.inline-diagnostics]
+cursor-line = "hint"
+other-lines = "error"
+
 [keys.normal.space]
 i = ":toggle lsp.display-inlay-hints"
