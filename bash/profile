@@ -71,6 +71,7 @@ if [ -d "$ANDROID_HOME" ]; then
         PATH="$ANDROID_HOME"/$dir:$PATH
     done
 fi
+export ANDROID_EMULATOR_WAIT_TIME_BEFORE_KILL=180
 
 export BUN_INSTALL=$XDG_DATA_HOME/bun
 
