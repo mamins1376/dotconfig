@@ -34,5 +34,3 @@ case "$ID" in
 esac
 
 rustup update
-
-pio upgrade
