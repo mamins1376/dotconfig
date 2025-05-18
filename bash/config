@@ -87,7 +87,7 @@ alias hced='hx $TIMECLOCK_FILE'
 
 alias ip='ip --color=auto'
 
-alias npm='pnpm'
+# alias npm='pnpm'
 # python virtual environment
 #alias venv='python -m venv'
 #alias act='. bin/activate'

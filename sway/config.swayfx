@@ -14,3 +14,5 @@ shadow_blur_radius 5
 default_dim_inactive 0.3
 
 layer_effects "waybar" blur enable; shadows enable
+
+for_window [app_id="^org\.gnome\.Epiphany$"] blur disable
