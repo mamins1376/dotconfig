@@ -206,6 +206,8 @@ for_window [app_id="^org\.gnome'.Solanum$"] floating enable
 
 for_window [app_id="^galculator$"] floating enable
 
+for_window [app_id="^nm-connection-editor$" title="^Editing "] floating enable
+
 for_window [app_id="^nm-openconnect-auth-dialog$"] floating enable
 
 for_window [class="^ffplay$"] floating enable
@@ -233,6 +235,8 @@ for_window [instance="^ngspice$"] floating enable
 for_window [app_id="^wdisplays$"] floating enable, sticky enable, resize set width 500 px
 
 for_window [app_id="^ir\.co\.ngk\."] floating enable
+
+for_window [app_id="^com\.igalia\.Cog$"] floating enable
 
 for_window [class="^Matplotlib$"] floating enable
 
