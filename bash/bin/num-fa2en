@@ -1,0 +1,13 @@
+#!/bin/env python3
+
+import sys
+
+fa_digits = "۰۱۲۳۴۵۶۷۸۹"
+en_digits = "0123456789"
+fa2en = str.maketrans(fa_digits, en_digits)
+en2fa = str.maketrans(en_digits, fa_digits)
+
+table = fa2en if sys.argv[0].endswith("-fa2en") else en2fa
+
+for line in sys.stdin:
+    print(line.translate(table), end="")

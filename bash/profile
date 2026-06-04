@@ -2,10 +2,22 @@
 # -*- coding: utf-8 -*-
 # vim: fenc=utf-8 ts=4 noet sw=4 sts=4
 
-if [ ${_profile_loaded+x} ]; then
-    return 0
-fi
+[ ! ${_profile_loaded+x} ] || return 0
 export _profile_loaded=
+
+_optional_source() {
+    if [ -r "$1" ]; then
+        # shellcheck disable=SC1090
+        . "$1"
+    fi
+}
+
+XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
+XDG_LOCAL_HOME=${XDG_LOCAL_HOME:-$HOME/.local}
+XDG_DATA_HOME=${XDG_DATA_HOME:-$XDG_LOCAL_HOME/share}
+
+_optional_source "$XDG_CONFIG_HOME/bash/profile.local"
 
 if ! [ ${SESSION+x} ]; then
     if [ ${TERMUX_VERSION+x} ]; then
@@ -30,11 +42,6 @@ o="$o --hf #e6e6e6 --nb #42424240"
 o="$o --scf #747474 --scb #00000000"
 export BEMENU_OPTS="$o"
 unset o
-
-XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
-XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
-XDG_LOCAL_HOME=${XDG_LOCAL_HOME:-$HOME/.local}
-XDG_DATA_HOME=${XDG_DATA_HOME:-$XDG_LOCAL_HOME/share}
 
 export MPD_HOST="$XDG_RUNTIME_DIR"/mpd/socket
 
@@ -73,8 +80,6 @@ if [ -d "$ANDROID_HOME" ]; then
 fi
 export ANDROID_EMULATOR_WAIT_TIME_BEFORE_KILL=180
 
-export BUN_INSTALL=$XDG_DATA_HOME/bun
-
 if [ -d "$VLANG_TOOLS" ]; then
     PATH=$VLANG_TOOLS:$PATH
 fi
@@ -91,12 +96,8 @@ if hash fnm >/dev/null 2>&1; then
     eval "$(fnm env --use-on-cd)"
 fi
 
-_optional_source() {
-    if [ -r "$1" ]; then
-        # shellcheck disable=SC1090
-        . "$1"
-    fi
-}
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 
 _optional_source "$XDG_CONFIG_HOME/$SESSION/env"
 
@@ -107,6 +108,8 @@ ssh)
     _optional_source ~/.bashrc
     ;;
 esac
+
+unset -f _optional_source
 
 if ! [ ${SSH_AUTH_SOCK+x} ]; then
     if [ ${XDG_RUNTIME_DIR+x} ] && [ -w "$XDG_RUNTIME_DIR/gcr/ssh" ]; then

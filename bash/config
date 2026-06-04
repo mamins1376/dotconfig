@@ -98,7 +98,7 @@ alias ip='ip --color=auto'
 alias aria2p="aria2p -s $ARIA_SECRET"
 
 # shellcheck disable=SC2139
-alias usv="SVDIR=${XDG_DATA_HOME:-${HOME}/.local/share}/../service sv"
+alias usv="SVDIR=${XDG_CONFIG_HOME:-${HOME}/.config}/service sv"
 
 ### Utility functions
 
@@ -335,8 +335,18 @@ if ! command -v nvm >/dev/null; then
 	_optional_source "$NVM_DIR"/bash_completion
 fi
 
+unset -f _optional_source
+
 set -o vi
 
 if hash fnm >/dev/null 2>&1; then
 	eval "$(fnm env --use-on-cd --)"
+fi
+
+if hash pyenv >/dev/null 2>&1; then
+	eval "$(pyenv init - bash)"
+fi
+
+if hash sing-box >/dev/null 2>&1; then
+	eval "$(sing-box completion bash)"
 fi
